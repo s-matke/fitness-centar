@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8"/>
+        <title>Registracija | Fitness-Centar</title>
+        <style>
+            div {
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Registracija</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="userNameField">*Korisničko Ime:</label>
+                <br/>
+                <input id="userNameField" type="text" name="username" required/>
+                <br/>
+            </div>
+            <div>
+                <label for="passwordField">*Lozinka:</label>
+                <br/>
+                <input id="passwordField" type="password" name="password" required/>
+                <br/>
+            </div>
+            <div>
+                <label for="firstNameField">*Ime:</label>
+                <br/>
+                <input id="firstNameField" type="text" name="first_name" required/>
+                <br/>
+            </div>
+            <div>
+                <label for="lastNameField">*Prezime:</label>
+                <br/>
+                <input id="lastNameField" type="text" name="last_name" required/>
+                <br/>
+            </div>
+            <div>
+                <label for="emailField">*Email:</label>
+                <br/>
+                <input id="emailField" type="email" name="email" required placeholder="something@example.com"/>
+                <br/>
+            </div>
+            <div>
+                <label for="telefonField">Telefon:</label>
+                <br/>
+                <input id="telefonField" type="text" name="telefon"/>
+                <br/>
+            </div>
+            <div>
+                <label for="birthdayField">Datum Rodjenja:</label>
+                <br/>
+                <input id="birthdayField" type="date" name="birthday"/>
+                <br/><br/>
+            </div>
+            <div>
+                <label for="ulogaField">*Uloga:</label>
+                <select name="Uloga" required>
+                    <option value="clan">Član Fitness Centra</option>
+                    <option value="trener">Trener</option>
+                </select>
+            </div>
+            <div>
+                <p>*Obavezna polja</p>
+                <input id="agreement" type="checkbox" name="agree" value="agree" required />
+                <label for="agreement">Prihvatam <a href="http://www.dumb.com/terms" target="_blank">uslove korišćenja</a></label>
+                <br/>
+            </div>
+            <div>
+                <input type="submit" value="Register"/>
+            </div>
+        </form>
+    </body>
+</html>

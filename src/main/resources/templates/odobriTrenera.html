@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8"/>
+        <title>Odobravanje Trenera | Fitness-Centar</title>
+        <style>
+            th, td {
+                border: 1px solid black;
+                padding: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h2>Lista trenera</h2>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            <div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th colspan="2">Ime</th>
+                            <th colspan="2">Prezime</th>
+                            <th>ID</th>
+                            <th>Status</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Alkesandar</th>
+                            <th colspan="2">Treneric</th>
+                            <th>2</th>
+                            <th>
+                                <input id="trener_2" type="checkbox" value="true"/>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Marko</th>
+                            <th colspan="2">Markovic</th>
+                            <th>3</th>
+                            <th>
+                                <input id="trener_3" type="checkbox" value="true"/>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Ivan</th>
+                            <th colspan="2">Ivanovic</th>
+                            <th>10</th>
+                            <th>
+                                <input id="trener_10" type="checkbox" value="true"/>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <br/>
+                <input type="submit" value="Submit"/>
+            </div>
+        </form>
+    </body>
+
+</html>
