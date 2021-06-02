@@ -1,9 +1,16 @@
 package ftn.uns.ProbaProjekat.model;
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("trener")
@@ -15,6 +22,14 @@ public class Trener extends Korisnik{
 	// prosecna ocena
 	@Column
 	private Double avgOcena;
+	
+	public Trener() {}
+	
+	public Trener(String userName, String lozinka, String ime, String prezime, String email, String telefon, Date date,
+			String role, String tip_korisnika, Boolean status, Double avgOcena) {
+		super(userName, lozinka, ime, prezime, email, telefon, date, role, tip_korisnika, status);
+		this.avgOcena = avgOcena;
+	}
 	
 	// lista treninga koje on drzi
 	@OneToMany(mappedBy = "trener", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
