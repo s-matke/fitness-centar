@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf8"/>
+        <title>Registracija | Fitness-Centar</title>
+        <script src="../../assets/js/jquery.min.js"></script>
+        <script src="../js/register.js"></script>
+
+        <style>
+            div {
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Registracija</h1>
+        <form id="addKorisnikForm">
+            <div>
+                <label for="userName">*Korisničko Ime:</label>
+                <br/>
+                <input id="userName" type="text" required/>
+                <br/>
+            </div>
+            <div>
+                <label for="lozinka">*Lozinka:</label>
+                <br/>
+                <input id="lozinka" type="password" required/>
+                <br/>
+            </div>
+            <div>
+                <label for="ime">*Ime:</label>
+                <br/>
+                <input id="ime" type="text" required/>
+                <br/>
+            </div>
+            <div>
+                <label for="prezime">*Prezime:</label>
+                <br/>
+                <input id="prezime" type="text" required/>
+                <br/>
+            </div>
+            <div>
+                <label for="email">*Email:</label>
+                <br/>
+                <input id="email" type="email" required placeholder="something@example.com"/>
+                <br/>
+            </div>
+            <div>
+                <label for="telefon">Telefon:</label>
+                <br/>
+                <input id="telefon" type="text" />
+                <br/>
+            </div>
+            <div>
+                <label for="birthday">Datum Rodjenja:</label>
+                <br/>
+                <input id="birthday" type="date" />
+                <br/><br/>
+            </div>
+            <div>
+                <label for="ulogaField">*Uloga:</label>
+                <select id="role" required>
+                    <option value="clan">Član Fitness Centra</option>
+                    <option value="trener">Trener</option>
+                </select>
+            </div>
+            <div>
+                <p>*Obavezna polja</p>
+                <br/>
+            </div>
+            <div>
+                <input type="submit" value="Register"/>
+            </div>
+        </form>
+    </body>
+</html>

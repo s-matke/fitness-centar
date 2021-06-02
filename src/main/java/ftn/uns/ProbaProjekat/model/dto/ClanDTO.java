@@ -1,79 +1,27 @@
-package ftn.uns.ProbaProjekat.model;
+package ftn.uns.ProbaProjekat.model.dto;
 
-import java.io.Serializable;
+//import java.util.Date;
 import java.sql.Date;
 
-import javax.persistence.*;
-
-import static javax.persistence.DiscriminatorType.STRING;
-import static javax.persistence.InheritanceType.SINGLE_TABLE;
-
-@Entity
-@Table(name="korisnik")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tip_korisnika", discriminatorType=DiscriminatorType.STRING)
-public class Korisnik implements Serializable{
+public class ClanDTO {
 	
-	/**
-	 * 
-	 */
-	//private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(insertable=false, updatable=false)
+	private String userName;
+	private String lozinka;
+	private String ime;
+	private String prezime;
+	private String telefon;
+	private String email;
+	private Date date;
+	private String role;
+	private Boolean status;
 	private String tip_korisnika;
 	
-	@Column(name = "user_name", unique = true)
-	private String userName;
-	
-	@Column
-	private String lozinka;
-	
-	@Column(name = "first_name")
-	private String ime;
-	
-	@Column(name = "last_name")
-	private String prezime;
-	
-	@Column(unique=true)
-	private String telefon;
-	
-	@Column(unique=true)	// kako bi zabranili registraciju korisnika sa istom adresom
-	private String email;
-	
-	@Column(name = "birthday")
-	private Date date;
-	//private String date;
-	
-	@Column(name = "uloga")
-	private String role;
-	
-	@Column(nullable = false)
-	private Boolean status;	// true/false
-		
-	
-	public Korisnik() {}
-	
-	public Korisnik(String userName, String lozinka, String ime, String prezime, String email,
-			String telefon, Date date, String role, String tip_korisnika, Boolean status) {
-		//this.id = id;
-		this.userName = userName;
-		this.lozinka = lozinka;
-		this.ime = ime;
-		this.prezime = prezime;
-		this.email = email;
-		this.telefon = telefon;
-		this.date = date;
-		this.role = role;
-		this.status = status;
-		this.tip_korisnika = tip_korisnika;
+	public ClanDTO() {
 		
 	}
 	
-	public Korisnik(Long id, String userName, String lozinka, String ime, String prezime, String email,
+	public ClanDTO(Long id, String userName, String lozinka, String ime, String prezime, String email,
 			String telefon, Date date, String role, String tip_korisnika, Boolean status) {
 		this.id = id;
 		this.userName = userName;
@@ -84,19 +32,26 @@ public class Korisnik implements Serializable{
 		this.telefon = telefon;
 		this.date = date;
 		this.role = role;
+		this.tip_korisnika = tip_korisnika;
 		this.status = status;
-		this.tip_korisnika = tip_korisnika;
-		
 	}
+
+	public ClanDTO(String userName, String lozinka, String ime, String prezime, String email,
+			String telefon, Date date, String role, String tip_korisnika, Boolean status) {
+		//this.id = id;
+		this.userName = userName;
+		this.lozinka = lozinka;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.email = email;
+		this.telefon = telefon;
+		this.date = date;
+		this.role = role;
+		this.tip_korisnika = tip_korisnika;
+		this.status = status;
+	}
+
 	
-	public String getTip_korisnika() {
-		return tip_korisnika;
-	}
-
-	public void setTip_korisnika(String tip_korisnika) {
-		this.tip_korisnika = tip_korisnika;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -113,7 +68,7 @@ public class Korisnik implements Serializable{
 		this.userName = userName;
 	}
 
-	public String getLozinka() {	// protected
+	public String getLozinka() {
 		return lozinka;
 	}
 
@@ -176,7 +131,14 @@ public class Korisnik implements Serializable{
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
+
+	public String getTip_korisnika() {
+		return tip_korisnika;
+	}
+
+	public void setTip_korisnika(String tip_korisnika) {
+		this.tip_korisnika = tip_korisnika;
+	}
 	
 
-	
 }
