@@ -49,13 +49,11 @@ public class KorisnikServiceImpl implements KorisnikService {
 
 	@Override
 	public Korisnik login(String email, String lozinka) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.korisnickiRepozitorijum.findByEmailAndLozinka(email, lozinka);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
 		
 	}
 

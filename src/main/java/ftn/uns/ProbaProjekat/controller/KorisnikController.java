@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ftn.uns.ProbaProjekat.model.Clan;
 import ftn.uns.ProbaProjekat.model.Korisnik;
-import ftn.uns.ProbaProjekat.model.dto.ClanDTO;
 import ftn.uns.ProbaProjekat.model.dto.KorisnikDTO;
-import ftn.uns.ProbaProjekat.service.ClanService;
+import ftn.uns.ProbaProjekat.model.dto.LoginKorisnikDTO;
 import ftn.uns.ProbaProjekat.service.KorisnikService;
 
 @RestController
@@ -48,6 +46,26 @@ public class KorisnikController {
 		return new ResponseEntity<>(korisnikDTOS, HttpStatus.OK);
 		
 	}
+	
+	@PostMapping(
+			value = "/login",
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<KorisnikDTO> login(@RequestBody LoginKorisnikDTO korisnikDTO) throws Exception {
+		
+		Korisnik korisnik = korisnickiService.login(korisnikDTO.getEmail(), korisnikDTO.getLozinka());
+		
+		KorisnikDTO loggedKorisnik = new KorisnikDTO();
+		
+		if (korisnik != null && korisnik.getStatus() != false) {
+			loggedKorisnik = new KorisnikDTO(korisnik.getId(), korisnik.getUserName(), korisnik.getLozinka(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getEmail(),
+					korisnik.getTelefon(), korisnik.getDate(), korisnik.getRole(), korisnik.getTip_korisnika(), korisnik.getStatus());
+			return new ResponseEntity<>(loggedKorisnik, HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>(loggedKorisnik, HttpStatus.BAD_REQUEST);
+	}
+	
 	
 	
 

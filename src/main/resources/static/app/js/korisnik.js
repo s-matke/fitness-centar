@@ -21,3 +21,22 @@ $(document).ready(function () {
         }
     });
 });
+
+function prikazKorisnika() {
+    if (sessionStorage.getItem('ime') === null || sessionStorage.getItem('prezime') === null || sessionStorage.getItem('role') === null) {
+        alert("Trenutno niko nije ulogovan");
+        console.log("Nema ulogovanog korisnika");
+    }
+    else {
+        let ime = sessionStorage.getItem('ime');
+        let prezime = sessionStorage.getItem('prezime');
+        let uloga = sessionStorage.getItem('role');
+        var korisnikInfo = {
+            ime,
+            prezime,
+            uloga
+        }
+        alert("Info: " + ime + " " + prezime + "\n" + "Uloga: " + uloga);
+        console.log(korisnikInfo);
+    }
+}
