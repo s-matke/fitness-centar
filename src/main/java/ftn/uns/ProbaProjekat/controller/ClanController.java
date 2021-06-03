@@ -29,6 +29,10 @@ public class ClanController {
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ClanDTO> createClan(@RequestBody ClanDTO clanDTO) throws Exception {
+//		if (clanService.isUserExist(clanDTO.getUserName(), clanDTO.getEmail(), clanDTO.getTelefon()) != null) {
+//			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+//		}
+		
 		clanDTO.setStatus(true); // svakom clanu se po default-u postavlja status na true prilikom registracije
 		Clan clan= new Clan(clanDTO.getUserName(), clanDTO.getLozinka(), clanDTO.getIme(), clanDTO.getPrezime(), clanDTO.getEmail(),
 				clanDTO.getTelefon(), clanDTO.getDate(), clanDTO.getRole(), clanDTO.getTip_korisnika(), clanDTO.getStatus());

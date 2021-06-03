@@ -26,4 +26,24 @@ public class ClanServiceImpl implements ClanService {
 		Clan noviClan = this.clanRepo.save(clan);
 		return noviClan;
 	}
+	
+//	@Override
+//	public Clan isUserExist(String userName, String email, String telefon) {
+//		
+//		if (this.clanRepo.findByUserName(userName) == null || this.clanRepo.findByEmail(email) == null || this.clanRepo.findByTelefon(telefon) == null) {
+//			return null;			
+//		}
+//		else {
+//			if (this.clanRepo.findByUserName(userName) != null) {
+//				Clan noviClan = this.clanRepo.findByUserName(userName);
+//				return noviClan;
+//			} else if (this.clanRepo.findByEmail(email) != null) {
+//				Clan noviClan = this.clanRepo.findByEmail(email);
+//				return noviClan;
+//			} else {
+//				Clan noviClan = this.clanRepo.findByTelefon(telefon);
+//				return noviClan;
+//			}
+//		}
+//	}
 }

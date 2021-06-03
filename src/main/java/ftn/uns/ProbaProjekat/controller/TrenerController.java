@@ -1,9 +1,13 @@
 package ftn.uns.ProbaProjekat.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,5 +45,25 @@ public class TrenerController {
 				noviTrener.getTelefon(), noviTrener.getDate(), noviTrener.getRole(), noviTrener.getTip_korisnika(), noviTrener.getStatus(), noviTrener.getAvgOcena());
 		
 		return new ResponseEntity<>(noviTrenerDTO, HttpStatus.CREATED);
+	}
+	
+	// Lista trenera (potrebna za odobravanje pristupa sistemu)
+	@GetMapping(
+			value = "/treneri",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<TrenerDTO>> getTrener() {
+		List<Trener> listaTrenera = this.trenerService.findAll();
+		
+		List<TrenerDTO> trenerDTOS = new ArrayList<>();
+		
+		for (Trener trener : listaTrenera) {
+			//if (trener.getStatus() == false) 
+			{
+				TrenerDTO trenerDTO = new TrenerDTO(trener.getId(), trener.getIme(), trener.getPrezime(), trener.getStatus());
+				trenerDTOS.add(trenerDTO);
+			}
+		}
+		
+		return new ResponseEntity<>(trenerDTOS, HttpStatus.OK);
 	}
 }

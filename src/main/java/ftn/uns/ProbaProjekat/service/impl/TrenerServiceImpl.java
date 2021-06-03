@@ -1,5 +1,7 @@
 package ftn.uns.ProbaProjekat.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,19 @@ public class TrenerServiceImpl implements TrenerService{
 	}
 	
 	@Override
+	public Trener findOne(Long id) {
+		Trener trener = this.trenerRepo.getOne(id);
+		return trener;
+	}
+	
+	@Override
+	public List<Trener> findAll() {
+		List<Trener> treneri = this.trenerRepo.findAll();
+		return treneri;
+	}
+
+
+	@Override
 	public Trener create(Trener trener) throws Exception {
 		if (trener.getId() != null) {
 			throw new Exception("ID must be null!");
@@ -25,5 +40,17 @@ public class TrenerServiceImpl implements TrenerService{
 		Trener noviTrener = this.trenerRepo.save(trener);
 		return noviTrener;
 	}
-
-}
+	
+	@Override
+	public Trener update(Trener trener) throws Exception {
+		Trener trenerToUpdate = this.trenerRepo.getOne(trener.getId());
+		if (trenerToUpdate == null) {
+			throw new Exception("Trener ne postoji!");
+		}
+		
+		trenerToUpdate.setStatus(trener.getStatus());
+		
+		Trener savedTrener = this.trenerRepo.save(trenerToUpdate);
+		return savedTrener;
+	}
+}	
