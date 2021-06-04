@@ -30,6 +30,13 @@ public class FitnessCentar implements Serializable{
 	@Column
 	private String email;	// mail fit. centra
 	
+	public FitnessCentar(String naziv, String adresa, String telefon, String email) {
+		this.naziv = naziv;
+		this.adresa = adresa;
+		this.telefon = telefon;
+		this.email = email;
+	}
+	
 	// lista trenera koji rade u teretani
 	// 1:n (1 teretana : n trenera)
 	@OneToMany(mappedBy = "fitnessCentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

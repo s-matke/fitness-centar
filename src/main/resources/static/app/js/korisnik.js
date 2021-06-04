@@ -9,6 +9,7 @@ $(document).ready(function () {
                 let row = "<tr>";
                 row += "<td>" + korisnik.ime + "</td>";
                 row += "<td>" + korisnik.prezime + "</td>";
+                row += "<td>" + korisnik.role + "</td>";
                 row += "<td>" + korisnik.status + "</td>";
                 row += "</tr>";
 

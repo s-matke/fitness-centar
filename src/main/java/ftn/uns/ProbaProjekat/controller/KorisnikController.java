@@ -38,7 +38,7 @@ public class KorisnikController {
 		List<KorisnikDTO> korisnikDTOS = new ArrayList<>();
 		
 		for (Korisnik korisnik : listaKorisnika) {
-			KorisnikDTO korisnikDTO = new KorisnikDTO(korisnik.getId(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getStatus());
+			KorisnikDTO korisnikDTO = new KorisnikDTO(korisnik.getId(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getStatus(), korisnik.getRole());
 			korisnikDTOS.add(korisnikDTO);
 			
 		}

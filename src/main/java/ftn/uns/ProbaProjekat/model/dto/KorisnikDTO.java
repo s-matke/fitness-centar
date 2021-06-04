@@ -18,17 +18,19 @@ public class KorisnikDTO {
 	
 	public KorisnikDTO() {}
 	
-	public KorisnikDTO(Long id, String ime, String prezime, Boolean status) {
+	public KorisnikDTO(Long id, String ime, String prezime, Boolean status, String role) {
 		this.id = id;
 		this.ime = ime;
 		this.prezime = prezime;
 		this.status = status;
+		this.role = role;
 	}
 
-	public KorisnikDTO(String ime, String prezime, Boolean status) {
+	public KorisnikDTO(String ime, String prezime, Boolean status, String role) {
 		this.ime = ime;
 		this.prezime = prezime;
 		this.status = status;
+		this.role = role;
 	}
 	
 	public KorisnikDTO(Long id, String userName, String lozinka, String ime, String prezime, String email,

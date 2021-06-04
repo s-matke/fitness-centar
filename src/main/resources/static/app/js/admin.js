@@ -1,3 +1,5 @@
+// Izmena statusa trenera
+
 $(document).on("submit", "#allTreneri", function(event) {
     event.preventDefault();
 
@@ -43,3 +45,38 @@ $(document).on("submit", "#allTreneri", function(event) {
         alert("Niste selektovali ni jednog trenera");
     }
 });
+
+// Dodavanje fitness centra
+
+$(document).on("submit", "#addFitnessCentar", function(event) {
+    event.preventDefault();
+
+    // preuzimanje vrednost
+    let naziv = $("#naziv").val();
+    let adresa = $("#adresa").val();
+    let telefon = $("#telefon").val();
+    let email = $("#email").val();
+
+    let newCentar = {
+        naziv,
+        adresa,
+        email,
+        telefon
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/api/admin/addCentar",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(newCentar),
+        success: function(response) {
+            console.log(response);
+            alert("Uspesno dodat novi fitness centar (" + response.id + ")\nNaziv: " + response.naziv + "\nAdresa: " + response.adresa);
+            window.location.href = "../../index.html";
+        },
+        error: function(error) {
+            alert(error);
+        }
+    });
+})
