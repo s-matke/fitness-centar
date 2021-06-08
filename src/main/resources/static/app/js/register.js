@@ -25,7 +25,7 @@ $(document).on("submit", "#addKorisnikForm", function(event) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/api/" + role + "/register",
+        url: "http://localhost:8080/api/" + role.toLowerCase() + "/register",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(newKorisnik),

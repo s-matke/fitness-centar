@@ -63,7 +63,7 @@ public class KorisnikController {
 			return new ResponseEntity<>(loggedKorisnik, HttpStatus.OK);
 		}
 		
-		return new ResponseEntity<>(loggedKorisnik, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
 	}
 	
 	

@@ -37,7 +37,7 @@ $(document).on("submit", "#loginForm", function(event) {
         },
         error: function(data) {
             console.log(data);
-            alert("Greska");
+            alert("Pogresna email/lozinka");
         }  
     });
 });

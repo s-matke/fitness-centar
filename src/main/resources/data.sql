@@ -5,9 +5,9 @@ INSERT INTO KORISNIK (user_name, lozinka, first_name, last_name, telefon, email,
 INSERT INTO KORISNIK (user_name, lozinka, first_name, last_name, telefon, email, birthday, uloga, status, tip_korisnika) VALUES ('user_trener_2', '1233223', 'Marko', 'Markovic', '0391-2213-122-2', 'trenerMarko@gmail.com', '1992-12-02', 'Trener', true,  'trener');
 INSERT INTO KORISNIK (user_name, lozinka, first_name, last_name, telefon, email, uloga, status, tip_korisnika) VALUES ('user_clan1', '123', 'Milica', 'Milic', '0391-2103-12-2', 'milica@gmail.com', 'Clan', true, 'clan');
 
-INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('ZxWY', 'P', 'M', 1, 2);
+INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('ZxWY', 'Palica', 'M', 1, 2);
 INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('Abcd', 'E', 'F', 2, 2);
-INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('HKL', 'P', 'M', 1, 3);
+INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('HKL', 'Perica', 'M', 1, 3);
 
 INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (10, 'S1', 1);
 INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (5, 'S2', 1);
