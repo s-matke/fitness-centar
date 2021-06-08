@@ -31,7 +31,7 @@ public class Trening implements Serializable{
 	private String opis;
 	
 	@Column(name = "tip")
-	private String tip_treninga;
+	private String tip;
 	
 	@Column(name = "trajanje")
 	private Integer trajanje;	// int/double?
@@ -83,11 +83,11 @@ public class Trening implements Serializable{
 	}
 
 	public String getTip_treninga() {
-		return tip_treninga;
+		return tip;
 	}
 
-	public void setTip_treninga(String tip_treninga) {
-		this.tip_treninga = tip_treninga;
+	public void setTip_treninga(String tip) {
+		this.tip = tip;
 	}
 
 	public Integer getTrajanje() {

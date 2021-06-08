@@ -5,23 +5,23 @@ public class TreningDTO {
 	private Long id;
 	private String naziv;
 	private String opis;
-	private String tip_treninga;
+	private String tip;
 	private Integer trajanje;
 	
 	public TreningDTO() {}
 	
-	public TreningDTO(Long id, String naziv, String opis, String tip_treninga, Integer trajanje) {
+	public TreningDTO(Long id, String naziv, String opis, String tip, Integer trajanje) {
 		this.id = id;
 		this.naziv = naziv;
 		this.opis = opis;
-		this.tip_treninga = tip_treninga;
+		this.tip = tip;
 		this.trajanje = trajanje;
 	}
 	
-	public TreningDTO(String naziv, String opis, String tip_treninga, Integer trajanje) {
+	public TreningDTO(String naziv, String opis, String tip, Integer trajanje) {
 		this.naziv = naziv;
 		this.opis = opis;
-		this.tip_treninga = tip_treninga;
+		this.tip = tip;
 		this.trajanje = trajanje;
 	}
 
@@ -50,11 +50,11 @@ public class TreningDTO {
 	}
 
 	public String getTip_treninga() {
-		return tip_treninga;
+		return tip;
 	}
 
-	public void setTip_treninga(String tip_treninga) {
-		this.tip_treninga = tip_treninga;
+	public void setTip_treninga(String tip) {
+		this.tip = tip;
 	}
 
 	public Integer getTrajanje() {

@@ -6,6 +6,14 @@ import ftn.uns.ProbaProjekat.model.Trening;
 
 public interface TreningService {
 
-	List<Trening> findAll();
+	List<Trening> findAll(String keyword);
+	
+	List<Trening> findByNaziv(String naziv);
+	
+	List<Trening> findByTrajanje(Integer trajanje);
+	
+	List<Trening> findByOpis(String opis);
+	
+	List<Trening> findByTip(String tip);
 
 }

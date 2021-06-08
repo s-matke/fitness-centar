@@ -16,7 +16,28 @@
         <div>
             <h2>Lista treninga</h2>
         </div>
-        <br/><br/>
+        <form id="searchForm">
+            <div>
+                <input type="text" id="filter" maxlength="24" placeholder="Pretraga..."/>
+                <input type="submit" value="Search"/> 
+            </div>
+        </form>
+        <fieldset style="text-align:center; border: 2px solid #efefef; border-radius: 5x; margin: 1.5em 0 1em 0; width: 10%">
+            <legend>Pretraga po kategoriji</legend>
+            <form id="searchByCategory">
+                <div>
+                    <input type="text" id="naziv" placeholder="Pretraga po nazivu..."> <br/>
+                    <input type="text" id="opis" placeholder="Pretraga po opisu..."> <br/>
+                    <input type="text" id="tip" placeholder="Pretraga po tipu..."> <br/>
+                    <input type="number" id="trajanje" placeholder="Pretraga po trajanju..."> <br/>
+                </div>
+                <div>
+                    <br/>
+                    <input type="submit" value="Search"> <br/>
+                </div>
+            </form>
+        </fieldset>
+        <br/>
         <div id="allTreninzi">
             <div class="container">
                 <table id="treninzi">
@@ -32,6 +53,11 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div>
+            <br/>
+            <!-- <li><a type="button" href="listaTreninga.html" class="btn">Refresh</a></li> -->
+            <button onclick="window.location.reload()">Refresh</button>
         </div>
     </body>
 </html>
