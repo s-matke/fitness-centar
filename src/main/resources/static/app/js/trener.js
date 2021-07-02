@@ -97,3 +97,61 @@ $(document).ready(function() {
     }); 
 });
 
+$(document).on('click', '.btnAddTermin', function() {
+    var treningDiv = $("#allTreninzi");
+    treningDiv.hide();
+    var terminDiv = $('#divTermin');
+    terminDiv.show();
+
+    let trening_id = this.dataset.id;
+
+    console.log("ID: " + trening_id);
+    let text = "<input id='id' type='number' disabled='disabled' value=" + trening_id + " />";
+    $('#kontent').append(text);
+});
+
+$(document).on('submit', '#addTermin', function(event) {
+    event.preventDefault();
+
+    let treningDiv = $("#allTreninzi");
+    let terminDiv = $('#divTermin');
+
+    let cena = $("#cena").val();
+    let datum = $("#datum").val();
+    let vreme = $("#vreme").val();
+    let trening_id = parseInt($("#id").val());
+    console.log("CENA: " + cena + "\nDatum: " + datum + "\nVreme: " + vreme + "\nID: " + trening_id);
+    let dejt = datum + " " + vreme;
+    let epoha = Date.parse(dejt) / 1000;
+    
+    let podaci = {
+        epoha,
+        cena,
+        trening_id
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/api/trener/termin/dodaj",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(podaci),
+        success: function(response) {
+            console.log("Success:\n" + response);
+            alert("Uspesno dodat termin");
+            // Resetuju se vrednosti
+            $('#id').remove();
+            $("#cena").val('');
+            $("#datum").val('');
+            $("#vreme").val('');
+            terminDiv.hide();
+            treningDiv.show();
+        },
+        error: function(error) {
+            console.log("ERROR:\n" + error);
+            alert("GRESKA");
+        }
+        
+    })
+});
+

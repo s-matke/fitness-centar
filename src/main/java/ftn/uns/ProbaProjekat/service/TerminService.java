@@ -9,4 +9,6 @@ public interface TerminService {
 	List<Termin> findAll();
 	
 	Termin findOne(Long id);
+	
+	Termin create(Termin termin) throws Exception;
 }

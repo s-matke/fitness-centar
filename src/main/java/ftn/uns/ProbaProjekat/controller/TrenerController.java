@@ -1,5 +1,6 @@
 package ftn.uns.ProbaProjekat.controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ftn.uns.ProbaProjekat.model.Sala;
+import ftn.uns.ProbaProjekat.model.Termin;
 import ftn.uns.ProbaProjekat.model.Trener;
 import ftn.uns.ProbaProjekat.model.Trening;
+import ftn.uns.ProbaProjekat.model.dto.TerminDTO;
 import ftn.uns.ProbaProjekat.model.dto.TrenerDTO;
 import ftn.uns.ProbaProjekat.model.dto.TreningDTO;
+import ftn.uns.ProbaProjekat.service.SalaService;
+import ftn.uns.ProbaProjekat.service.TerminService;
 import ftn.uns.ProbaProjekat.service.TrenerService;
 import ftn.uns.ProbaProjekat.service.TreningService;
 
@@ -27,11 +33,15 @@ import ftn.uns.ProbaProjekat.service.TreningService;
 public class TrenerController {
 	private final TrenerService trenerService;
 	private final TreningService treningService;
+	private final SalaService salaService;
+	private final TerminService terminService;
 	
 	@Autowired
-	public TrenerController(TrenerService trenerService, TreningService treningService) {
+	public TrenerController(TrenerService trenerService, TreningService treningService, SalaService salaService, TerminService terminService) {
 		this.trenerService = trenerService;
 		this.treningService = treningService;
+		this.salaService = salaService;
+		this.terminService = terminService;
 	}
 	
 	@PostMapping(
@@ -88,6 +98,33 @@ public class TrenerController {
 		
 		return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
 	}
+	
+	@PostMapping( 
+			value = "/termin/dodaj",
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<TerminDTO> addTermin(@RequestBody TerminDTO terminDTO) throws Exception {
+		// Provera validnosti datuma prosledjenog za termin
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		if ((terminDTO.getEpoha() * 1000l) < now.getTime()) {
+			throw new Exception("Datum mora biti validan, odnosno novi termin mora biti odrzan u buducnosti.");
+		}
+		
+		Trening trening = this.treningService.findOne(terminDTO.getTrening_id());
+		
+		terminDTO.setPocetak(new Timestamp(terminDTO.getEpoha() * 1000l));
+		
+		Long id = (long) 1;	// TMP resenje dok ne dodam funkcionalnost za izbor sale
+		Sala sala = this.salaService.findOne(id);
+		
+		Termin termin = new Termin(terminDTO.getPocetak(), terminDTO.getCena(), sala, trening);
+		Termin noviTermin = terminService.create(termin);
+		
+		TerminDTO noviTerminDTO = new TerminDTO(noviTermin.getId(), noviTermin.getPocetak(), noviTermin.getCena(), noviTermin.getSala().getId(), noviTermin.getTrening().getId());
+		
+		return new ResponseEntity<>(noviTerminDTO, HttpStatus.CREATED);
+	}
+	
 }
 
 

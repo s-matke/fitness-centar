@@ -26,4 +26,15 @@ public class TerminServiceImpl implements TerminService {
 		Termin termin = this.terminRepo.getOne(id);
 		return termin;
 	}
+	
+	@Override
+	public Termin create(Termin termin) throws Exception {
+		if (termin.getId() != null) {
+			throw new Exception("ID must be mull!");
+		}
+		
+		Termin noviTermin = this.terminRepo.save(termin);
+		
+		return termin;
+	}
 }

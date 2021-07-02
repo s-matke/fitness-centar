@@ -20,4 +20,5 @@ public interface TreningService {
 	
 	List<Trening> findByTrener(Long id);
 
+	Trening findOne(Long id);
 }

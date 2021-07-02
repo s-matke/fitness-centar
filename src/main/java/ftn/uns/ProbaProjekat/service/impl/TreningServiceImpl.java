@@ -71,4 +71,10 @@ public class TreningServiceImpl implements TreningService {
 		return treninzi;
 	}
 	
+	@Override
+	public Trening findOne(Long id) {
+		Trening trening = this.treningRepo.getOne(id);
+		return trening;
+	}
+	
 }

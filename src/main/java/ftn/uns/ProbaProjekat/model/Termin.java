@@ -36,6 +36,23 @@ public class Termin implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Trening trening;
+	
+	public Termin() {}
+	
+	public Termin(Timestamp pocetak, Double cena, Sala sala, Trening trening) {
+		this.pocetak = pocetak;
+		this.cena = cena;
+		this.sala = sala;
+		this.trening = trening;
+	}
+	
+	public Termin(Long id, Timestamp pocetak, Double cena, Sala sala, Trening trening) {
+		this.id = id;
+		this.pocetak = pocetak;
+		this.cena = cena;
+		this.sala = sala;
+		this.trening = trening;
+	}
 
 	public Long getId() {
 		return id;
