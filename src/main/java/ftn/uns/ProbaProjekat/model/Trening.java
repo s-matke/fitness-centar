@@ -46,17 +46,24 @@ public class Trening implements Serializable{
 	@OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<OdradjenTermin> listaOdradjenihTermina = new HashSet<>();
 	
-//	@ManyToMany
-//	@JoinTable(name = "odradjen_trening",
-//			   joinColumns = @JoinColumn(name = "trening_id", referencedColumnName = "id"),
-//			   inverseJoinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"))
-//	private Set<Clan> odradjenTrening = new HashSet<>();
-//	
-//	@ManyToMany
-//	@JoinTable(name = "prijavljen_trening",
-//			   joinColumns = @JoinColumn(name = "trening_id", referencedColumnName = "id"),
-//			   inverseJoinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"))
-//	private Set<Clan> prijavljenTrening = new HashSet<>();
+	public Trening() {}
+	
+	public Trening(String naziv, String opis, String tip, Integer trajanje, Trener trener) {
+		this.naziv = naziv;
+		this.opis = opis;
+		this.tip = tip;
+		this.trajanje = trajanje;
+		this.trener = trener;
+	}
+	
+	public Trening(Long id, String naziv, String opis, String tip, Integer trajanje, Trener trener) {
+		this.id = id;
+		this.naziv = naziv;
+		this.opis = opis;
+		this.tip = tip;
+		this.trajanje = trajanje;
+		this.trener = trener;
+	}
 	
 	public Long getId() {
 		return id;

@@ -27,3 +27,40 @@ $(document).ready(function () {
         }
     });
 });
+
+// Dodavanje novog treninga
+$(document).on("submit", "#addTrening", function(event) {
+    event.preventDefault();
+    console.log("Pravim trening");
+    // preuzimanje vrednosti
+    let naziv = $("#naziv").val();
+    let opis = $("#opis").val();
+    let tip_treninga = $("#tip_treninga").val();
+    let trajanje = $("#trajanje").val();
+    let id = sessionStorage.getItem('id');
+
+    let newTrening = {
+        id,
+        naziv,
+        opis,
+        tip_treninga,
+        trajanje
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/api/trening/dodaj",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(newTrening),
+        success: function(response) {
+            console.log(response);
+            alert("Uspesno dodat novi trening");
+            window.location.href = "../../index.html";
+        },
+        error: function(error) {
+            console.log(error);
+            alert("Error");
+        }
+    });
+});
