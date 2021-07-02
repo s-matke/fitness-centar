@@ -91,5 +91,17 @@ public class ClanController {
 		return new ResponseEntity<>(prijavaDTOS, HttpStatus.OK);
 	}
 	
+	// Odjava termina
+	@DeleteMapping(value = "/odjava")
+	public ResponseEntity<Long> odjavaTermina(@RequestParam(required=true) Long id) throws Exception {
+		
+		if (this.prijavaService.findOne(id) == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		this.prijavaService.delete(id);
+		return new ResponseEntity<>(id, HttpStatus.OK);
+	}
+	
 
 }

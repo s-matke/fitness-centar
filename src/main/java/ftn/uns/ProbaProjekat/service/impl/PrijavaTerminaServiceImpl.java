@@ -37,4 +37,14 @@ public class PrijavaTerminaServiceImpl implements PrijavaTerminaService {
 		List<PrijavaTermina> termini = this.prijavaRepo.findAllByClan_id(id);
 		return termini;
 	}
+	
+	@Override
+	public void delete(Long id) {
+		this.prijavaRepo.deleteById(id);
+	}
+	
+	@Override
+	public PrijavaTermina findOne(Long id) {
+		return this.prijavaRepo.getOne(id);
+	}
 }

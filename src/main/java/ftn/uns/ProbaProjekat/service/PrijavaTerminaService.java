@@ -9,5 +9,9 @@ public interface PrijavaTerminaService {
 	PrijavaTermina create(PrijavaTermina prijava) throws Exception;
 	
 	List<PrijavaTermina> findByClan(Long id);
+	
+	public void delete(Long id);
+	
+	PrijavaTermina findOne(Long id);
 
 }
