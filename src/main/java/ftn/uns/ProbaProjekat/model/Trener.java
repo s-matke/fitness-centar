@@ -23,6 +23,14 @@ public class Trener extends Korisnik{
 	@Column
 	private Double avgOcena;
 	
+	// lista treninga koje on drzi
+	@OneToMany(mappedBy = "trener", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<Trening> listaTreninga = new HashSet<>();
+	
+	// fitness centar u kom je zaposlen
+	@ManyToOne(fetch = FetchType.EAGER)
+	private FitnessCentar fitnessCentar;
+
 	public Trener() {}
 	
 	public Trener(String userName, String lozinka, String ime, String prezime, String email, String telefon, Date date,
@@ -31,13 +39,13 @@ public class Trener extends Korisnik{
 		this.avgOcena = avgOcena;
 	}
 	
-	// lista treninga koje on drzi
-	@OneToMany(mappedBy = "trener", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<Trening> listaTreninga = new HashSet<>();
+	public Trener(String userName, String lozinka, String ime, String prezime, String email, String telefon, Date date,
+			String role, String tip_korisnika, Boolean status, Double avgOcena, FitnessCentar fitnessCentar) {
+		super(userName, lozinka, ime, prezime, email, telefon, date, role, tip_korisnika, status);
+		this.avgOcena = avgOcena;
+		this.fitnessCentar = fitnessCentar;
+	}
 	
-	// fitness centar u kom je zaposlen
-	@ManyToOne(fetch = FetchType.EAGER)
-	private FitnessCentar fitnessCentar;
 	
 	
 	/*public boolean isPrihvacen() {

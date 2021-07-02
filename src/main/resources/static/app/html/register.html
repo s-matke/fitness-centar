@@ -59,10 +59,19 @@
             </div>
             <div>
                 <label for="ulogaField">*Uloga:</label>
-                <select id="role" required>
+                <select id="role" required onchange="visibility()">
                     <option value="Clan">Član Fitness Centra</option>
                     <option value="Trener">Trener</option>
                 </select>
+            </div>
+            <div>
+                <label for="centar">*Fitness Centar:</label>
+                <!--"<input id='id' type='number' disabled='disabled' value=" + trening_id + " />";-->
+                <select id="centar" disabled>
+                    <!-- fitness centri -->
+                    <option value="-1">---- Izaberite fitness centar ----</option>
+                </select>
+
             </div>
             <div>
                 <p>*Obavezna polja</p>

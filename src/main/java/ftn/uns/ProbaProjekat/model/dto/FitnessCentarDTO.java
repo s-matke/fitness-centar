@@ -16,6 +16,11 @@ public class FitnessCentarDTO {
 		this.email = email;
 	}
 
+	public FitnessCentarDTO(Long id, String naziv) {
+		this.id = id;
+		this.naziv = naziv;
+	}
+	
 	public Long getId() {
 		return id;
 	}

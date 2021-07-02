@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ftn.uns.ProbaProjekat.model.FitnessCentar;
 import ftn.uns.ProbaProjekat.model.Sala;
 import ftn.uns.ProbaProjekat.model.Termin;
 import ftn.uns.ProbaProjekat.model.Trener;
@@ -22,6 +23,7 @@ import ftn.uns.ProbaProjekat.model.Trening;
 import ftn.uns.ProbaProjekat.model.dto.TerminDTO;
 import ftn.uns.ProbaProjekat.model.dto.TrenerDTO;
 import ftn.uns.ProbaProjekat.model.dto.TreningDTO;
+import ftn.uns.ProbaProjekat.service.FitnessCentarService;
 import ftn.uns.ProbaProjekat.service.SalaService;
 import ftn.uns.ProbaProjekat.service.TerminService;
 import ftn.uns.ProbaProjekat.service.TrenerService;
@@ -35,13 +37,15 @@ public class TrenerController {
 	private final TreningService treningService;
 	private final SalaService salaService;
 	private final TerminService terminService;
+	private final FitnessCentarService centarService;
 	
 	@Autowired
-	public TrenerController(TrenerService trenerService, TreningService treningService, SalaService salaService, TerminService terminService) {
+	public TrenerController(TrenerService trenerService, TreningService treningService, SalaService salaService, TerminService terminService, FitnessCentarService centarService) {
 		this.trenerService = trenerService;
 		this.treningService = treningService;
 		this.salaService = salaService;
 		this.terminService = terminService;
+		this.centarService = centarService;
 	}
 	
 	@PostMapping(
@@ -52,8 +56,12 @@ public class TrenerController {
 		
 		trenerDTO.setStatus(false);	// ostaje na Administratoru da dozvoli/odbije zahtev za pristup sistemu (samo za trenere)
 		
+		System.out.println("ID Centra: " + trenerDTO.getFitnessCentar_id());
+		
+		FitnessCentar centar = this.centarService.findOne(trenerDTO.getFitnessCentar_id());
+		
 		Trener trener = new Trener(trenerDTO.getUserName(), trenerDTO.getLozinka(), trenerDTO.getIme(), trenerDTO.getPrezime(), trenerDTO.getEmail(),
-				trenerDTO.getTelefon(), trenerDTO.getDate(), trenerDTO.getRole(), trenerDTO.getTip_korisnika(), trenerDTO.getStatus(), 0.0);
+				trenerDTO.getTelefon(), trenerDTO.getDate(), trenerDTO.getRole(), trenerDTO.getTip_korisnika(), trenerDTO.getStatus(), 0.0, centar);
 		
 		Trener noviTrener = trenerService.create(trener);
 		

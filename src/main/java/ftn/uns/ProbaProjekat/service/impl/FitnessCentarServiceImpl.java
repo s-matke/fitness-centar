@@ -1,5 +1,7 @@
 package ftn.uns.ProbaProjekat.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,18 @@ public class FitnessCentarServiceImpl implements FitnessCentarService {
 		}
 		FitnessCentar noviFitnessCentar = this.fitnessRepo.save(fitnessCentar);
 		return noviFitnessCentar;
+	}
+	
+	@Override
+	public List<FitnessCentar> findAll() {
+		List<FitnessCentar> centri = this.fitnessRepo.findAll();
+		return centri;
+	}
+	
+	@Override
+	public FitnessCentar findOne(Long id) {
+		FitnessCentar centar = this.fitnessRepo.getOne(id);
+		return centar;
 	}
 	
 	

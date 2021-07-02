@@ -1,5 +1,34 @@
-// Registracija
 
+function visibility() {
+    let role = $("#role").val();
+
+    if ($("#role").val() == "Trener") {
+        document.getElementById("centar").disabled = false;
+    } else {
+        document.getElementById("centar").disabled = true;
+    }
+}
+
+$(document).ready(function() {
+    // pribavljanje svih FC-a
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/centar/opcije",
+        dataType: "json",
+        success: function(response) {
+            for (let fc of response) {
+                let option = "<option value=" + fc.id + ">" + fc.naziv + "</otion>";
+                $('#centar').append(option);
+            }
+        },
+        error: function(error) {
+            alert("Doslo je do greske prilikom pribavljanja informacija sa servera.")
+            window.location.href = "../../index.html";
+        }
+    });
+});
+
+// Registracija
 $(document).on("submit", "#addKorisnikForm", function(event) {
     event.preventDefault();
 
@@ -11,6 +40,12 @@ $(document).on("submit", "#addKorisnikForm", function(event) {
     let telefon = $("#telefon").val();
     let birthday = $("#birthday").val();
     let role = $("#role").val();
+    let fitnessCentar_id = document.getElementById('centar').value;
+
+    if (fitnessCentar_id == "-1" && role == "Trener") {
+        alert("Niste uneli validan fitness centar");
+        return;
+    }
 
     let newKorisnik = {
         userName,
@@ -20,7 +55,12 @@ $(document).on("submit", "#addKorisnikForm", function(event) {
         email,
         telefon,
         date: birthday,
-        role
+        role,
+        fitnessCentar_id
+    }
+
+    if (role == "Clan") {
+        delete newKorisnik.fitnessCentar_id;
     }
 
     $.ajax({
@@ -32,8 +72,8 @@ $(document).on("submit", "#addKorisnikForm", function(event) {
         success: function(response) {
             console.log(response);
 
-            if (role.equals("clan")) {
-                alert("Uspesna registracija!\n Dobrodosli " + ime + " " + prezime);
+            if (role == "Clan") {
+                alert("Uspesna registracija!\nDobrodosli " + ime + " " + prezime);
             }
             else {
                 alert("Uspesna registracija!\nVas zahtev je prosledjen na pregled.")

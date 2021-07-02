@@ -16,6 +16,7 @@ public class TrenerDTO {
 	private Boolean status;
 	private Double avgOcena;
 	private String tip_korisnika;
+	private Long fitnessCentar_id;
 	
 	public TrenerDTO() {
 	}
@@ -37,7 +38,7 @@ public class TrenerDTO {
 	}
 
 	public TrenerDTO(String userName, String lozinka, String ime, String prezime, String email,
-			String telefon, Date date, String role, String tip_korisnika, Boolean status, Double avgOcena) {
+			String telefon, Date date, String role, String tip_korisnika, Boolean status, Double avgOcena, Long fitnessCentar_id) {
 		//this.id = id;
 		this.userName = userName;
 		this.lozinka = lozinka;
@@ -49,7 +50,8 @@ public class TrenerDTO {
 		this.role = role;
 		this.tip_korisnika = tip_korisnika;
 		this.status = status;
-		this.avgOcena = avgOcena;		
+		this.avgOcena = avgOcena;
+		this.fitnessCentar_id = fitnessCentar_id;
 	}
 	
 	public TrenerDTO(Long id, String ime, String prezime, Boolean status) {
@@ -159,6 +161,14 @@ public class TrenerDTO {
 
 	public void setTip_korisnika(String tip_korisnika) {
 		this.tip_korisnika = tip_korisnika;
+	}
+
+	public Long getFitnessCentar_id() {
+		return fitnessCentar_id;
+	}
+
+	public void setFitnessCentar_id(Long fitnessCentar_id) {
+		this.fitnessCentar_id = fitnessCentar_id;
 	}
 	
 }
