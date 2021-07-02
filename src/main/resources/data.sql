@@ -13,10 +13,10 @@ INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (10, 'S1', 1);
 INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (5, 'S2', 1);
 INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (20, 'S3', 1);
 
-INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (1500, '2021-06-30 09:00:00', 1, 1);
-INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (1000, '2021-07-01 15:00', 2, 2);
-INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (500, '2021-07-02 13:30', 1, 3);
-INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (2000, '2021-06-29 14:20', 3, 1);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (1500, '2021-07-22 09:00:00', 1, 1);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (1000, '2021-07-05 15:00', 2, 2);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (500, '2021-07-07 13:30', 1, 3);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (2000, '2021-07-10 14:20', 3, 1);
 
 INSERT INTO PRIJAVA_TERMINA (clan_id, termin_id) VALUES (1, 2);
 INSERT INTO PRIJAVA_TERMINA (clan_id, termin_id) VALUES (1, 1);

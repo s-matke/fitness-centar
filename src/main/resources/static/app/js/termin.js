@@ -73,3 +73,4 @@ $(document).on("submit", "#allTermini", function(event) {
         }
     });
 });
+

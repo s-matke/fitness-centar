@@ -2,7 +2,7 @@ $(document).ready(function() {
     let clan_id = sessionStorage.getItem('id');
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/clan/termini",
+        url: "http://localhost:8080/api/termin/prijavljeni",
         data: {clan_id},
         dataType: "json",
         success: function(response) {
@@ -30,3 +30,27 @@ $(document).ready(function() {
     });
 });
 
+$(document).on("submit", "#allPrijave", function(event) {
+    event.preventDefault();
+    
+    let id;
+
+    $("input:radio[name='odjava']:checked").each(function() {
+        id = parseInt($(this).val());
+    });
+
+    $.ajax({
+        type: "DELETE",
+        url: "http://localhost:8080/api/termin/odjava",
+        data: {id},
+        success: function(response) {
+            console.log(response);
+            alert("Uspesno odjavljen termin: " + response);
+            window.location.href = "prijavljeniTermini.html";
+        },
+        error: function(error) {
+            console.log(error);
+            alert("GRESKA");
+        }
+    });
+});

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -104,8 +105,42 @@ public class TerminController {
 		
 	}
 	
-	
-	// Prijavljivanje na termin
+	// Lista prijavljenih termina
+	@GetMapping( 
+			value = "/prijavljeni",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<TermingDTO>> viewTermin(@RequestParam(required=true) Long clan_id) throws Exception {
+		List<TermingDTO> prijavaDTOS = new ArrayList<>();
+		List<PrijavaTermina> listaTermina = this.prijavaService.findByClan(clan_id);
+		
+		SimpleDateFormat crunchifyDate = new SimpleDateFormat("MMM dd yyyy");
+		SimpleDateFormat crunchifyTime = new SimpleDateFormat("HH:ss");
+		
+		String datum, vreme;
+		
+		for (PrijavaTermina termin : listaTermina) {
+			datum = crunchifyDate.format(termin.getTermin().getPocetak());
+			vreme = crunchifyTime.format(termin.getTermin().getPocetak());
+			
+			if (termin.getTermin().getTrening().getTrener().getStatus() == false) {
+				continue;
+			}
+			
+			TermingDTO termingDTO = new TermingDTO(
+					termin.getTermin().getTrening().getNaziv(),
+					termin.getTermin().getTrening().getOpis(),
+					termin.getTermin().getCena(),
+					datum,
+					vreme,
+					termin.getTermin().getTrening().getTrener().getIme() + " " + termin.getTermin().getTrening().getTrener().getPrezime(),
+					termin.getId());
+			prijavaDTOS.add(termingDTO);
+		}
+		
+		return new ResponseEntity<>(prijavaDTOS, HttpStatus.OK);
+	}
+		
+	// Prijavljivanje termina
 	@PostMapping( 
 			value = "/prijava", 
 			consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -127,6 +162,18 @@ public class TerminController {
 		PrijavaTerminaDTO novaPrijavaDTO = new PrijavaTerminaDTO(novaPrijava.getId(), novaPrijava.getClan().getId(), novaPrijava.getTermin().getId());
 		
 		return new ResponseEntity<>(novaPrijavaDTO, HttpStatus.CREATED);
+	}
+	
+	// Odjava termina
+	@DeleteMapping(value = "/odjava")
+	public ResponseEntity<Long> odjavaTermina(@RequestParam(required=true) Long id) throws Exception {
+		
+		if (this.prijavaService.findOne(id) == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		this.prijavaService.delete(id);
+		return new ResponseEntity<>(id, HttpStatus.OK);
 	}
 
 }
