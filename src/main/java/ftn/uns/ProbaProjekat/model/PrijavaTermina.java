@@ -11,8 +11,8 @@ public class PrijavaTermina implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
-	private Integer brPrijavljenihClanova;
+//	@Column
+//	private Integer brPrijavljenihClanova;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Termin termin;
@@ -20,8 +20,21 @@ public class PrijavaTermina implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Clan clan;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Trening trening;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	private Trening trening;
+	
+	public PrijavaTermina() {}
+	
+	public PrijavaTermina(Clan clan, Termin termin) {
+		this.clan = clan;
+		this.termin = termin;
+	}
+	
+	public PrijavaTermina(Long id, Clan clan, Termin termin) {
+		this.id = id;
+		this.clan = clan;
+		this.termin = termin;
+	}
 
 	public Long getId() {
 		return id;
@@ -47,13 +60,13 @@ public class PrijavaTermina implements Serializable {
 		this.clan = clan;
 	}
 
-	public Trening getTrening() {
-		return trening;
-	}
-
-	public void setTrening(Trening trening) {
-		this.trening = trening;
-	}
+//	public Trening getTrening() {
+//		return trening;
+//	}
+//
+//	public void setTrening(Trening trening) {
+//		this.trening = trening;
+//	}
 	
 	/*
 	 * 

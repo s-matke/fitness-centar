@@ -32,8 +32,13 @@ $(document).on("submit", "#addKorisnikForm", function(event) {
         success: function(response) {
             console.log(response);
 
-            alert(response.id + ". " + role + " je uspesno kreiran!");
-            window.location.href = "register.html";
+            if (role.equals("clan")) {
+                alert("Uspesna registracija!\n Dobrodosli " + ime + " " + prezime);
+            }
+            else {
+                alert("Uspesna registracija!\nVas zahtev je prosledjen na pregled.")
+            }
+            window.location.href = "../../index.html";
         },
         error: function(error) {
             console.log(error);

@@ -27,6 +27,11 @@ public class ClanServiceImpl implements ClanService {
 		return noviClan;
 	}
 	
+	@Override
+	public Clan findOne(Long id) {
+		Clan clan = this.clanRepo.getOne(id);
+		return clan;
+	}
 //	@Override
 //	public Clan isUserExist(String userName, String email, String telefon) {
 //		

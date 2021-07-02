@@ -33,7 +33,7 @@ $(document).on("submit", "#loginForm", function(event) {
             console.log("Uloga korisnika: " + ulogaKorisnika);
             alert("Dobrodosli: " + sessionStorage.getItem('ime') + " " + sessionStorage.getItem('prezime'));
 
-            window.location.href = "login.html";
+            window.location.href = "../../index.html";
         },
         error: function(data) {
             console.log(data);

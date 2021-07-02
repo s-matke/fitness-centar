@@ -33,7 +33,7 @@ public class TreningController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<TreningDTO>> getTrenings(@RequestParam(required=false) String keyword) {
 		
-		System.out.println("Keyword: " + keyword);
+		//System.out.println("Keyword: " + keyword);
 		
 		List<TreningDTO> treningDTOS = new ArrayList<>();
 		List<Trening> listaTreninga = this.treningService.findAll(keyword);  

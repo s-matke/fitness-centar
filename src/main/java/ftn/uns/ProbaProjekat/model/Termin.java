@@ -1,11 +1,19 @@
 package ftn.uns.ProbaProjekat.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Termin implements Serializable {
@@ -16,8 +24,8 @@ public class Termin implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "vreme_pocetka")
-	private String pocetak;
+	@Column(name = "datum")
+	private Timestamp pocetak;	// YYYY-mm-DD HH:mm:SS
 	
 	@Column(name = "cena")
 	private Double cena;
@@ -26,8 +34,8 @@ public class Termin implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Sala sala;
 	
-	@OneToMany(mappedBy="termin", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<PrijavaTermina> prijavljeniTermini = new HashSet<>();
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Trening trening;
 
 	public Long getId() {
 		return id;
@@ -37,11 +45,11 @@ public class Termin implements Serializable {
 		this.id = id;
 	}
 
-	public String getPocetak() {
+	public Timestamp getPocetak() {
 		return pocetak;
 	}
 
-	public void setPocetak(String pocetak) {
+	public void setPocetak(Timestamp pocetak) {
 		this.pocetak = pocetak;
 	}
 
@@ -59,6 +67,14 @@ public class Termin implements Serializable {
 
 	public void setSala(Sala sala) {
 		this.sala = sala;
+	}
+
+	public Trening getTrening() {
+		return trening;
+	}
+
+	public void setTrening(Trening trening) {
+		this.trening = trening;
 	}
 	
 	

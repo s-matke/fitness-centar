@@ -30,6 +30,8 @@ public class FitnessCentar implements Serializable{
 	@Column
 	private String email;	// mail fit. centra
 	
+	public FitnessCentar() {}
+	
 	public FitnessCentar(String naziv, String adresa, String telefon, String email) {
 		this.naziv = naziv;
 		this.adresa = adresa;

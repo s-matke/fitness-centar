@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf8"/>
+        <title>Lista Treninga | Fitness-Centar</title>
+        <script src="../../assets/js/jquery.min.js"></script>
+        <script src="../js/termin.js"></script>
+        <script src="../js/login.js"></script>
+        <style>
+            th, td {
+                border: 1px solid black;
+                padding: 15px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h2>Lista treninga</h2>
+        </div>
+       <br/>
+        <form id="allTermini">
+            <div class="container">
+                <table id="termini">
+                    <thead>    
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Opis</th>
+                            <th>Tip</th>
+                            <th>Trajanje</th>
+                            <th>Vreme</th>
+                            <th>Datum</th>
+                            <th>Cena</th>
+                            <th>Trener</th>
+                            <th>Sala</th>
+                            <th>Odabir</th>
+                        </tr>
+                    </thead>
+                    <tbody id="content">
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <input type="submit" value="Prosledi"/>
+            </div>
+        </form>
+        <div id="prazno" hidden>
+            <h2>Trenutno ne postoji ni jedan trening na koji se mozete prijaviti</h2>
+        </div>
+        <div>
+            <br/>
+            <!-- <li><a type="button" href="listaTreninga.html" class="btn">Refresh</a></li> -->
+            <button onclick="window.location.reload()">Refresh</button>
+        </div>
+        <div>
+            <br/>
+            <a href="prijavljeniTermini.html">Prijavljeni termini</a>
+        </div>
+    </body>
+</html>

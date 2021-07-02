@@ -11,9 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -39,9 +36,12 @@ public class Trening implements Serializable{
 	// n treninga : 1 trener
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Trener trener;
+	
+	@OneToMany(mappedBy = "trening", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Termin> termini = new HashSet<>();
 
-	@OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<PrijavaTermina> listaPrijavljenihTermina = new HashSet<>();
+//	@OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private Set<PrijavaTermina> listaPrijavljenihTermina = new HashSet<>();
 	
 	@OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<OdradjenTermin> listaOdradjenihTermina = new HashSet<>();
