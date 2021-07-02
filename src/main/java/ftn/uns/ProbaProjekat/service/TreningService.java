@@ -17,5 +17,7 @@ public interface TreningService {
 	List<Trening> findByTip(String tip);
 	
 	Trening create(Trening trening) throws Exception;
+	
+	List<Trening> findByTrener(Long id);
 
 }

@@ -64,3 +64,36 @@ $(document).on("submit", "#addTrening", function(event) {
         }
     });
 });
+
+
+// Lista treninga
+$(document).ready(function() {
+    let id = sessionStorage.getItem('id');
+
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/trener/trening/lista",
+        dataType: "json",
+        data: {id},
+        success: function(response) {
+            console.log("Success:\n" + response);
+            for (let trening of response) {
+                let row = "<tr>";
+                row += "<td>" + trening.naziv + "</td>";
+                row += "<td>" + trening.opis + "</td>";
+                row += "<td>" + trening.tip_treninga + "</td>";
+                row += "<td>" + trening.trajanje + "</td>";
+                let btn = "<button class='btnAddTermin' data-id=" + trening.id + ">Add Termin</button>";
+                row += "<td> " + btn + "</td>"
+                row += "</tr>";
+
+                $('#content').append(row);
+            }
+        }, 
+        error: function(error) {
+            console.log("Error:\n" + error);
+            alert("Greska");
+        }
+    }); 
+});
+

@@ -65,5 +65,10 @@ public class TreningServiceImpl implements TreningService {
 		return noviTrening;
 	}
 	
+	@Override
+	public List<Trening> findByTrener(Long id) {
+		List<Trening> treninzi = this.treningRepo.findAllByTrener_id(id);
+		return treninzi;
+	}
 	
 }

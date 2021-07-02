@@ -37,7 +37,7 @@ public class TreningController {
 	@GetMapping(
 			value = "/lista",
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<TreningDTO>> getTrenings(@RequestParam(required=false) String keyword) {
+	public ResponseEntity<List<TreningDTO>> getTrenings(@RequestParam(required=false) String keyword){
 		
 		//System.out.println("Keyword: " + keyword);
 		
@@ -108,16 +108,6 @@ public class TreningController {
 		return new ResponseEntity<>(noviTreningDTO, HttpStatus.CREATED);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 
 }

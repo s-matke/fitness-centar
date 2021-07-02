@@ -11,21 +11,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ftn.uns.ProbaProjekat.model.Trener;
+import ftn.uns.ProbaProjekat.model.Trening;
 import ftn.uns.ProbaProjekat.model.dto.TrenerDTO;
+import ftn.uns.ProbaProjekat.model.dto.TreningDTO;
 import ftn.uns.ProbaProjekat.service.TrenerService;
+import ftn.uns.ProbaProjekat.service.TreningService;
 
 
 @RestController
 @RequestMapping(value = "/api/trener")
 public class TrenerController {
 	private final TrenerService trenerService;
+	private final TreningService treningService;
 	
 	@Autowired
-	public TrenerController(TrenerService trenerService) {
+	public TrenerController(TrenerService trenerService, TreningService treningService) {
 		this.trenerService = trenerService;
+		this.treningService = treningService;
 	}
 	
 	@PostMapping(
@@ -66,4 +72,33 @@ public class TrenerController {
 		
 		return new ResponseEntity<>(trenerDTOS, HttpStatus.OK);
 	}
+	
+	// Lista treninga koje drzi trener
+	@GetMapping(
+			value = "/trening/lista",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<TreningDTO>> listTrening(@RequestParam(required=true) Long id) throws Exception {
+		List<TreningDTO> treningDTOS = new ArrayList<>();
+		List<Trening> listaTreninga = this.treningService.findByTrener(id);
+		
+		for (Trening trening : listaTreninga) {
+			TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getTip_treninga(), trening.getOpis(), trening.getTrajanje());
+			treningDTOS.add(treningDTO);
+		}
+		
+		return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
