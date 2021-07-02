@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf8"/>
+        <title>Lista Treninga | Fitness-Centar</title>
+        <script src="../../assets/js/jquery.min.js"></script>
+        <script src="../js/trener.js"></script>
+        <script src="../js/login.js"></script>
+        <style>
+            th, td {
+                border: 1px solid black;
+                padding: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h2>Kontrolni Panel za Trening/Termin</h2>
+        </div>
+        <br/>
+
+        <div id="allTreninzi">
+            <div class="container">
+                <table id="treninzi">
+                    <thead>    
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Opis</th>
+                            <th>Tip</th>
+                            <th>Trajanje</th>
+                            <th>Termin</th>
+                        </tr>
+                    </thead>
+                    <tbody id="content">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="divTermin" hidden>
+            <h2>Dodaj Termin</h2>
+            <form id="addTermin">
+                <label for="cena">Cena:</label> <br/>
+                <input id="cena" type="number" required/> <br/>
+                <br/>
+                <label for="datum">Datum:</label> <br/>
+                <input id="datum" type="date" required/> <br/>
+                <br/>
+                <label for="vreme">Vreme:</label> <br/>
+                <input id="vreme" type="time" required/> <br/>
+                <p>ID: </p>
+                <div id="kontent">
+                </div> <br/>
+                <input type="submit" value="Dodaj"/>
+            </form>
+        </div>
+
+        <div>
+            <br/>
+            <!-- <li><a type="button" href="listaTreninga.html" class="btn">Refresh</a></li> -->
+            <button onclick="window.location.reload()">Refresh</button>
+        </div>
+    </body>
+</html>
