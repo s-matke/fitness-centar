@@ -12,6 +12,7 @@ $(document).ready(function() {
                 row += "<td>" + termin.naziv + "</td>";
                 row += "<td>" + termin.opis + "</td>";
                 row += "<td>" + termin.cena + "</td>";
+                row += "<td>" + termin.oznaka + "</td>";
                 row += "<td>" + termin.vreme + "</td>";
                 row += "<td>" + termin.datum + "</td>";
                 row += "<td>" + termin.ime_prezime + "</td>";

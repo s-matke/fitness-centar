@@ -1,9 +1,10 @@
 package ftn.uns.ProbaProjekat.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ftn.uns.ProbaProjekat.model.Sala;
 import ftn.uns.ProbaProjekat.model.Sala;
 import ftn.uns.ProbaProjekat.repository.SalaRepository;
 import ftn.uns.ProbaProjekat.service.SalaService;
@@ -22,5 +23,11 @@ public class SalaServiceImpl implements SalaService {
 	public Sala findOne(Long id) {
 		Sala sala = this.salaRepo.getOne(id);
 		return sala;
+	}
+	
+	@Override
+	public List<Sala> findAll(){
+		List<Sala> sale = this.salaRepo.findAll();
+		return sale;
 	}
 }

@@ -108,6 +108,20 @@ $(document).on('click', '.btnAddTermin', function() {
     console.log("ID: " + trening_id);
     let text = "<input id='id' type='number' disabled='disabled' value=" + trening_id + " />";
     $('#kontent').append(text);
+
+    // ajax grab sale
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/sala/lista",
+        dataType: "json",
+        success: function(response) {
+            for (let sale of response) {
+                let option = "<option value=" + sale.id + ">" + sale.oznaka + "</option>";
+                
+                $('#sala').append(option);
+            }
+        }
+    });
 });
 
 $(document).on('submit', '#addTermin', function(event) {
@@ -120,14 +134,16 @@ $(document).on('submit', '#addTermin', function(event) {
     let datum = $("#datum").val();
     let vreme = $("#vreme").val();
     let trening_id = parseInt($("#id").val());
-    console.log("CENA: " + cena + "\nDatum: " + datum + "\nVreme: " + vreme + "\nID: " + trening_id);
+    //let sala_id = $("")
+    let sala_id = document.getElementById('sala').value;
     let dejt = datum + " " + vreme;
     let epoha = Date.parse(dejt) / 1000;
     
     let podaci = {
         epoha,
         cena,
-        trening_id
+        trening_id,
+        sala_id
     }
 
     $.ajax({

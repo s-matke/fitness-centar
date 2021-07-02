@@ -130,6 +130,7 @@ public class TerminController {
 					termin.getTermin().getTrening().getNaziv(),
 					termin.getTermin().getTrening().getOpis(),
 					termin.getTermin().getCena(),
+					termin.getTermin().getSala().getOznaka(),
 					datum,
 					vreme,
 					termin.getTermin().getTrening().getTrener().getIme() + " " + termin.getTermin().getTrening().getTrener().getPrezime(),

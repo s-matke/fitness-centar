@@ -13,10 +13,11 @@ public class TermingDTO {
 	private String ime_prezime;
 	private String oznaka;
 	
-	public TermingDTO(String naziv, String opis, Double cena, String datum, String vreme, String ime_prezime, Long id) {
+	public TermingDTO(String naziv, String opis, Double cena, String oznaka, String datum, String vreme, String ime_prezime, Long id) {
 		this.naziv = naziv;
 		this.opis = opis;
 		this.cena = cena;
+		this.oznaka = oznaka;
 		this.datum = datum;
 		this.vreme = vreme;
 		this.ime_prezime = ime_prezime;

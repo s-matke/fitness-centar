@@ -114,9 +114,8 @@ public class TrenerController {
 		
 		terminDTO.setPocetak(new Timestamp(terminDTO.getEpoha() * 1000l));
 		
-		Long id = (long) 1;	// TMP resenje dok ne dodam funkcionalnost za izbor sale
-		Sala sala = this.salaService.findOne(id);
-		
+		Sala sala = this.salaService.findOne(terminDTO.getSala_id());
+			
 		Termin termin = new Termin(terminDTO.getPocetak(), terminDTO.getCena(), sala, trening);
 		Termin noviTermin = terminService.create(termin);
 		
