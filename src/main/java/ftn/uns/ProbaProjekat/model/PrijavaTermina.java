@@ -59,6 +59,12 @@ public class PrijavaTermina implements Serializable {
 	public void setClan(Clan clan) {
 		this.clan = clan;
 	}
+	
+	@Override
+	public String toString() {
+		return "Clan: " + this.getClan().getIme() + " " + this.getClan().getPrezime() +
+			   "\nTermin: " + this.getTermin().getCena() + ", " +this.getTermin().getPocetak();
+	}
 
 //	public Trening getTrening() {
 //		return trening;

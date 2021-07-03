@@ -13,5 +13,7 @@ public interface PrijavaTerminaService {
 	public void delete(Long id);
 	
 	PrijavaTermina findOne(Long id);
+	
+	List<PrijavaTermina> findAllById(Long id);
 
 }

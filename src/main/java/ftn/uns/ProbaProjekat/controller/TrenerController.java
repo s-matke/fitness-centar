@@ -3,6 +3,7 @@ package ftn.uns.ProbaProjekat.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -84,6 +85,10 @@ public class TrenerController {
 			//if (trener.getStatus() == false) 
 			{
 				TrenerDTO trenerDTO = new TrenerDTO(trener.getId(), trener.getIme(), trener.getPrezime(), trener.getStatus());
+				Set<Trening> treninzi = trener.getListaTreninga();
+				for (Trening trening : treninzi) {
+					System.out.println(trening);
+				}
 				trenerDTOS.add(trenerDTO);
 			}
 		}
@@ -131,6 +136,7 @@ public class TrenerController {
 		
 		return new ResponseEntity<>(noviTerminDTO, HttpStatus.CREATED);
 	}
+	
 	
 }
 

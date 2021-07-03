@@ -47,4 +47,10 @@ public class PrijavaTerminaServiceImpl implements PrijavaTerminaService {
 	public PrijavaTermina findOne(Long id) {
 		return this.prijavaRepo.getOne(id);
 	}
+
+	@Override
+	public List<PrijavaTermina> findAllById(Long id) {
+		List<PrijavaTermina> lista = this.prijavaRepo.search(id);
+		return lista;
+	}
 }

@@ -20,12 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 import ftn.uns.ProbaProjekat.model.Clan;
 import ftn.uns.ProbaProjekat.model.PrijavaTermina;
 import ftn.uns.ProbaProjekat.model.Termin;
+import ftn.uns.ProbaProjekat.model.Trener;
 import ftn.uns.ProbaProjekat.model.dto.PrijavaDTO;
 import ftn.uns.ProbaProjekat.model.dto.PrijavaTerminaDTO;
 import ftn.uns.ProbaProjekat.model.dto.TermingDTO;
 import ftn.uns.ProbaProjekat.service.ClanService;
 import ftn.uns.ProbaProjekat.service.PrijavaTerminaService;
 import ftn.uns.ProbaProjekat.service.TerminService;
+import ftn.uns.ProbaProjekat.service.TrenerService;
 
 @RestController
 @RequestMapping(value = "/api/termin")
@@ -34,12 +36,14 @@ public class TerminController {
 	private final TerminService terminService;
 	private final ClanService clanService;
 	private final PrijavaTerminaService prijavaService;
+	private final TrenerService trenerService;
 	
 	@Autowired
-	public TerminController(TerminService terminService, ClanService clanService, PrijavaTerminaService prijavaService) {
+	public TerminController(TerminService terminService, ClanService clanService, PrijavaTerminaService prijavaService, TrenerService trenerService) {
 		this.terminService = terminService;
 		this.clanService = clanService;
-		this.prijavaService = prijavaService;		
+		this.prijavaService = prijavaService;
+		this.trenerService = trenerService;
 	}
 	
 	// Izlistavanje termina koji se mogu prijaviti
@@ -107,7 +111,7 @@ public class TerminController {
 	
 	// Lista prijavljenih termina
 	@GetMapping( 
-			value = "/prijavljeni",
+			value = "/clan/prijavljeni",
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<TermingDTO>> viewTermin(@RequestParam(required=true) Long clan_id) throws Exception {
 		List<TermingDTO> prijavaDTOS = new ArrayList<>();
@@ -136,6 +140,37 @@ public class TerminController {
 					termin.getTermin().getTrening().getTrener().getIme() + " " + termin.getTermin().getTrening().getTrener().getPrezime(),
 					termin.getId());
 			prijavaDTOS.add(termingDTO);
+		}
+		
+		return new ResponseEntity<>(prijavaDTOS, HttpStatus.OK);
+	}
+	
+	// Lista nadolazecih termina za trenera
+	@GetMapping(
+			value = "/trener/prijavljeni",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<PrijavaTerminaDTO>> getUpcomingSessions(@RequestParam(required = true) Long trener_id) throws Exception {
+		// Potrebne povratne informacije: Clan ime+prezime, Vreme+Datum+Cena Termina i Oznaka sale u kojoj se odrzava termin
+		//Trener trener = this.trenerService.findOne(trener_id);
+		List<PrijavaTerminaDTO> prijavaDTOS = new ArrayList<>(); 
+		List<PrijavaTermina> listaTermina = this.prijavaService.findAllById(trener_id);
+		
+		SimpleDateFormat crunchifyDate = new SimpleDateFormat("MMM dd yyyy");
+		SimpleDateFormat crunchifyTime = new SimpleDateFormat("HH:ss");
+		
+		String datum, vreme;
+		
+		for (PrijavaTermina prijava : listaTermina) {
+			vreme = crunchifyTime.format(prijava.getTermin().getPocetak());
+			datum = crunchifyDate.format(prijava.getTermin().getPocetak());
+			PrijavaTerminaDTO prijavaDTO = new PrijavaTerminaDTO(
+					prijava.getClan().getIme() + " " + prijava.getClan().getPrezime(),
+					prijava.getTermin().getCena(),
+					vreme,
+					datum,
+					prijava.getTermin().getSala().getOznaka());
+
+			prijavaDTOS.add(prijavaDTO);
 		}
 		
 		return new ResponseEntity<>(prijavaDTOS, HttpStatus.OK);

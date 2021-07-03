@@ -2,7 +2,7 @@ $(document).ready(function() {
     let clan_id = sessionStorage.getItem('id');
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/termin/prijavljeni",
+        url: "http://localhost:8080/api/termin/clan/prijavljeni",
         data: {clan_id},
         dataType: "json",
         success: function(response) {

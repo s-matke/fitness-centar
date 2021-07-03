@@ -10,6 +10,13 @@ public class PrijavaTerminaDTO {
 	private Long clan_id;
 	private Long termin_id;
 	
+	// Upcoming events
+	private String fullname;
+	private Double cena;
+	private String vreme;
+	private String datum;
+	private String oznaka;
+	
 	public PrijavaTerminaDTO(Long id, Clan clan, Termin termin) {
 		this.id = id;
 		this.clan = clan;
@@ -25,6 +32,14 @@ public class PrijavaTerminaDTO {
 	public PrijavaTerminaDTO(Clan clan, Termin termin) {
 		this.clan = clan;
 		this.termin = termin;
+	}
+	
+	public PrijavaTerminaDTO(String fullname, Double cena, String vreme, String datum, String oznaka) {
+		this.fullname = fullname;
+		this.cena = cena;
+		this.vreme = vreme;
+		this.datum = datum;
+		this.oznaka = oznaka;
 	}
 	
 	public Long getClan_id() {
@@ -65,5 +80,45 @@ public class PrijavaTerminaDTO {
 
 	public void setTermin(Termin termin) {
 		this.termin = termin;
+	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+	public Double getCena() {
+		return cena;
+	}
+
+	public void setCena(Double cena) {
+		this.cena = cena;
+	}
+
+	public String getVreme() {
+		return vreme;
+	}
+
+	public void setVreme(String vreme) {
+		this.vreme = vreme;
+	}
+
+	public String getDatum() {
+		return datum;
+	}
+
+	public void setDatum(String datum) {
+		this.datum = datum;
+	}
+
+	public String getOznaka() {
+		return oznaka;
+	}
+
+	public void setOznaka(String oznaka) {
+		this.oznaka = oznaka;
 	}
 }

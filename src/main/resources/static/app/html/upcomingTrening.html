@@ -1,0 +1,88 @@
+<!-- Lista nadolazecih treninga - Feature za trenere -->
+<!-- Clan_Ime_Prezime | Termin_Vreme_Datum_Sala | Opcija 'zavrsenja' treninga -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf8"/>
+        <title>Lista Treninga | Fitness-Centar</title>
+        <script src="../../assets/js/jquery.min.js"></script>
+        <script src="../js/login.js"></script>
+        <script>
+            $(document).ready(function(event) {
+                let trener_id = sessionStorage.getItem('id');
+
+                console.log("ID: " + trener_id);
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/api/termin/trener/prijavljeni",
+                    data: {trener_id},
+                    dataType: "json",
+                    success: function(response) {
+                        console.log("Success:\n" + response);
+                        for (let termin of response) {
+                            let row = "<tr>";
+                            row += "<td>" + termin.fullname + "</td>";
+                            row += "<td>" + termin.cena + "</td>";
+                            row += "<td>" + termin.vreme + "</td>";
+                            row += "<td>" + termin.datum + "</td>";
+                            row += "<td>" + termin.oznaka + "</td>";
+                            row += "<td> zavrsi </td>";
+                            row += "</tr>";
+
+                            $("#content").append(row);
+                        }
+                    },
+                    error: function(error) {
+                        console.log("Hello from error");
+                    }
+                });
+            });
+        </script>
+        <!-- <script src="../js/termin.js"></script>
+        <script src="../js/login.js"></script> -->
+        <style>
+            th, td {
+                border: 1px solid black;
+                padding: 15px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h2>Lista nadolazecih termina</h2>
+        </div>
+       <br/>
+        <form id="upcomingTreninzi">
+            <div class="container">
+                <table id="infotrening">
+                    <thead>    
+                        <tr>
+                            <th>Clan</th>
+                            <th>Oznaka</th>
+                            <th>Vreme</th>
+                            <th>Datum</th>
+                            <th>Cena</th>
+                            <th>Zavrsi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="content">
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <input type="submit" value="Prosledi"/>
+            </div>
+        </form>
+        <div>
+            <br/>
+            <!-- <li><a type="button" href="listaTreninga.html" class="btn">Refresh</a></li> -->
+            <button onclick="window.location.reload()">Refresh</button>
+        </div>
+        <div>
+            <br/>
+            <a href="../../index.html">Pocetna Stranica</a>
+        </div>
+    </body>
+</html>

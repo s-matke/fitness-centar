@@ -63,4 +63,21 @@ public class Trener extends Korisnik{
 	public void setAvgOcena(Double avgOcena) {
 		this.avgOcena = avgOcena;
 	}
+
+	public Set<Trening> getListaTreninga() {
+		return listaTreninga;
+	}
+
+	public void setListaTreninga(Set<Trening> listaTreninga) {
+		this.listaTreninga = listaTreninga;
+	}
+
+	public FitnessCentar getFitnessCentar() {
+		return fitnessCentar;
+	}
+
+	public void setFitnessCentar(FitnessCentar fitnessCentar) {
+		this.fitnessCentar = fitnessCentar;
+	}
+	
 }
