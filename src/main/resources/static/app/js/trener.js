@@ -75,6 +75,8 @@ $(document).on('click', '.btnAddTermin', function() {
 
     let trening_id = this.dataset.id;
 
+    let id = sessionStorage.getItem('id');
+
     console.log("ID: " + trening_id);
     let text = "<input id='id' type='number' disabled='disabled' value=" + trening_id + " />";
     $('#kontent').append(text);
@@ -82,7 +84,7 @@ $(document).on('click', '.btnAddTermin', function() {
     // ajax grab sale
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/sala/lista",
+        url: "http://localhost:8080/api/sala/lista/" + id,
         dataType: "json",
         success: function(response) {
             for (let sale of response) {
@@ -135,7 +137,7 @@ $(document).on('submit', '#addTermin', function(event) {
         },
         error: function(error) {
             console.log("ERROR:\n" + error);
-            alert("GRESKA");
+            alert("Vrednosti datuma/vremena ili sale nisu korektno postavljene");
         }
         
     })

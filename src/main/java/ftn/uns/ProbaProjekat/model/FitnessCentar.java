@@ -30,6 +30,15 @@ public class FitnessCentar implements Serializable{
 	@Column
 	private String email;	// mail fit. centra
 	
+	// lista trenera koji rade u teretani
+	// 1:n (1 teretana : n trenera)
+	@OneToMany(mappedBy = "fitnessCentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<Trener> treneri = new HashSet<>();
+	
+	// lista sala u fitness centru
+	@OneToMany(mappedBy = "fitnessCentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<Sala> listaSala = new HashSet<>();
+
 	public FitnessCentar() {}
 	
 	public FitnessCentar(String naziv, String adresa, String telefon, String email) {
@@ -39,14 +48,6 @@ public class FitnessCentar implements Serializable{
 		this.email = email;
 	}
 	
-	// lista trenera koji rade u teretani
-	// 1:n (1 teretana : n trenera)
-	@OneToMany(mappedBy = "fitnessCentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<Trener> treneri = new HashSet<>();
-	
-	// lista sala u fitness centru
-	@OneToMany(mappedBy = "fitnessCentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<Sala> listaSala = new HashSet<>();
 
 	public Long getId() {
 		return id;

@@ -106,6 +106,8 @@ $(document).on("submit", "#addFitnessCentar", function(event) {
     let telefon = $("#telefon").val();
     let email = $("#email").val();
 
+    let cid = 1;
+
     let newCentar = {
         naziv,
         adresa,
@@ -115,7 +117,7 @@ $(document).on("submit", "#addFitnessCentar", function(event) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/api/admin/addCentar",
+        url: "http://localhost:8080/api/admin/addCentar/" + cid,
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(newCentar),

@@ -123,6 +123,10 @@ public class TrenerController {
 			throw new Exception("Datum mora biti validan, odnosno novi termin mora biti odrzan u buducnosti.");
 		}
 		
+		if (terminDTO.getSala_id() == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+		
 		Trening trening = this.treningService.findOne(terminDTO.getTrening_id());
 		
 		terminDTO.setPocetak(new Timestamp(terminDTO.getEpoha() * 1000l));

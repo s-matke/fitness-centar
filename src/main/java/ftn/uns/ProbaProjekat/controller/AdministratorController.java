@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,10 +73,10 @@ public class AdministratorController {
 	}
 	
 	@PostMapping(
-			value="/addCentar",
+			value="/addCentar/{cid}",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<FitnessCentarDTO> createCentar(@RequestBody FitnessCentarDTO fitnessDTO) throws Exception {
+	public ResponseEntity<FitnessCentarDTO> createCentar(@PathVariable("cid") Long id, @RequestBody FitnessCentarDTO fitnessDTO) throws Exception {
 		FitnessCentar fitnessCentar = new FitnessCentar(fitnessDTO.getNaziv(), fitnessDTO.getAdresa(), fitnessDTO.getTelefon(), fitnessDTO.getEmail());
 		FitnessCentar noviCentar = fitnessService.create(fitnessCentar);
 		
