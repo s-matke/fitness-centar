@@ -68,15 +68,14 @@ public class AdministratorController {
 			
 			treneriDTO.add(updatedTrenerDTO);	
 		}
-		
 		return new ResponseEntity<>(treneriDTO, HttpStatus.OK);
 	}
 	
 	@PostMapping(
-			value="/addCentar/{cid}",
+			value="/addCentar",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<FitnessCentarDTO> createCentar(@PathVariable("cid") Long id, @RequestBody FitnessCentarDTO fitnessDTO) throws Exception {
+	public ResponseEntity<FitnessCentarDTO> createCentar(@RequestBody FitnessCentarDTO fitnessDTO) throws Exception {
 		FitnessCentar fitnessCentar = new FitnessCentar(fitnessDTO.getNaziv(), fitnessDTO.getAdresa(), fitnessDTO.getTelefon(), fitnessDTO.getEmail());
 		FitnessCentar noviCentar = fitnessService.create(fitnessCentar);
 		

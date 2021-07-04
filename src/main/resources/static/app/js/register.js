@@ -6,6 +6,7 @@ function visibility() {
         document.getElementById("centar").disabled = false;
     } else {
         document.getElementById("centar").disabled = true;
+        document.getElementById("centar").value = "-1";
     }
 }
 

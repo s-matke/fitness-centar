@@ -32,11 +32,11 @@ public class FitnessCentar implements Serializable{
 	
 	// lista trenera koji rade u teretani
 	// 1:n (1 teretana : n trenera)
-	@OneToMany(mappedBy = "fitnessCentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "fitnessCentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Trener> treneri = new HashSet<>();
 	
 	// lista sala u fitness centru
-	@OneToMany(mappedBy = "fitnessCentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "fitnessCentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Sala> listaSala = new HashSet<>();
 
 	public FitnessCentar() {}

@@ -1,47 +1,17 @@
 // Provera prava pristupa
 function checkPrivileges() {
-    let role = sessionStorage.getItem('role');
-
-    console.log("Uloga:" + role);
     if (sessionStorage.getItem('role') != "Admin") {
         alert("Nemate pravo pristupa!");
-        window.location.href = "../../index.html";
+        window.location.replace("../../index.html");
+        return false;
     }
+    return true;
 }
 
-// izlistavanje trenera
-$(document).ready(function () {
-    checkPrivileges();
-
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/api/trener/treneri",
-        dataType: "json",
-        success: function(response) {
-            console.log("Success:\n", response);
-            var tmp = response;
-            for (let trener of response) {
-                let row = "<tr>";
-                row += "<td>" + trener.id + "</td>";
-                row += "<td>" + trener.ime + "</td>";
-                row += "<td>" + trener.prezime + "</td>";
-                row += "<td>" + trener.status + "</td>";
-                //let input = "<input type='checkbox' class='dejt' data-id=" + trener.id + "/>";
-                //let input = "<button class='btnSend' data-id=" + trener.id + ">Accept</button>";
-                let boxes = "<input type='checkbox' name='checkboxes' class='dejt' value=" + trener.id + "/>";
-                //row += "<td>" + input + "</td>";
-                row += "<td>" + boxes + "</td>";
-                row += "</tr>";
-                
-                $('#treneri').append(row);
-            }
-        },
-        error: function(response) {
-            console.log("ERROR:\n", response);
-        }
-    });
-});
-
+function check(id) {
+    let r = confirm("Da li ste sigurni da zelite da obrisete centar s ID-om: " + id + "?");
+    return r;
+}
 
 
 // Izmena statusa trenera
@@ -96,7 +66,7 @@ $(document).on("submit", "#allTreneri", function(event) {
 // Dodavanje fitness centra
 
 $(document).on("submit", "#addFitnessCentar", function(event) {
-    checkPrivileges();
+    if (!checkPrivileges()) return;
 
     event.preventDefault();
 
@@ -105,8 +75,6 @@ $(document).on("submit", "#addFitnessCentar", function(event) {
     let adresa = $("#adresa").val();
     let telefon = $("#telefon").val();
     let email = $("#email").val();
-
-    let cid = 1;
 
     let newCentar = {
         naziv,
@@ -117,7 +85,7 @@ $(document).on("submit", "#addFitnessCentar", function(event) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/api/admin/addCentar/" + cid,
+        url: "http://localhost:8080/api/admin/addCentar",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(newCentar),
@@ -128,6 +96,32 @@ $(document).on("submit", "#addFitnessCentar", function(event) {
         },
         error: function(error) {
             alert(error);
+        }
+    });
+});
+
+$(document).on("submit", "#centri", function(event) {
+
+    
+    event.preventDefault();
+    
+    let id;
+    $("input:radio[name='odjava']:checked").each(function() {
+        id = parseInt($(this).val());
+    });
+    if (id == null) {alert("Morate izabrati centar koji zelite obrisati"); return;}
+    if(!check(id)) {return;}
+
+    $.ajax({
+        type: "DELETE",
+        url: "http://localhost:8080/api/centar/obrisi/" + id,
+        dataType: "json",
+        success: function(response) {
+            console.log("SUCCESS:\n" + response);
+            window.location.reload();
+        },
+        error: function(response) {
+            console.log("ERROR:\n" + response);
         }
     });
 });

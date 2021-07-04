@@ -5,8 +5,15 @@
         <meta charset="utf-8"/>
         <script src="../../assets/js/jquery.min.js"></script>
         <script src="../js/admin.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#addCentarBody").hide();
+                if (!checkPrivileges()) return;
+                $("#addCentarBody").show();
+            });
+        </script>
     </head>
-    <body>
+    <body id="addCentarBody">
         <h1>Dodaj Fitness Centar</h1>
         <div>
             <form id="addFitnessCentar">

@@ -24,7 +24,7 @@ public class Trener extends Korisnik{
 	private Double avgOcena;
 	
 	// lista treninga koje on drzi
-	@OneToMany(mappedBy = "trener", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "trener", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Trening> listaTreninga = new HashSet<>();
 	
 	// fitness centar u kom je zaposlen

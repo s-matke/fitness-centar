@@ -39,6 +39,12 @@ public class FitnessCentarServiceImpl implements FitnessCentarService {
 		FitnessCentar centar = this.fitnessRepo.getOne(id);
 		return centar;
 	}
+
+	@Override
+	public void delete(Long id) {
+		this.fitnessRepo.deleteById(id);
+		
+	}
 	
 	
 }

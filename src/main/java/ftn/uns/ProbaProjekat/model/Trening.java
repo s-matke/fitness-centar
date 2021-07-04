@@ -37,13 +37,13 @@ public class Trening implements Serializable{
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Trener trener;
 	
-	@OneToMany(mappedBy = "trening", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Termin> termini = new HashSet<>();
 
 //	@OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //	private Set<PrijavaTermina> listaPrijavljenihTermina = new HashSet<>();
 	
-	@OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<OdradjenTermin> listaOdradjenihTermina = new HashSet<>();
 	
 	public Trening() {}

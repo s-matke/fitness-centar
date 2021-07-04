@@ -14,4 +14,6 @@ public interface TrenerService {
 	
 	Trener update(Trener trener) throws Exception;
 	
+	List<Trener> findByCentar(Long id);
+	
 }

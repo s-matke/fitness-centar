@@ -30,4 +30,10 @@ public class SalaServiceImpl implements SalaService {
 		List<Sala> sale = this.salaRepo.findAll();
 		return sale;
 	}
+	
+	@Override
+	public List<Sala> findByCentar(Long id) {
+		List<Sala> sale = this.salaRepo.findAllByFitnessCentar_id(id);
+		return sale;
+	}
 }

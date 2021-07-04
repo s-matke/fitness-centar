@@ -8,6 +8,11 @@ public class FitnessCentarDTO {
 	private String telefon;
 	private String email;
 	
+	// Izlistavanjje za brisanje
+	private Integer treneri;
+	private Integer sale;
+	
+	
 	public FitnessCentarDTO() {}
 	
 	public FitnessCentarDTO(Long id, String naziv, String adresa, String telefon, String email) {
@@ -16,6 +21,14 @@ public class FitnessCentarDTO {
 		this.adresa = adresa;
 		this.telefon = telefon;
 		this.email = email;
+	}
+	
+	public FitnessCentarDTO(Long id, String naziv, String adresa, Integer sale, Integer treneri) {
+		this.id = id;
+		this.naziv = naziv;
+		this.adresa = adresa;
+		this.sale = sale;
+		this.treneri = treneri;
 	}
 
 	public FitnessCentarDTO(Long id, String naziv) {
@@ -62,4 +75,21 @@ public class FitnessCentarDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public Integer getTreneri() {
+		return treneri;
+	}
+
+	public void setTreneri(Integer treneri) {
+		this.treneri = treneri;
+	}
+
+	public Integer getSale() {
+		return sale;
+	}
+
+	public void setSale(Integer sale) {
+		this.sale = sale;
+	}
+	
 }

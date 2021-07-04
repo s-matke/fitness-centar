@@ -37,11 +37,11 @@ public class Clan extends Korisnik {
 	}
 	
 	// lista treninga za koje su se prijavili	
-	@OneToMany(mappedBy = "clan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "clan", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<PrijavaTermina> listaPrijavljenihTermina = new HashSet<>();
 
 	// lista odradjenih treninga
-	@OneToMany(mappedBy = "clan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "clan", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<OdradjenTermin> listaOdradjenihTermina = new HashSet<>();
 	
 		

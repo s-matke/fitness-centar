@@ -11,4 +11,6 @@ public interface FitnessCentarService {
 	List<FitnessCentar> findAll();
 	
 	FitnessCentar findOne(Long id);
+	
+	public void delete(Long id);
 }

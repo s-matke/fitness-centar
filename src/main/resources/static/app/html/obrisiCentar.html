@@ -1,0 +1,88 @@
+<!-- Lista nadolazecih treninga - Feature za trenere -->
+<!-- Clan_Ime_Prezime | Termin_Vreme_Datum_Sala | Opcija 'zavrsenja' treninga -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf8"/>
+        <title>Lista FCa | Fitness-Centar</title>
+        <script src="../../assets/js/jquery.min.js"></script>
+        <!-- <script src="../js/login.js"></script> -->
+        <!-- <script src="../js/obrisi.js"></script> -->
+        <script src="../js/admin.js"></script>
+        <!-- <script src="../js/termin.js"></script>
+        <script src="../js/login.js"></script> -->
+        <style>
+            th, td {
+                border: 1px solid black;
+                padding: 15px;
+                text-align: center;
+            }
+        </style>
+        <script>
+            $(document).ready(function() {
+                if (!checkPrivileges()) return;
+                $("#centriBody").show();
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/api/centar/lista",
+                    dataType: "json",
+                    success: function(response) {
+                        console.log("SUCCESS:\n" +response);
+                        for (let centar of response) {
+                            let row = "<tr>";
+                            row += "<td>" + centar.id + "</td>";
+                            row += "<td>" + centar.naziv + "</td>";
+                            row += "<td>" + centar.adresa + "</td>";
+                            row += "<td>" + centar.sale + "</td>";
+                            row += "<td>" + centar.treneri + "</td>";
+                            let boxes = "<input type='radio' name='odjava' value='" + centar.id + "'/>";
+                            row += "<td>" + boxes + "</td>";
+                            
+                            $("#content").append(row);
+                        }
+                    },
+                    error: function(error) {
+                        console.log("ERROR:\n" + error);
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body id="centriBody" hidden>
+        <div>
+            <h2>Lista fca</h2>
+        </div>
+       <br/>
+        <form id="centri">
+            <div class="container">
+                <table id="allCentri">
+                    <thead>    
+                        <tr>
+                            <th>ID</th>
+                            <th>Naziv</th>
+                            <th>Adresa</th>
+                            <th>Broj Sala</th>
+                            <th>Broj Trenera</th>
+                            <th>Odjavi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="content">
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <input type="submit" value="Prosledi"/>
+            </div>
+        </form>
+        <div>
+            <br/>
+            <!-- <li><a type="button" href="listaTreninga.html" class="btn">Refresh</a></li> -->
+            <button onclick="window.location.reload()">Refresh</button>
+        </div>
+        <div>
+            <br/>
+            <a href="../../index.html">Pocetna Stranica</a>
+            <button class='btnPutFC' data-id="1">Izmena fc</button>
+        </div>
+    </body>
+</html>

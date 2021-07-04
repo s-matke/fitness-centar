@@ -20,11 +20,11 @@ public class Sala implements Serializable{
 	private String oznaka;
 	
 	// 1:n (1 sala : n treninga)
-	@OneToMany(mappedBy = "sala", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "sala", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Termin> listaTermina = new HashSet<>();
 
 	// n sala : 1 fitness centar
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private FitnessCentar fitnessCentar;
 
 	public Long getId() {

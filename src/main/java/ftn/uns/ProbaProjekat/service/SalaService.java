@@ -9,4 +9,6 @@ public interface SalaService {
 	Sala findOne(Long id);
 	
 	List<Sala> findAll();
+	
+	List<Sala> findByCentar(Long id);
 }

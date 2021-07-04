@@ -53,4 +53,13 @@ public class TrenerServiceImpl implements TrenerService{
 		Trener savedTrener = this.trenerRepo.save(trenerToUpdate);
 		return savedTrener;
 	}
+	
+	@Override
+	public List<Trener> findByCentar(Long id) {
+		if (id == null) {
+			return null;
+		}
+		List<Trener> treneri = this.trenerRepo.findAllByFitnessCentar_Id(id);
+		return treneri;
+	}
 }	

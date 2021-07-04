@@ -31,11 +31,14 @@ public class Termin implements Serializable {
 	private Double cena;
 	
 	// "N:1" - u jednoj sali se moze odvijati N treninga
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Sala sala;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Trening trening;
+	
+	@OneToMany(mappedBy = "termin", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<PrijavaTermina> prijavljeniTermini = new HashSet<>();
 	
 	public Termin() {}
 	
