@@ -1,0 +1,16 @@
+.footer {
+    /* z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+    transform: translateX(50%); */
+
+    position: absolute;
+    top:95.5%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    z-index: 22;
+    width: 20%;
+    padding: 15px;
+    text-align: center;
+}

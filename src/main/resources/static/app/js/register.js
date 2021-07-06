@@ -23,14 +23,14 @@ $(document).ready(function() {
             }
         },
         error: function(error) {
-            alert("Doslo je do greske prilikom pribavljanja informacija sa servera.")
-            window.location.href = "../../index.html";
+            // alert("Doslo je do greske prilikom pribavljanja informacija sa servera.")
+            // window.location.href = "../../index.html";
         }
     });
 });
 
 // Registracija
-$(document).on("submit", "#addKorisnikForm", function(event) {
+$(document).on("submit", "#registerForm", function(event) {
     event.preventDefault();
 
     let userName = $("#userName").val();

@@ -1,7 +1,7 @@
 $(document).on("submit", "#loginForm", function(event) {
     event.preventDefault();
 
-    let email = $("#email").val();
+    let email = $("#email").val().toLowerCase();
     let password = $("#password").val();
 
     let loginInfo = {

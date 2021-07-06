@@ -2,180 +2,48 @@
 <html lang="en">
     <head>
         <title>Home Page | Fitness-Centar</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8"/>
-        <style>
-            /* * {
-                box-sizing: border-box;
-            }
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="./assets/css/index.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/footer.css">
+        <script src="./assets/js/jquery.min.js"></script>
+        <script src="./app/js/logout.js"></script>
+        <!-- <script src="./app/js/footer.js"></script> -->
+        <script>
+            $(document).ready(function() {
+                if (sessionStorage.getItem('role') != null) {
+                    $(".logout").hide();
+                    $(".login").show();
+                    $(".logged-navbar").show();
+                } else {
+                    $(".logout").show();
+                    $(".login").hide();
+                    $(".logged-navbar").hide();
+                }
+            });
 
-            body {
-                font-family: -apple-system;
-                margin: 0;
-            }
-            .header {
-                padding: 80px;
-                text-align: center;
-                height: 100%;
-                width: 100%;
-                float: left;
-                padding: 0 20px;
-                color: #fff;
-            }
-            .brand-logo {
-                max-width: 75px;
-                float: left;
-                padding: 14px 0px;
-            }
-            .brand-logo img {
-                max-width: 100%;
-            }
-            .navigation {
-                margin: 0px;
-                float: right;
-            }
-            .navigation li {
-                list-style: none;
-                float: left;
-            }
-            .navigation li a {
-                color: rgb(0, 0, 0);
-                padding: 28px 15px;
-                font-size: 25px;
-                text-transform: uppercase;
-                text-align: center;
-                display: block;
-                text-decoration: none;
-            }
-            .navigation li a i {
-                width: 100%;
-                font-size: 20px;
-                margin-bottom: 7px;
-            }
-            .show-menu-btn,
-            .hide-menu-btn {
-                transition: 0.4s;
-                font-size: 40px;
-                cursor: pointer;
-                display: none;
-            }
-            .show-menu-btn {
-                margin: 0px;
-                float: right;
-            }
-            .show-menu-btn i {
-                line-height: 100px;
-            }
-            .navigation a:hover,
-            .show-menu-btn:hover,
-            .hide-menu-btn:hover {
-                color: #565c56;
-                background-color: #d5d8d1;
-            } */
-            * {
-                box-sizing: border-box;
-            }
-
-            body {
-                font-family: apple-system;
-                margin:0;
-            }
-
-            .header {
-                position: relative;
-                padding:30px;
-                text-align: center;
-
-                width: 100%;
-                height: 800px;
-
-
-                background: url("assets/img/tg.png") no-repeat fixed center center;
-                background-size: cover;
-                background-image: blur(5px);
-                filter:blur(3px);
-                -webkit-filter: blur(3px);
-
-               
-                /* filter: blur(3px);
-                
-                /* background: rgb(255, 255, 255); */
-                /* color: white; */
-            }
-
-            .centered {
-                background-color: rgb(0,0,0);
-                background-color: rgba(0,0,0,0.4);
-                color:white;
-                font-weight: bold;
-                border: 3px solid #f1f1f1;
-                position: absolute;
-                top:50%;
-                left:50%;
-                transform: translate(-50%, -50%);
-                z-index: 2;
-                width: 40%;
-                padding: 20px;
-                text-align: center;
-            }
-
-            .header h1 { 
-                font-size: 40px;
-            }
-
-            .navbar {
-                overflow: hidden;
-                position: sticky;
-                position: -webkit-sticky;
-                font-size: 25px;
-                border-bottom: 3px solid black;
-                top:0;
-            }
-
-            .navbar a {
-                float: left;
-                display: block;
-                color: black;
-                text-align: center;
-                padding: 14px 20px;
-                text-decoration: none;
-            }
-
-            .navbar a.right {
-                float: right;
-            }
-
-            .navbar a:hover {
-                background-color: rgb(114, 114, 114);
-                color: white;
-            }
-
-            .bgm {
-                /* background-image:url("../static/assets/img/bg.png"); */
-               
-                width: 100%;
-                height: 800px;
-
-                
-
-                
-                /* background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover; */
-            }
-            
-
-        </style>
+        </script>
     </head>
     <body>
         <div class="navbar">
-            <a>Fitness Centar</a>
-            <a href="app/html/login.html" class="right">Login</a>
-            <a href="app/html/register.html" class="right">Register</a>
-            <a href="#" class="right">Home</a>
+            <a href="#">Fitness Centar</a>
+            <span class="login" hidden><a onclick="logout()" href="#" class="right">Logout</a></span>
+            <span class="login" hidden><a href="#" class="right">Profile</a></span>
+            <span class="logout"><a href="app/html/login.html" class="right">Login</a></span>
+            <span class="logout"><a href="app/html/register.html" class="right">Register</a></span>
+            <a href="./app/html/listaTerminga.html" class="right">Workouts</a>
+            <a href="#" id="active" class="right">Home</a>
+            <!-- <a href="#" id="active" class="right">Home</a> -->
         </div>
 
+        
         <div class="header">
+            <div class="logged-navbar" hidden >
+                <!-- <a>Fitness Centar</a> -->
+                <span class="login"><a href="#" class="right">Logout</a></span>
+                <span class="login"><a href="#" class="right">Profile</a></span>
+                <a href="#" class="right">Home</a>
+            </div>
         </div>
         <div class="centered">    
             <h1 style="font-size:50px">Fitness Centar</h1>
@@ -183,13 +51,16 @@
 
         </div>
 
-        <footer class="footer">
-            <div class="container">
-                <p style="text-align: center;">Copyright &copy; Stefan Matkovic 2021</p>
-            </div>
-        </footer>
+        <div class="footer-content">
+            <footer class="footer">
+                <div class="container">
+                    <p>Copyright &copy; Stefan Matkovic 2021</p>
+                </div>
+            </footer>
+            
+        </div>
 
-        <!-- <div class="header">
+       <!-- <div class="header">
             <h1>Fitness Centar</h1>
         </div>
         <div class="topnav">

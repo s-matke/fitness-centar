@@ -3,16 +3,22 @@
     <head>
         <meta charset="utf8"/>
         <title>Login | Fitness-Centar</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="../../assets/css/login.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">     
         <script src="../../assets/js/jquery.min.js"></script>
-        <script src="../js/login.js"></script>        
+        <script src="../js/login.js"></script>
+        <!-- <script src="../js/footer.js"></script> -->
     </head>
     <body>
 
         <div class="navbar">
-            <a>Fitness Centar</a>
-            <a href="#" class="right">Login</a>
+            <a href="../../index.html">Fitness Centar</a>
+            <a href="#" id="active" class="right">Login</a>
             <a href="register.html" class="right">Register</a>
+            <a href="listaTerminga.html" class="right">Workouts</a>
             <a href="../../index.html" class="right">Home</a>
         </div>
 
@@ -28,31 +34,19 @@
                     <button type="submit">Login</button>
                     <div class="not"> </div>
                     <div class="msg">
-                        Don't have an account? <a href=register.html>Register</a> now!
+                        Don't have an account? <a href=register.html>Sign up</a> now!
                     </div>
                 </div>
             </form>
         </div>
-        
-            <!-- <form id="loginForm">
-                <div>
-                    <fieldset>
-                        <legend>Login</legend>
-                        <br/>
-                        <label>Email: </label>
-                        <input id="email" type="text" required/>
 
-                        <br/> <br/>
-
-                        <label>Password: </label>
-                        <input id="password" type="password" required/>
-                        
-                        <br/><br/>
-
-                        <input type="submit" value="Login"/>
-                    </fieldset>
+        <div class="footer-content">
+            <footer class="footer">
+                <div class="container">
+                    <!-- <script src="../js/footer.js"></script> -->
+                    <p>Copyright &copy; Stefan Matkovic 2021</p>
                 </div>
-            </form> -->
+            </footer>            
         </div>
     </body>
 </html>

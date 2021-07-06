@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: apple-system;
+    margin:0;
+}
+
+.header {
+    position: relative;
+    padding:30px;
+    text-align: center;
+
+    width: 100%;
+    height: 800px;
+
+    border-bottom: .09em solid black;
+    border-top: .09em solid black;
+
+
+    background: url("../img/tg.png") no-repeat fixed center center;
+    background-size: cover;
+    background-image: blur(5px);
+    /* filter:blur(3px);
+    -webkit-filter: blur(3px); */    
+}
+
+
+.centered {
+    background-color: rgb(0,0,0);
+    background-color: rgba(0, 0, 0, 0.61);
+    color:white;
+    font-weight: bold;
+    border: 3px solid #cecbcb;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 40%;
+    padding: 20px;
+    text-align: center;
+}
+
+.header h1 { 
+    font-size: 40px;
+}
+
+/*  Main Navbar  */
+.navbar {
+    overflow: hidden;
+    position: sticky;
+    position: -webkit-sticky;
+    font-size: 25px;
+    
+    z-index: 3;
+    top:0;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar a.right {
+    float: right;
+}
+
+.navbar a:hover {
+    background-color: rgb(161, 161, 161);
+    color: white;
+}
+
+.navbar a#active {
+    background-color: rgb(161, 161, 161);
+    color: white;
+}
+
+/* Additional Navbar when User is logged */
+
+.logged-navbar {
+    overflow: hidden;
+    position:sticky;
+    position: -webkit-sticky;
+    font-size: 25px;
+    border-bottom: .06em solid black;
+    border-left: .06em solid black;
+    border-right: .06em solid black;
+    background-color: #f1f1f1;
+    height: 6.4%;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: -30px;
+    top:0;
+}
+
+.logged-navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: .29em 20px;
+    text-decoration: none;
+}
+
+.logged-navbar a.right {
+    /* float: right; */
+    /* position:absolute; */
+    /* left: 50%;  */
+    /* transform: translateX(-270%); */
+
+}
+
+.logged-navbar a:hover {
+    background-color: rgb(114, 114, 114);
+    color: white;
+}
+

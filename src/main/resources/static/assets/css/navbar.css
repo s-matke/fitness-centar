@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+/*  Main Navbar  */
+.navbar {
+    overflow: hidden;
+    position: sticky;
+    position: -webkit-sticky;
+    font-size: 25px;
+    
+    z-index: 3;
+    top:0;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar a.right {
+    float: right;
+}
+
+.navbar a:hover {
+    background-color: rgb(161, 161, 161);
+    color: white;
+}
+
+.navbar a#active {
+    background-color: rgb(161, 161, 161);
+    color: white;
+}
+
+

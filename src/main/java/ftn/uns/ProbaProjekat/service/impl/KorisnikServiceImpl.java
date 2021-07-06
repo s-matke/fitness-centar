@@ -49,7 +49,7 @@ public class KorisnikServiceImpl implements KorisnikService {
 
 	@Override
 	public Korisnik login(String email, String lozinka) {
-		return this.korisnickiRepozitorijum.findByEmailAndLozinka(email, lozinka);
+		return this.korisnickiRepozitorijum.findByEmailAndLozinkaIgnoreCase(email, lozinka);
 	}
 
 	@Override

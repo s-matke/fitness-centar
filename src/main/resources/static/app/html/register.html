@@ -1,85 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="utf8"/>
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
         <title>Registracija | Fitness-Centar</title>
+        
+        <link rel="stylesheet" type="text/css" href="../../assets/css/reg.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">
+        
         <script src="../../assets/js/jquery.min.js"></script>
         <script src="../js/register.js"></script>
+        <!-- <script src="../js/footer.js"></script> -->
 
-        <style>
-            div {
-                margin-bottom: 20px;
-            }
-        </style>
     </head>
     <body>
-        <h1>Registracija</h1>
-        <form id="addKorisnikForm">
-            <div>
-                <label for="userName">*Korisničko Ime:</label>
-                <br/>
-                <input id="userName" type="text" required/>
-                <br/>
-            </div>
-            <div>
-                <label for="lozinka">*Lozinka:</label>
-                <br/>
-                <input id="lozinka" type="password" required/>
-                <br/>
-            </div>
-            <div>
-                <label for="ime">*Ime:</label>
-                <br/>
-                <input id="ime" type="text" required/>
-                <br/>
-            </div>
-            <div>
-                <label for="prezime">*Prezime:</label>
-                <br/>
-                <input id="prezime" type="text" required/>
-                <br/>
-            </div>
-            <div>
-                <label for="email">*Email:</label>
-                <br/>
-                <input id="email" type="email" required placeholder="something@example.com"/>
-                <br/>
-            </div>
-            <div>
-                <label for="telefon">Telefon:</label>
-                <br/>
-                <input id="telefon" type="text" />
-                <br/>
-            </div>
-            <div>
-                <label for="birthday">Datum Rodjenja:</label>
-                <br/>
-                <input id="birthday" type="date" />
-                <br/><br/>
-            </div>
-            <div>
-                <label for="ulogaField">*Uloga:</label>
-                <select id="role" required onchange="visibility()">
-                    <option value="Clan">Član Fitness Centra</option>
-                    <option value="Trener">Trener</option>
-                </select>
-            </div>
-            <div>
-                <label for="centar">*Fitness Centar:</label>
-                <!--"<input id='id' type='number' disabled='disabled' value=" + trening_id + " />";-->
-                <select id="centar" disabled>
-                    <!-- fitness centri -->
-                    <option value="-1">---- Izaberite fitness centar ----</option>
-                </select>
+        <div class="navbar">
+            <a href="../../index.html">Fitness Centar</a>
+            <span hidden><a href="../../index.html" class="right">Logout</a> </span>
+            <a href="./login.html" class="right">Login</a>
+            <a href="#" id="active" class="right">Register</a>
+            <a href="listaTerminga.html" class="right">Workouts</a>
+            <a href="../../index.html" class="right">Home</a>
+        </div>
 
-            </div>
-            <div>
-                <p>*Obavezna polja</p>
-                <br/>
-            </div>
-            <div>
-                <input type="submit" value="Register"/>
-            </div>
-        </form>
+        <div class="header">
+            <div class="logo"></div>
+
+            <form id="registerForm">
+                <div class="register-block">
+                    <h1>Sign Up</h1>
+                    <input id="userName" type="text" placeholder="Username" required/>
+                    <input id="lozinka" type="password" placeholder="Password" required/>
+                    <input class="names" id="ime" type="text" placeholder="First name" required/>
+                    <input class="names" id="prezime" type="text" required placeholder="Last name"/>
+                    <input id="email" type="email" required placeholder="Email"/>
+                    <input id="telefon" type="text" placeholder="Mobile number" />
+                    <input id="birthday" type="date" />
+                    <select id="role" required onchange="visibility()">
+                        <option value="">Izaberite Ulogu</option>
+                        <optgroup label="Uloge">    
+                            <option value="Clan">Član Fitness Centra</option>
+                            <option value="Trener">Trener</option>
+                        </optgroup>
+                    </select>
+                    <select id="centar" disabled>
+                        <option value="-1">Izaberite fitness centar</option>
+                    </select>
+                    <button type="submit">Sign Up</button>
+                </div>
+            </form>
+            
+        </div>
+        <div class="footer-content">
+            <footer class="footer">
+                <div class="container">
+                    <!-- <script src="../js/footer.js"></script> -->
+                    <p>Copyright &copy; Stefan Matkovic 2021</p>
+                </div>
+            </footer>
+            
+        </div>
+        
     </body>
 </html>
