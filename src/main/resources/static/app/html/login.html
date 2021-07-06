@@ -3,19 +3,39 @@
     <head>
         <meta charset="utf8"/>
         <title>Login | Fitness-Centar</title>
-        <style>
-            fieldset {
-                text-align: center;
-                width: 200px;
-                margin: auto;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="../../assets/css/login.css">
         <script src="../../assets/js/jquery.min.js"></script>
-        <script src="../js/login.js"></script>
+        <script src="../js/login.js"></script>        
     </head>
     <body>
-        <div>
-            <form id="loginForm">
+
+        <div class="navbar">
+            <a>Fitness Centar</a>
+            <a href="#" class="right">Login</a>
+            <a href="register.html" class="right">Register</a>
+            <a href="../../index.html" class="right">Home</a>
+        </div>
+
+        <div class="header">
+
+            <div class="logo">
+            </div>
+            <form id="loginForm">    
+                <div class="login-block">
+                    <h1>Login</h1>
+                    <input placeholder="Email" value="" id="email" type="email" required/>
+                    <input placeholder="Password" value="" id="password" type="password" required/>
+                    <button type="submit">Login</button>
+                    <div class="not"> </div>
+                    <div class="msg">
+                        Don't have an account? <a href=register.html>Register</a> now!
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+            <!-- <form id="loginForm">
+                <div>
                     <fieldset>
                         <legend>Login</legend>
                         <br/>
@@ -31,7 +51,8 @@
 
                         <input type="submit" value="Login"/>
                     </fieldset>
-            </form>
+                </div>
+            </form> -->
         </div>
     </body>
 </html>

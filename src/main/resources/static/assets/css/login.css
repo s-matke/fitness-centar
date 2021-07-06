@@ -1,0 +1,160 @@
+body {
+    /* background: url('http://i.imgur.com/Eor57Ae.jpg') no-repeat fixed center center;
+    background-size: cover; */
+    /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif */
+    font-family: apple-system;
+    margin:0;
+}
+
+.header {
+    position: relative;
+    padding:30px;
+    text-align: center;
+
+    width: 100%;
+    height: 800px;
+
+    background-color: #e9e5e5;
+    /* background: url("assets/img/tg.png") no-repeat fixed center center;
+    background-size: cover;
+    background-image: blur(5px);
+    filter:blur(3px);
+    -webkit-filter: blur(3px); */
+
+   
+    /* filter: blur(3px);
+    
+    /* background: rgb(255, 255, 255); */
+    /* color: white; */
+}
+
+
+/* .logo {
+    width: 213px;
+    height: 36px;
+    background: url('http://i.imgur.com/fd8Lcso.png') no-repeat;
+    margin: 30px auto;
+} */
+
+.login-block {
+    width: 320px;
+    padding: 20px;
+    background: rgb(177, 174, 174);
+    border-radius: 5px;
+    border-top: 5px solid #5e4b4c;
+    margin: 5% auto;
+}
+
+.login-block h1 {
+    text-align: center;
+    color: #000;
+    font-size: 28px;
+    text-transform: uppercase;
+    margin-top:0;
+    margin-bottom: 20px;
+}
+
+.login-block input {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 0 20px 0 50px;
+    outline: none;
+}
+
+.login-block input#email {
+    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input#email:focus {
+    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input#password {
+    background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px top no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input#password:focus {
+    background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input:active,
+.login-block input:focus {
+    border: 1px solid #4e4344;
+}
+
+.login-block button {
+    width: 100%;
+    height: 40px;
+    background:#9c8b8c;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #353030;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family:'Courier New', Courier, monospace;
+    outline: none;
+    cursor: pointer;
+}
+
+.login-block button:hover {
+    background: #c9b2b3;
+}
+
+/* NEW SHIT */
+.navbar {
+    overflow: hidden;
+    position: sticky;
+    position: -webkit-sticky;
+    font-size: 25px;
+    border-bottom: 3px solid black;
+    top:0;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar a.right {
+    float: right;
+}
+
+.navbar a:hover {
+    background-color: rgb(114, 114, 114);
+    color: white;
+}
+
+.navbar a:active {
+    background-color: rgb(10, 10, 10);
+
+}
+
+.not {
+    /* padding: 5px; */
+    margin: 5% auto;
+    border-top: 2px solid black;
+}
+
+.msg {
+    font-size: 20px;
+}
+
+.msg a:hover {
+    color: red;
+}

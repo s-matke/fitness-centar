@@ -1,7 +1,7 @@
 // Dodavanje novog treninga
 $(document).on("submit", "#addTrening", function(event) {
     event.preventDefault();
-    console.log("Pravim trening");
+
     // preuzimanje vrednosti
     let naziv = $("#naziv").val();
     let opis = $("#opis").val();
