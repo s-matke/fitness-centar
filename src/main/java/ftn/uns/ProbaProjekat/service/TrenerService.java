@@ -13,7 +13,8 @@ public interface TrenerService {
 	Trener create(Trener trener) throws Exception;
 	
 	Trener update(Trener trener) throws Exception;
-	
+		
 	List<Trener> findByCentar(Long id);
 	
+	public void delete(Long id);
 }

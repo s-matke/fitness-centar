@@ -113,8 +113,9 @@ body {
 }
 
 .logged-navbar a.right {
-    margin-left: auto;
-    margin-right: auto;
+    float:right;
+    /* margin-left: auto;
+    margin-right: auto; */
     /* float: right; */
     /* position:absolute; */
     /* left: 50%;  */

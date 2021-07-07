@@ -115,10 +115,7 @@ public class Trening implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Naziv: " + this.getNaziv() + 
-			   "\nOpis: " + this.getOpis() + 
-			   "\nTip: " + this.getTip_treninga() + 
-			   "\nTrajanje: " + this.getTrajanje();
+		return "";
 	}
 	
 	

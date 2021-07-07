@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,6 +57,29 @@ public class TrenerController {
 	public ResponseEntity<TrenerDTO> createTrener(@RequestBody TrenerDTO trenerDTO) throws Exception {
 		
 		trenerDTO.setStatus(false);	// ostaje na Administratoru da dozvoli/odbije zahtev za pristup sistemu (samo za trenere)
+		
+		System.out.println("ID Centra: " + trenerDTO.getFitnessCentar_id());
+		
+		FitnessCentar centar = this.centarService.findOne(trenerDTO.getFitnessCentar_id());
+		
+		Trener trener = new Trener(trenerDTO.getUserName(), trenerDTO.getLozinka(), trenerDTO.getIme(), trenerDTO.getPrezime(), trenerDTO.getEmail(),
+				trenerDTO.getTelefon(), trenerDTO.getDate(), trenerDTO.getRole(), trenerDTO.getTip_korisnika(), trenerDTO.getStatus(), 0.0, centar);
+		
+		Trener noviTrener = trenerService.create(trener);
+		
+		TrenerDTO noviTrenerDTO = new TrenerDTO(noviTrener.getId(), noviTrener.getUserName(), noviTrener.getLozinka(), noviTrener.getIme(), noviTrener.getPrezime(), noviTrener.getEmail(),
+				noviTrener.getTelefon(), noviTrener.getDate(), noviTrener.getRole(), noviTrener.getTip_korisnika(), noviTrener.getStatus(), noviTrener.getAvgOcena());
+		
+		return new ResponseEntity<>(noviTrenerDTO, HttpStatus.CREATED);
+	}
+	
+	@PostMapping(
+			value="/admin-register",
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<TrenerDTO> createTrenerTrue(@RequestBody TrenerDTO trenerDTO) throws Exception {
+		
+		trenerDTO.setStatus(true);	// ostaje na Administratoru da dozvoli/odbije zahtev za pristup sistemu (samo za trenere)
 		
 		System.out.println("ID Centra: " + trenerDTO.getFitnessCentar_id());
 		
@@ -139,6 +163,21 @@ public class TrenerController {
 		TerminDTO noviTerminDTO = new TerminDTO(noviTermin.getId(), noviTermin.getPocetak(), noviTermin.getCena(), noviTermin.getSala().getId(), noviTermin.getTrening().getId());
 		
 		return new ResponseEntity<>(noviTerminDTO, HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping(value="/obrisi")
+	public ResponseEntity<Void> obrisiTrenera(@RequestBody Long[] array) throws Exception {
+		//System.out.println("Uso u delete");
+		for (int i = 0; i < array.length; ++i) {
+			Long tmpId = array[i];
+			Trener trener = this.trenerService.findOne(tmpId);
+//			System.out.println("Trener: " + trener.getIme() + " " + trener.getPrezime());
+			if (trener == null) {
+				throw new Exception("Trener, sa datim ID-om, ne postoji!");
+			}
+			this.trenerService.delete(tmpId);
+		}
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	

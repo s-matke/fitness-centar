@@ -67,7 +67,7 @@ public class TreningController {
 		List<TreningDTO> treningDTOS = new ArrayList<>();
 		List<Trening> listaTreninga = null;
 		
-		System.out.println("Naziv: " + naziv + "\nTrajanje: " + trajanje);
+		//System.out.println("Naziv: " + naziv + "\nTrajanje: " + trajanje);
 			
 		if (!naziv.equalsIgnoreCase("")) {
 			listaTreninga = this.treningService.findByNaziv(naziv);  

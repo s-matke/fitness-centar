@@ -3,8 +3,16 @@
     <head>
         <title>Dodavanje Fitness Centra | Fitness Centar</title>
         <meta charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/trening.css">
+        <!-- <link rel="stylesheet" type="text/css" href="../../assets/css/terming.css"> -->
+        <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">
+
         <script src="../../assets/js/jquery.min.js"></script>
         <script src="../js/admin.js"></script>
+        <script src="../js/login.js"></script>
+        <script src="../js/logged.js"></script>
+        <script src="../js/logout.js"></script>
         <script>
             $(document).ready(function(){
                 $("#addCentarBody").hide();
@@ -14,29 +22,53 @@
         </script>
     </head>
     <body id="addCentarBody">
-        <h1>Dodaj Fitness Centar</h1>
-        <div>
-            <form id="addFitnessCentar">
-                <div>
-                    <label for="naziv">Naziv:</label> <br/>
-                    <input id="naziv" type="text" required/> <br/>
-                </div>
-                <div>
-                    <label for="adresa">Adresa:</label> <br/>
-                    <input id="adresa" type="text" required/> <br/>
-                </div>
-                <div>
-                    <label for="telefon">Telefon:</label> <br/>
-                    <input id="telefon" type="text" required/> <br/>
-                </div>
-                <div>
-                    <label for="email">E-mail:</label> <br/>
-                    <input id="email" type="email" required/> <br/>
-                </div>
-                <div>
-                    <input type="submit" value="Dodaj"/>
-                </div>
-            </form>
+        <div class="navbar">
+            <a href="../../index.html">Fitness Centar</a>
+
+            <span class="login" hidden><a onclick="logout()" href="../../index.html" class="right">Logout</a> </span>
+            <span class="login" hidden><a href="#" class="right">Profile</a></span>
+            <span class="logout"><a href="./login.html" class="right">Login</a></span>
+            <span class="logout"><a href="./register.html" class="right">Register</a></span>
+            <a href="./listaTerminga.html" class="right">Workouts</a>
+            <a href="../../index.html" class="right">Home</a>
+        </div>
+        
+        
+        <div class="header">
+            <div class="logged-navbar" hidden>
+                <!-- <a>Fitness Centar</a> -->
+                <span id="trener" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <!-- <a href="#" class="right">Odjavi</a> -->
+                    <a href="./upcomingTrening.html" class="right">Raspored</a>
+                    <a href="./dodajTrening.html" class="right">Dodaj Trening</a>
+                    <a href="./mojiTreninzi.html" class="right">Dodaj Termin</a>
+                </span>
+                <span id="user" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <a href="./odradjeniTermini.html" class="right">Odradjeni</a>
+                    <a href="./prijavljeniTermini.html" class="right">Prijavljeni</a>
+                </span>
+                <span id="admin" hidden>
+                    <a href="#">Kontrolni Panel Centra</a>
+                    <a href="./odobriTrenera.html" class="right">Trener</a>
+                    <a href="./obrisiCentar.html" class="right">Obrisi</a>
+                    <a id="active"  href="#" class="right">Dodaj</a>
+                </span>
+            </div>
+            <div>
+                <form id="addFitnessCentar">
+                    <div class="trening-block">
+                        <h1>Dodaj Fitness Centar</h1>
+                        <input id="naziv" type="text" placeholder="Naziv" required/> <br/>
+                        <input id="adresa" type="text" placeholder="Adresa" required/> <br/>
+                        <input id="telefon" type="text" placeholder="Telefon" required/> <br/>
+                        <input id="email" type="email" placeholder="Email" required/> <br/>
+                        <button type="submit">Add</button>
+                        
+                    </div>
+                </form>
+            </div>
         </div>
     </body>
 </html>

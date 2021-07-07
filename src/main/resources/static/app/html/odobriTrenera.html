@@ -3,16 +3,17 @@
     <head>
         <meta charset="utf-8"/>
         <title>Odobravanje Trenera | Fitness-Centar</title>
+        <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/terming.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">
+        
+        
         <script src="../../assets/js/jquery.min.js"></script>
+        <script src="../../assets/js/select.js"></script>
         <script src="../js/admin.js"></script>
         <script src="../js/login.js"></script>
-        <script src="../../assets/js/select.js"></script>
-        <style>
-            th, td {
-                border: 1px solid black;
-                padding: 15px;
-            }
-        </style>
+        <script src="../js/logged.js"></script>
+        <script src="../js/logout.js"></script>
         <script>
             $(document).ready(function () {
                 $("#listTrenerBody").hide();
@@ -36,9 +37,10 @@
                             let boxes = "<input type='checkbox' name='checkboxes' class='dejt' value=" + trener.id + "/>";
                             //row += "<td>" + input + "</td>";
                             row += "<td>" + boxes + "</td>";
+                            // let button = 
                             row += "</tr>";
                             
-                            $('#treneri').append(row);
+                            $('#content').append(row);
                         }
                     },
                     error: function(response) {
@@ -47,31 +49,92 @@
                 });
             });
         </script>
+        <style>
+            .styled-table .button {
+                margin-top: .1em;
+                /* margin-left: 65%; */
+                width: 5%;
+                height: 40px;
+                background:rgb(165, 164, 164);
+                color: white;
+                box-sizing: border-box;
+                border-radius: 5px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.15);
+                border: 1px solid #dddddd;
+
+                /* border: 1px solid #353030; */
+                /* margin-right: auto; */
+                /* width: 100%; */
+            }
+            .styled-table .button:hover {
+                background-color: rgb(185, 181, 181);
+                color: white;
+            }
+
+        </style>
     </head>
     <body id="listTrenerBody" hidden>
-        <div>
-            <h2>Lista trenera</h2>
+        <div class="navbar">
+            <a href="../../index.html">Fitness Centar</a>
+            
+            <span class="login" hidden><a onclick="logout()" href="../../index.html" class="right">Logout</a> </span>
+            <span class="login" hidden><a href="#" class="right">Profile</a></span>
+            <span class="logout"><a href="./login.html" class="right">Login</a></span>
+            <span class="logout"><a href="./register.html" class="right">Register</a></span>
+            <a href="./listaTerminga.html" class="right">Workouts</a>
+            <a href="../../index.html" class="right">Home</a>
         </div>
-        <form id="allTreneri">
-            <div>
-                <input type="button" onclick='selectAll()', value="Select All" />
-                <input type="button" onclick='deselectAll()', value="Deselect All" />
+
+        <div class="header">
+            <div class="logged-navbar" hidden>
+                <!-- <a>Fitness Centar</a> -->
+                <span id="user" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <a href="./odradjeniTermini.html" class="right">Odradjeni</a>
+                    <a href="./prijavljeniTermini.html" class="right">Prijavljeni</a>
+                </span>
+                <span id="trener" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <!-- <a href="#" class="right">Odjavi</a> -->
+                    <a href="#" class="right">Raspored</a>
+                    <a href="./dodajTrening.html" class="right">Dodaj Trening</a>
+                    <a href="./mojiTreninzi.html" class="right">Dodaj Termin</a>
+                </span>
+                <span id="admin" hidden>
+                    <a href="#">Kontrolni Panel Trenera</a>
+                    <a href="./register-trener.html" class="right">Dodaj</a>
+                    <a id="active" href="#" class="right">Izmeni</a>
+                    <a href="./dodajCentar.html" class="right">Centar</a>
+                </span>
+
             </div>
-            <div class="container">
-                <table id="treneri">
-                    <tr>
-                        <th>ID</th>
-                        <th>Ime</th>
-                        <th>Prezime</th>
-                        <th>Status</th>
-                        <th>Boxes</th>
-                    </tr>
-                </table>
-            </div>
-            <div>
-                <input type="submit" value="Update"/>
-            </div>
-        </form>
+            
+            <form class="termin-block" id="allTreneri">
+                
+                
+                <div class="styled-table">
+                    <input class="button" type="button" onclick='selectAll()' value="Select All" style="margin-top:1%"/>
+                    <input class="button" type="button" onclick='deselectAll()' value="Deselect All" stype="margin-top:1%"/>
+                    <table class="tabela" id="treneri">
+                        <thead>    
+                            <tr>
+                                <th>ID</th>
+                                <th>Ime</th>
+                                <th>Prezime</th>
+                                <th>Status</th>
+                                <th>Select</th>
+                                <!-- <th>Delete</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="content">
+
+                        </tbody>
+                    </table>
+                    <input onclick="changeT()" class="button" id="change" type="submit" value="Update">
+                    <input onclick="deleteT()" class="button" id="delete" type="submit" value="Delete">
+                </div>
+            </form>
+        </div>
     </body>
 
 </html>

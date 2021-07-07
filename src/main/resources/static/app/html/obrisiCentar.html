@@ -5,19 +5,38 @@
     <head>
         <meta charset="utf8"/>
         <title>Lista FCa | Fitness-Centar</title>
-        <script src="../../assets/js/jquery.min.js"></script>
-        <!-- <script src="../js/login.js"></script> -->
-        <!-- <script src="../js/obrisi.js"></script> -->
-        <script src="../js/admin.js"></script>
-        <!-- <script src="../js/termin.js"></script>
-        <script src="../js/login.js"></script> -->
+        <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/terming.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">
+
         <style>
-            th, td {
-                border: 1px solid black;
-                padding: 15px;
-                text-align: center;
+            .styled-table .button {
+                margin-top: .1em;
+                /* margin-left: 65%; */
+                width: 5%;
+                height: 40px;
+                background:rgb(165, 164, 164);
+                color: white;
+                box-sizing: border-box;
+                border-radius: 5px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.15);
+                border: 1px solid #dddddd;
+
+                /* border: 1px solid #353030; */
+                /* margin-right: auto; */
+                /* width: 100%; */
+            }
+            .styled-table .button:hover {
+                background-color: rgb(185, 181, 181);
+                color: white;
             }
         </style>
+
+        <script src="../../assets/js/jquery.min.js"></script>
+        <script src="../js/admin.js"></script>
+        <script src="../js/login.js"></script>
+        <script src="../js/logged.js"></script>
+        <script src="../js/logout.js"></script>
         <script>
             $(document).ready(function() {
                 if (!checkPrivileges()) return;
@@ -49,40 +68,72 @@
         </script>
     </head>
     <body id="centriBody" hidden>
-        <div>
-            <h2>Lista fca</h2>
+        <div class="navbar">
+            <a href="../../index.html">Fitness Centar</a>
+            
+            <span class="login" hidden><a onclick="logout()" href="../../index.html" class="right">Logout</a> </span>
+            <span class="login" hidden><a href="#" class="right">Profile</a></span>
+            <span class="logout"><a href="./login.html" class="right">Login</a></span>
+            <span class="logout"><a href="./register.html" class="right">Register</a></span>
+            <a href="./listaTerminga.html" class="right">Workouts</a>
+            <a href="../../index.html" class="right">Home</a>
         </div>
-       <br/>
-        <form id="centri">
-            <div class="container">
-                <table id="allCentri">
-                    <thead>    
-                        <tr>
-                            <th>ID</th>
-                            <th>Naziv</th>
-                            <th>Adresa</th>
-                            <th>Broj Sala</th>
-                            <th>Broj Trenera</th>
-                            <th>Odjavi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="content">
-                    </tbody>
-                </table>
+
+        <div class="header">
+            <div class="logged-navbar" hidden>
+                <!-- <a>Fitness Centar</a> -->
+                <span id="user" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <a href="./odradjeniTermini.html" class="right">Odradjeni</a>
+                    <a href="./prijavljeniTermini.html" class="right">Prijavljeni</a>
+                </span>
+                <span id="trener" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <!-- <a href="#" class="right">Odjavi</a> -->
+                    <a href="#" class="right">Raspored</a>
+                    <a href="./dodajTrening.html" class="right">Dodaj Trening</a>
+                    <a href="./mojiTreninzi.html" class="right">Dodaj Termin</a>
+                </span>
+                <span id="admin" hidden>
+                    <a href="#">Kontrolni Panel Centra</a>
+                    <a href="./odobriTrenera.html" class="right">Trener</a>
+                    <a id="active" href="#" class="right">Obrisi</a>
+                    <a href="./dodajCentar.html" class="right">Dodaj</a>
+                </span>
+
             </div>
-            <div>
-                <input type="submit" value="Prosledi"/>
-            </div>
-        </form>
-        <div>
-            <br/>
-            <!-- <li><a type="button" href="listaTreninga.html" class="btn">Refresh</a></li> -->
-            <button onclick="window.location.reload()">Refresh</button>
+            <form class="centar-block" id="centri">
+                <div class="styled-table">
+                    <table class="tabela" id="allCentri" style="margin-top: 2%">
+                        <thead>    
+                            <tr>
+                                <th>ID</th>
+                                <th>Naziv</th>
+                                <th>Adresa</th>
+                                <th>Broj Sala</th>
+                                <th>Broj Trenera</th>
+                                <th>Odjavi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="content">
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <input class="button" onclick="deleteC()" type="submit" value="Ukloni"/>
+                </div>
+            </form>
         </div>
-        <div>
-            <br/>
-            <a href="../../index.html">Pocetna Stranica</a>
-            <button class='btnPutFC' data-id="1">Izmena fc</button>
+
+        <div class="footer-content">
+            <footer class="footer">
+                <div class="container">
+                    <!-- <script src="../js/footer.js"></script> -->
+                    <p>Copyright &copy; Stefan Matkovic 2021</p>
+                </div>
+            </footer>
+            
         </div>
+
     </body>
 </html>

@@ -21,7 +21,7 @@ $(document).ready(function() {
                 row += "<td>" + termin.centar + "<br/>Sala: " + termin.oznaka + "</td>";
                 console.log("Termin.id = " + termin.id);
                 let boxes;
-                if (id == null) {
+                if (sessionStorage.getItem('role') != "Clan") {
                     boxes = "<input type='radio' name='radiobox' class='prijavi' disabled value=" + termin.id + "/>";
                 }
                 else {
@@ -48,6 +48,10 @@ $(document).on("submit", "#allTermini", function(event) {
     if (!checkLogin()) {
         alert("Morate biti ulogovani da biste se prijavili na termin!");         
         return; 
+    }
+    if (sessionStorage.getItem('role') != "Clan") {
+        alert("Samo clanovi mogu prijavljivati termine");
+        return;
     }
     let idKorisnika = sessionStorage.getItem('id');
     var choice;

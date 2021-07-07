@@ -5,8 +5,15 @@
     <head>
         <meta charset="utf8"/>
         <title>Lista Treninga | Fitness-Centar</title>
+        <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/terming.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">
+   
+
         <script src="../../assets/js/jquery.min.js"></script>
         <script src="../js/login.js"></script>
+        <script src="../js/logged.js"></script>
+        <script src="../js/logout.js"></script>
         <script>
             $(document).ready(function(event) {
                 let trener_id = sessionStorage.getItem('id');
@@ -39,50 +46,76 @@
                 });
             });
         </script>
-        <!-- <script src="../js/termin.js"></script>
-        <script src="../js/login.js"></script> -->
-        <style>
-            th, td {
-                border: 1px solid black;
-                padding: 15px;
-                text-align: center;
-            }
-        </style>
     </head>
     <body>
-        <div>
-            <h2>Lista nadolazecih termina</h2>
+        
+        <div class="navbar">
+            <a href="../../index.html">Fitness Centar</a>
+            
+            <span class="login" hidden><a onclick="logout()" href="../../index.html" class="right">Logout</a> </span>
+            <span class="login" hidden><a href="#" class="right">Profile</a></span>
+            <span class="logout"><a href="./login.html" class="right">Login</a></span>
+            <span class="logout"><a href="./register.html" class="right">Register</a></span>
+            <a href="./listaTerminga.html" class="right">Workouts</a>
+            <a href="../../index.html" class="right">Home</a>
         </div>
-       <br/>
-        <form id="upcomingTreninzi">
-            <div class="container">
-                <table id="infotrening">
-                    <thead>    
-                        <tr>
-                            <th>Clan</th>
-                            <th>Cena</th>
-                            <th>Vreme</th>
-                            <th>Datum</th>
-                            <th>Oznaka</th>
-                            <th>Zavrsi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="content">
-                    </tbody>
-                </table>
+        <div class="header">
+            <div class="logged-navbar" hidden>
+                <!-- <a>Fitness Centar</a> -->
+                <span id="user" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <a href="./odradjeniTermini.html" class="right">Odradjeni</a>
+                    <a href="./prijavljeniTermini.html" class="right">Prijavljeni</a>
+                </span>
+                <span id="trener" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <!-- <a href="#" class="right">Odjavi</a> -->
+                    <a id="active" href="#" class="right">Raspored</a>
+                    <a href="./dodajTrening.html" class="right">Dodaj Trening</a>
+                    <a href="./mojiTreninzi.html" class="right">Dodaj Termin</a>
+                </span>
+                <span id="admin" hidden>
+                    <a href="#">Kontrolni Panel Centra</a>
+                    <a href="./odobriTrenera.html" class="right">Treneri</a>
+                    <a href="./dodajCentar.html" class="right">Centar</a>
+                </span>
+
             </div>
             <div>
-                <input type="submit" value="Prosledi"/>
+                <h2></h2>
             </div>
-        </form>
-        <div>
             <br/>
-            <!-- <li><a type="button" href="listaTreninga.html" class="btn">Refresh</a></li> -->
-            <button onclick="window.location.reload()">Refresh</button>
+            <form class="termin-block" id="upcomingTreninzi">
+                <div class="styled-table">
+                    <table class="tabela" id="infotrening">
+                        <thead>    
+                            <tr>
+                                <th>Clan</th>
+                                <th>Cena</th>
+                                <th>Vreme</th>
+                                <th>Datum</th>
+                                <th>Sala</th>
+                                <th>Zavrsi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="content">
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <input type="submit" value="Prosledi"/>
+                </div>
+            </form>
         </div>
-        <div>
-            <br/>
-            <a href="../../index.html">Pocetna Stranica</a>
+        
+        <div class="footer-content">
+            <footer class="footer">
+                <div class="container">
+                    <!-- <script src="../js/footer.js"></script> -->
+                    <p>Copyright &copy; Stefan Matkovic 2021</p>
+                </div>
+            </footer>
+            
         </div>
     </body>
 </html>

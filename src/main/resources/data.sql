@@ -2,6 +2,10 @@ INSERT INTO FITNESS_CENTAR (adresa, email, naziv, telefon) VALUES ('Neka Adresa 
 INSERT INTO FITNESS_CENTAR (adresa, email, naziv, telefon) VALUES ('Neka Adresa 2', 'mejl2@gmail.com', 'KerGym', '094-1033321-321');
 INSERT INTO FITNESS_CENTAR (adresa, email, naziv, telefon) VALUES ('Neka Adresa 3', 'mejl3@gmail.com', 'Seaeaeea', '09422-10321-321');
 
+INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (10, 'S1', 1);
+INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (5, 'S2', 1);
+INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (20, 'S3', 1);
+
 INSERT INTO KORISNIK (user_name, lozinka, first_name, last_name, telefon, email, birthday, uloga, status, tip_korisnika, fitness_centar_id) VALUES ('user_trener', '123', 'Aleksandar', 'Treneric', '0391-213-122-2', 'trenerSasa@gmail.com', '1992-12-12', 'Trener', true,  'trener', 1);
 INSERT INTO KORISNIK (user_name, lozinka, first_name, last_name, telefon, email, birthday, uloga, status, tip_korisnika, fitness_centar_id) VALUES ('user_trener_2', '1233223', 'Marko', 'Markovic', '0391-2213-122-2', 'trenerMarko@gmail.com', '1992-12-02', 'Trener', true,  'trener', 1);
 INSERT INTO KORISNIK (user_name, lozinka, first_name, last_name, telefon, email, birthday, uloga, status, tip_korisnika, fitness_centar_id) VALUES ('user_trener_44', '123', 'Milan', 'Milanovic', '03912313-2213-122-2', 'trenerMilan@gmail.com', '1992-12-02', 'Trener', true,  'trener', 2);
@@ -15,9 +19,6 @@ INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('Aerobik', '
 INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('Abs', 'Vezbe sa jacanje stomacnih misica', 'Stomak/Noge', 2, 2);
 INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('Snaga', 'Vezbe snage', 'Ramena/Ruke/Ledja', 2, 3);
 
-INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (10, 'S1', 1);
-INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (5, 'S2', 1);
-INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (20, 'S3', 1);
 
 INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (1500, '2021-07-22 09:00:00', 1, 1);
 INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (1000, '2021-07-09 15:00', 2, 2);

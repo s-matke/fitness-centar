@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="./assets/css/footer.css">
         <script src="./assets/js/jquery.min.js"></script>
         <script src="./app/js/logout.js"></script>
+        <script src="./app/js/login.js"></script>
         <!-- <script src="./app/js/footer.js"></script> -->
         <script src="./app/js/logged.js"></script>
     </head>
@@ -25,11 +26,24 @@
 
         
         <div class="header">
-            <div class="logged-navbar" hidden >
-                <!-- <a>Fitness Centar</a> -->
-                <span class="login"><a href="#" class="right">Logout</a></span>
-                <span class="login"><a href="#" class="right">Profile</a></span>
-                <a href="#" class="right">Home</a>
+            <div class="logged-navbar" hidden>
+                <span id="user" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <a href="./app/html/#" class="right">Odradjeni</a>
+                    <a href="./app/html/prijavljeniTermini.html" class="right">Prijavljeni</a>
+                </span>
+                <span id="trener" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <!-- <a href="#" class="right">Odjavi</a> -->
+                    <a href="./app/html/upcomingTrening.html" class="right">Raspored</a>
+                    <a href="./app/html/dodajTrening.html" class="right">Dodaj Trening</a>
+                    <a href="./app/html/mojiTreninzi.html" class="right">Dodaj Termin</a>
+                </span>
+                <span id="admin" hidden>
+                    <a href="#">Kontrolni Panel</a>
+                    <a href="./app/html/odobriTrenera.html" class="right">Trener</a>
+                    <a href="./app/html/dodajCentar.html" class="right">Centar</a>
+                </span>
             </div>
         </div>
         <div class="centered">    

@@ -3,67 +3,103 @@
     <head>
         <meta charset="utf8"/>
         <title>Lista Treninga | Fitness-Centar</title>
-        <script src="../../assets/js/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/moj_trening.css">
+        <!-- <link rel="stylesheet" type="text/css" href="../../assets/css/trening.css"> -->
+        <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">
+
+        <script src="../../assets/js/jquery.min.js"></script>     
         <script src="../js/trener.js"></script>
         <script src="../js/login.js"></script>
-        <style>
-            th, td {
-                border: 1px solid black;
-                padding: 15px;
+        <script src="../js/logged.js"></script>
+        <script src="../js/logout.js"></script>
+        <script>
+            function back() {
+                document.getElementById('allTreninzi').show();
+                document.getElementById('addTermin').hide();
             }
-        </style>
+        </script>
     </head>
     <body>
-        <div>
-            <h2>Kontrolni Panel za Trening/Termin</h2>
-        </div>
-        <br/>
+        <div class="navbar">
+            <a href="../../index.html">Fitness Centar</a>
 
-        <div id="allTreninzi">
-            <div class="container">
-                <table id="treninzi">
-                    <thead>    
-                        <tr>
-                            <th>Naziv</th>
-                            <th>Opis</th>
-                            <th>Tip</th>
-                            <th>Trajanje</th>
-                            <th>Termin</th>
-                        </tr>
-                    </thead>
-                    <tbody id="content">
-                    </tbody>
-                </table>
+            <span class="login" hidden><a onclick="logout()" href="../../index.html" class="right">Logout</a> </span>
+            <span class="login" hidden><a href="#" class="right">Profile</a></span>
+            <span class="logout"><a href="./login.html" class="right">Login</a></span>
+            <span class="logout"><a href="./register.html" class="right">Register</a></span>
+            <a href="./listaTerminga.html" class="right">Workouts</a>
+            <a href="../../index.html" class="right">Home</a>
+        </div>
+
+
+        <div class="header">
+            <div class="logged-navbar" hidden>
+                <!-- <a>Fitness Centar</a> -->
+                <span id="user" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <a href="./odradjeniTermini.html" class="right">Odradjeni</a>
+                    <a href="./prijavljeniTermini.html" class="right">Prijavljeni</a>
+                </span>
+                <span id="trener" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <a href="./upcomingTrening.html" class="right">Raspored</a>
+                    <a href="./dodajTrening.html" class="right">Dodaj Trening</a>
+                    <a id="active" href="#" class="right">Dodaj Termin</a>
+                </span>
+                <span id="admin" hidden>
+                    <a href="#">Kontrolni Panel Centra</a>
+                    <a href="./odobriTrenera.html" class="right">Treneri</a>
+                    <a href="./dodajCentar.html" class="right">Centar</a>
+                </span>
             </div>
-        </div>
-
-        <div id="divTermin" hidden>
-            <h2>Dodaj Termin</h2>
-            <form id="addTermin">
-                <label for="cena">Cena:</label> <br/>
-                <input id="cena" type="number" required/> <br/>
-                <br/>
-                <label for="datum">Datum:</label> <br/>
-                <input id="datum" type="date" required/> <br/>
-                <br/>
-                <label for="vreme">Vreme:</label> <br/>
-                <input id="vreme" type="time" required/> <br/>
-                <p>ID: </p>
-                <div id="kontent">
-                </div> <br/>
-                <label for="sala">Sala:</label>
-                <select name="sala" id="sala">
-                    <option value="">----- Izaberitu Salu -----</option>
-                <!-- Insert data via JS -->
-                </select>
-                <input type="submit" value="Dodaj"/>
+            
+            <div class="styled-table" style="max-width: 60%; margin-left:auto; margin-right:auto; margin-top:1.2em" id="allTreninzi">
+                <div class="container">
+                    <table class="tabela" id="treninzi">
+                        <thead>    
+                            <tr>
+                                <th>Naziv</th>
+                                <th>Opis</th>
+                                <th>Tip</th>
+                                <th>Trajanje</th>
+                                <th>Termin</th>
+                            </tr>
+                        </thead>
+                        <tbody id="content">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- HIDDEN -->
+            <form id="addTermin" hidden>
+                <button class="back-btn" onclick="window.location.reload()">Back</button>
+                <div class="termin-block">
+                <h1>Dodaj Termin</h1>
+                <!-- <form id="addTermin"> -->
+                    <input id="cena" type="number" placeholder="Cena" required/>
+                    <input id="datum" type="date" required/>
+                    <input id="vreme" type="time"  required/>
+                    <div id="kontent">
+                    </div>
+                    <select name="sala" id="sala">
+                        <option value="">Izaberitu Salu</option>
+                        <!-- Insert data via JS -->
+                    </select>
+                    <button type="submit">Add</button>
+                </div>                    
             </form>
         </div>
-
-        <div>
-            <br/>
-            <!-- <li><a type="button" href="listaTreninga.html" class="btn">Refresh</a></li> -->
-            <button onclick="window.location.reload()">Refresh</button>
+    
+        <div class="footer-content">
+            <footer class="footer">
+                <div class="container">
+                    <!-- <script src="../js/footer.js"></script> -->
+                    <p>Copyright &copy; Stefan Matkovic 2021</p>
+                </div>
+            </footer>
+            
         </div>
     </body>
 </html>

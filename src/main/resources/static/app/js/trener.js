@@ -70,7 +70,7 @@ $(document).ready(function() {
 $(document).on('click', '.btnAddTermin', function() {
     var treningDiv = $("#allTreninzi");
     treningDiv.hide();
-    var terminDiv = $('#divTermin');
+    var terminDiv = $('#addTermin');
     terminDiv.show();
 
     let trening_id = this.dataset.id;
@@ -100,7 +100,7 @@ $(document).on('submit', '#addTermin', function(event) {
     event.preventDefault();
 
     let treningDiv = $("#allTreninzi");
-    let terminDiv = $('#divTermin');
+    let terminDiv = $('#addTermin');
 
     let cena = $("#cena").val();
     let datum = $("#datum").val();

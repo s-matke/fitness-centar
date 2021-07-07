@@ -62,4 +62,10 @@ public class TrenerServiceImpl implements TrenerService{
 		List<Trener> treneri = this.trenerRepo.findAllByFitnessCentar_Id(id);
 		return treneri;
 	}
+
+	@Override
+	public void delete(Long id) {
+		this.trenerRepo.deleteById(id);
+		
+	}
 }	

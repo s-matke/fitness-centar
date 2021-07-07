@@ -15,13 +15,13 @@ body {
     border-bottom: .09em solid black;
     border-top: .09em solid black;
 
-    background: url("../img/reg.png") no-repeat fixed center center;
-    background-size: cover;
-    background-image: blur(5px);
+    /* background: url("../img/reg.png") no-repeat fixed center center; */
+    /* background-size: cover;
+    background-image: blur(5px); */
 }
 
 
-.register-block {
+.trening-block {
     width: 500px;
     padding: 20px;
     background: rgb(177, 174, 174);
@@ -30,10 +30,10 @@ body {
     border-bottom: 5px solid #5e4b4c;
     border-right: 1px solid black;
     border-left: 1px solid black;
-    margin: 2% auto;
+    margin: 5% auto;
 }
 
-.register-block h1 {
+.trening-block h1 {
     text-align: center;
     color: #000;
     font-size: 28px;
@@ -42,7 +42,7 @@ body {
     margin-bottom: 20px;
 }
 
-.register-block input.names {
+.trening-block input.names {
     float: left;
     display: block;
     width: 42.7%;
@@ -60,7 +60,7 @@ body {
 
 }
 
-.register-block input {
+.trening-block input {
     width: 90%;
     height: 42px;
     box-sizing: border-box;
@@ -74,32 +74,12 @@ body {
     border-color: black;
 }
 
-.register-block select {
-    background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 94% 20%;
-    width: 90%;
-    height: 42px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
-    font-size: 17px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 0 5px 0 5px;
-    outline: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-color: white;
-    border-color: black;
-}
-
-
-
-.register-block input:active,
-.register-block input:focus {
+.trening-block input:active,
+.trening-block input:focus {
     border: 1px solid #4e4344;
 }
 
-.register-block button {
+.trening-block button {
     width: 90%;
     height: 45px;
     background:#9c8b8c;
@@ -116,6 +96,6 @@ body {
     margin-top:.1em;
 }
 
-.register-block button:hover {
+.trening-block button:hover {
     background: #c9b2b3;
 }
