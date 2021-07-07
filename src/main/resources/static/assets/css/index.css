@@ -77,7 +77,7 @@ body {
 }
 
 .navbar a#active {
-    background-color: rgb(161, 161, 161);
+    background-color: rgb(185, 181, 181);
     color: white;
 }
 
@@ -88,6 +88,7 @@ body {
     position:sticky;
     position: -webkit-sticky;
     font-size: 25px;
+    
     border-bottom: .06em solid black;
     border-left: .06em solid black;
     border-right: .06em solid black;
@@ -101,6 +102,9 @@ body {
 
 .logged-navbar a {
     float: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: .02em;
     display: block;
     color: black;
     text-align: center;
@@ -109,6 +113,8 @@ body {
 }
 
 .logged-navbar a.right {
+    margin-left: auto;
+    margin-right: auto;
     /* float: right; */
     /* position:absolute; */
     /* left: 50%;  */
@@ -117,7 +123,8 @@ body {
 }
 
 .logged-navbar a:hover {
-    background-color: rgb(114, 114, 114);
+    height: 120%;
+    background-color: rgb(168, 164, 164);
     color: white;
 }
 

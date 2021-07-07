@@ -9,20 +9,7 @@
         <script src="./assets/js/jquery.min.js"></script>
         <script src="./app/js/logout.js"></script>
         <!-- <script src="./app/js/footer.js"></script> -->
-        <script>
-            $(document).ready(function() {
-                if (sessionStorage.getItem('role') != null) {
-                    $(".logout").hide();
-                    $(".login").show();
-                    $(".logged-navbar").show();
-                } else {
-                    $(".logout").show();
-                    $(".login").hide();
-                    $(".logged-navbar").hide();
-                }
-            });
-
-        </script>
+        <script src="./app/js/logged.js"></script>
     </head>
     <body>
         <div class="navbar">

@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
 }
+
 /*  Main Navbar  */
 .navbar {
     overflow: hidden;
@@ -8,7 +9,7 @@
     position: -webkit-sticky;
     font-size: 25px;
     
-    z-index: 3;
+    z-index: 2;
     top:0;
 }
 
@@ -31,8 +32,60 @@
 }
 
 .navbar a#active {
-    background-color: rgb(161, 161, 161);
+    background-color: rgb(185, 181, 181);
     color: white;
 }
 
 
+/* Navbar logged user */
+
+.logged-navbar {
+    overflow: hidden;
+    position:sticky;
+    position: -webkit-sticky;
+    font-size: 25px;
+    
+    border-bottom: .06em solid black;
+    border-left: .06em solid black;
+    border-right: .06em solid black;
+    background-color: #f1f1f1;
+    height: 6.4%;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: -30px;
+    top:0;
+    z-index: 2;
+}
+
+.logged-navbar a {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: .02em;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: .29em 20px;
+    text-decoration: none;
+}
+
+.logged-navbar a.right {
+    /* margin-left: auto;
+    margin-right: auto; */
+    float: right;
+    /* position:absolute;
+    left: 50%; 
+    transform: translateX(-270%); */
+
+}
+
+.logged-navbar a:hover {
+    height: 120%;
+    background-color: rgb(168, 164, 164);
+    color: white;
+}
+
+.logged-navbar a#active {
+    background-color: rgb(185, 181, 181);
+    color: white;
+}

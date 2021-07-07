@@ -11,26 +11,35 @@ INSERT INTO KORISNIK (user_name, lozinka, first_name, last_name, telefon, email,
 INSERT INTO KORISNIK (user_name, lozinka, first_name, last_name, telefon, email, uloga, status, tip_korisnika) VALUES ('user_clan1', '123', 'Milica', 'Milic', '0391-2103-12-2', 'milica@gmail.com', 'Clan', true, 'clan');
 INSERT INTO KORISNIK (user_name, lozinka, first_name, last_name, telefon, email, uloga, status, tip_korisnika) VALUES ('admin', '123', 'Admin', 'Adminovic', '039122-2103-12-2', 'admin@gmail.com', 'Admin', true, 'admin');
 
--- INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('Aerobik', 'Efikasne vezbe tela', 'Svi misici', 1, 1);
--- INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('Abs', 'Vezbe sa jacanje stomacnih misica', 'Stomak/Noge', 2, 2);
--- INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('Snaga', 'Vezbe snage', 'Ramena/Ruke/Ledja', 2, 3);
+INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('Aerobik', 'Efikasne vezbe tela', 'Svi misici', 1, 1);
+INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('Abs', 'Vezbe sa jacanje stomacnih misica', 'Stomak/Noge', 2, 2);
+INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('Snaga', 'Vezbe snage', 'Ramena/Ruke/Ledja', 2, 3);
 
 INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (10, 'S1', 1);
 INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (5, 'S2', 1);
 INSERT INTO SALA (kapacitet, oznaka, fitness_centar_id) VALUES (20, 'S3', 1);
 
--- INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (1500, '2021-07-22 09:00:00', 1, 1);
--- INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (1000, '2021-07-05 15:00', 2, 2);
--- INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (500, '2021-07-07 13:30', 1, 3);
--- INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (2000, '2021-07-10 14:20', 3, 1);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (1500, '2021-07-22 09:00:00', 1, 1);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (1000, '2021-07-09 15:00', 2, 2);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (500, '2021-07-09 13:30', 1, 3);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (2000, '2021-07-10 14:20', 3, 1);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (1000, '2021-07-09 15:00', 2, 2);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (500, '2021-07-09 13:30', 1, 3);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (2000, '2021-07-10 14:20', 3, 1);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (1000, '2021-07-09 15:00', 2, 2);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (500, '2021-07-09 13:30', 1, 3);
+INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (2000, '2021-07-10 14:20', 3, 1);
 
--- INSERT INTO PRIJAVA_TERMINA (clan_id, termin_id) VALUES (6, 2);
--- INSERT INTO PRIJAVA_TERMINA (clan_id, termin_id) VALUES (7, 1);
--- INSERT INTO PRIJAVA_TERMINA (clan_id, termin_id) VALUES (6, 4);
 
--- INSERT INTO ODRADJEN_TERMIN (ocena, clan_id, trening_id) VALUES (5.00, 7, 1);
--- INSERT INTO ODRADJEN_TERMIN (ocena, clan_id, trening_id) VALUES (3.00, 6, 2);
--- INSERT INTO ODRADJEN_TERMIN (ocena, clan_id, trening_id) VALUES (5.00, 7, 1);
--- INSERT INTO ODRADJEN_TERMIN (ocena, clan_id, trening_id) VALUES (5.00, 6, 3);
--- INSERT INTO ODRADJEN_TERMIN (clan_id, trening_id) VALUES (6, 2);
+
+
+INSERT INTO PRIJAVA_TERMINA (clan_id, termin_id) VALUES (6, 2);
+INSERT INTO PRIJAVA_TERMINA (clan_id, termin_id) VALUES (7, 1);
+INSERT INTO PRIJAVA_TERMINA (clan_id, termin_id) VALUES (6, 4);
+
+INSERT INTO ODRADJEN_TERMIN (ocena, clan_id, trening_id) VALUES (5.00, 7, 1);
+INSERT INTO ODRADJEN_TERMIN (ocena, clan_id, trening_id) VALUES (3.00, 6, 2);
+INSERT INTO ODRADJEN_TERMIN (ocena, clan_id, trening_id) VALUES (5.00, 7, 1);
+INSERT INTO ODRADJEN_TERMIN (ocena, clan_id, trening_id) VALUES (5.00, 6, 3);
+INSERT INTO ODRADJEN_TERMIN (clan_id, trening_id) VALUES (6, 2);
 

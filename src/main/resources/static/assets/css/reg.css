@@ -14,6 +14,10 @@ body {
     background-color: #e9e5e5;
     border-bottom: .09em solid black;
     border-top: .09em solid black;
+
+    background: url("../img/reg.png") no-repeat fixed center center;
+    background-size: cover;
+    background-image: blur(5px);
 }
 
 .register-block {
@@ -22,6 +26,9 @@ body {
     background: rgb(177, 174, 174);
     border-radius: 5px;
     border-top: 5px solid #5e4b4c;
+    border-bottom: 5px solid #5e4b4c;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
     margin: 5% auto;
 }
 

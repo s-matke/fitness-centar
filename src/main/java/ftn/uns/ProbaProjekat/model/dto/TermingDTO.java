@@ -12,6 +12,7 @@ public class TermingDTO {
 	private Double cena;
 	private String ime_prezime;
 	private String oznaka;
+	private String centar;
 	
 	public TermingDTO(String naziv, String opis, Double cena, String oznaka, String datum, String vreme, String ime_prezime, Long id) {
 		this.naziv = naziv;
@@ -49,6 +50,20 @@ public class TermingDTO {
 		this.id = id;
 	}
 
+	public TermingDTO(String naziv, String opis, String tip, Integer trajanje, String datum, String vreme, Double cena, String ime_prezime, String centar, String oznaka, Long id) {
+		this.naziv = naziv;
+		this.opis = opis;
+		this.tip = tip;
+		this.trajanje = trajanje;
+		this.datum = datum;
+		this.vreme = vreme;
+		this.cena = cena;
+		this.ime_prezime = ime_prezime;
+		this.centar = centar;
+		this.oznaka = oznaka;
+		this.id = id;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -127,6 +142,14 @@ public class TermingDTO {
 
 	public void setOznaka(String oznaka) {
 		this.oznaka = oznaka;
+	}
+
+	public String getCentar() {
+		return centar;
+	}
+
+	public void setCentar(String centar) {
+		this.centar = centar;
 	}
 	
 }

@@ -5,10 +5,10 @@
     transform: translateY(-50%);
     transform: translateX(50%); */
 
-    position: absolute;
-    top:95.5%;
+    position: relative;
+    bottom: 0;
     left:50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
     z-index: 22;
     width: 20%;
     padding: 15px;

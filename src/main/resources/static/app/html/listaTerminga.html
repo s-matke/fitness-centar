@@ -4,57 +4,84 @@
         <meta charset="utf8"/>
         <title>Lista Treninga | Fitness-Centar</title>
         <script src="../../assets/js/jquery.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/terming.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">
+        
         <script src="../js/termin.js"></script>
         <script src="../js/login.js"></script>
-        <style>
-            th, td {
-                border: 1px solid black;
-                padding: 15px;
-                text-align: center;
-            }
-        </style>
+        <script src="../js/logged.js"></script>
+        <script src="../js/logout.js"></script>
     </head>
     <body>
-        <div>
-            <h2>Lista treninga</h2>
+
+        <div class="navbar">
+            <a href="../../index.html">Fitness Centar</a>
+
+            <span class="login" hidden><a onclick="logout()" href="../../index.html" class="right">Logout</a> </span>
+            <span class="login" hidden><a href="#" class="right">Profile</a></span>
+            <span class="logout"><a href="./login.html" class="right">Login</a></span>
+            <span class="logout"><a href="./register.html" class="right">Register</a></span>
+            <a id="active" href="#" class="right">Workouts</a>
+            <a href="../../index.html" class="right">Home</a>
         </div>
-       <br/>
-        <form id="allTermini">
-            <div class="container">
-                <table id="termini">
-                    <thead>    
-                        <tr>
-                            <th>Naziv</th>
-                            <th>Opis</th>
-                            <th>Tip</th>
-                            <th>Trajanje</th>
-                            <th>Vreme</th>
-                            <th>Datum</th>
-                            <th>Cena</th>
-                            <th>Trener</th>
-                            <th>Sala</th>
-                            <th>Odabir</th>
-                        </tr>
-                    </thead>
-                    <tbody id="content">
-                    </tbody>
-                </table>
+
+        <div class="header">
+            <div class="logged-navbar"  >
+                <!-- <a>Fitness Centar</a> -->
+                <a href="#">Kontrolni Panel Termina</a>
+                <span class="login"><a href="./odradjeniTermini.html" class="right">Odradjeni</a></span>
+                <span class="login"><a href="./prijavljeniTermini.html" class="right">Prijavljeni</a></span>
             </div>
             <div>
-                <input type="submit" value="Prosledi"/>
+                <h2></h2>
             </div>
-        </form>
-        <div id="prazno" hidden>
-            <h2>Trenutno ne postoji ni jedan trening na koji se mozete prijaviti</h2>
-        </div>
-        <div>
             <br/>
-            <!-- <li><a type="button" href="listaTreninga.html" class="btn">Refresh</a></li> -->
-            <button onclick="window.location.reload()">Refresh</button>
+            <form class="termin-block" id="allTermini">
+                <div class="styled-table">
+                    <table class="tabela" id="termini">
+                        <thead>    
+                            <tr>
+                                <th>Naziv</th>
+                                <th>Opis</th>
+                                <th>Tip</th>
+                                <th>Trajanje (h)</th>
+                                <th>Vreme</th>
+                                <th>Datum</th>
+                                <th>Cena</th>
+                                <th>Trener</th>
+                                <th>Mesto</th>
+                                <th>Odabir</th>
+                            </tr>
+                        </thead>
+                        <tbody id="content">
+                        </tbody>
+                    </table>
+                    <button class="btn" type="submit">Apply</button>
+                </div>
+                <div>
+                    <!-- <input type="submit" value="Prosledi"/> -->
+                </div>
+            </form>
+            <div id="prazno" hidden>
+                <h2>Trenutno ne postoji ni jedan trening na koji se mozete prijaviti</h2>
+            </div>
+            <div>
+                <!-- <br/> -->
+                <!-- <li><a type="button" href="listaTreninga.html" class="btn">Refresh</a></li> -->
+                <!-- <button onclick="window.location.reload()">Refresh</button> -->
+            </div>
         </div>
-        <div>
-            <br/>
-            <a href="prijavljeniTermini.html">Prijavljeni termini</a>
+
+        <div class="footer-content">
+            <footer class="footer">
+                <div class="container">
+                    <!-- <script src="../js/footer.js"></script> -->
+                    <p>Copyright &copy; Stefan Matkovic 2021</p>
+                </div>
+            </footer>
+            
         </div>
     </body>
 </html>

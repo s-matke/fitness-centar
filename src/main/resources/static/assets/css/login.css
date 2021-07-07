@@ -20,10 +20,11 @@ body {
     background-color: #e9e5e5;
     border-bottom: .09em solid black;
     border-top: .09em solid black;
-    /* background: url("assets/img/tg.png") no-repeat fixed center center;
+
+    background: url("../img/log.png") no-repeat fixed center center;
     background-size: cover;
     background-image: blur(5px);
-    filter:blur(3px);
+    /* filter:blur(3px);
     -webkit-filter: blur(3px); */
 
    

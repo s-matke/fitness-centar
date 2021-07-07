@@ -85,13 +85,16 @@ public class TerminController {
 					vreme,
 					termin.getCena(),
 					termin.getTrening().getTrener().getIme() + " " + termin.getTrening().getTrener().getPrezime(),
+					termin.getTrening().getTrener().getFitnessCentar().getNaziv(),
 					termin.getSala().getOznaka(),
 					termin.getId());
 			
 			// Provera da li je clan vec prijavljen na neki od termina
-			for (PrijavaTermina prijava : listaPrijavljenihTermina) {
-				if (prijava.getTermin().getId() == termin.getId()) {
-					preskoci = true;
+			if (id != null) {
+				for (PrijavaTermina prijava : listaPrijavljenihTermina) {
+					if (prijava.getTermin().getId() == termin.getId()) {
+						preskoci = true;
+					}
 				}
 			}
 			

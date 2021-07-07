@@ -17,7 +17,7 @@ $(document).on("submit", "#loginForm", function(event) {
         data: JSON.stringify(loginInfo),
         success: function(data) {
             console.log(data);
-            alert("Uspesno ste se ulogovali");
+            // alert("Uspesno ste se ulogovali");
 
             // TODO - logged user
             // Napraviti da sessionStorage ili localStorage cuva ID a JAVA vrsi vracanje

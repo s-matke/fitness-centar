@@ -18,9 +18,15 @@ $(document).ready(function() {
                 row += "<td>" + termin.datum + "</td>";
                 row += "<td>" + termin.cena + "</td>";
                 row += "<td>" + termin.ime_prezime + "</td>";
-                row += "<td>" + termin.oznaka + "</td>";
+                row += "<td>" + termin.centar + "<br/>Sala: " + termin.oznaka + "</td>";
                 console.log("Termin.id = " + termin.id);
-                let boxes = "<input type='radio' name='radiobox' class='prijavi' value=" + termin.id + "/>";
+                let boxes;
+                if (id == null) {
+                    boxes = "<input type='radio' name='radiobox' class='prijavi' disabled value=" + termin.id + "/>";
+                }
+                else {
+                    boxes = "<input type='radio' name='radiobox' class='prijavi' value=" + termin.id + "/>";
+                }
                 row += "<td>" + boxes + "</td>";
                 row += "</tr>";
 
@@ -39,6 +45,10 @@ $(document).ready(function() {
 
 $(document).on("submit", "#allTermini", function(event) {
     event.preventDefault();
+    if (!checkLogin()) {
+        alert("Morate biti ulogovani da biste se prijavili na termin!");         
+        return; 
+    }
     let idKorisnika = sessionStorage.getItem('id');
     var choice;
     //var choice = $("input:radio[name=radiobox]:checked").val();   // koji radio je selektovan, sadrzi id termina
@@ -47,6 +57,10 @@ $(document).on("submit", "#allTermini", function(event) {
     $("input:radio[name=radiobox]:checked").each(function() {
         choice = parseInt($(this).val());
     });
+    if (choice == undefined) {
+        alert("Nije izabran nijedan termin.")
+        return;
+    }
     console.log("Id korisnika: " + idKorisnika);
     console.log("Id termina: " + choice);
 
@@ -74,3 +88,7 @@ $(document).on("submit", "#allTermini", function(event) {
     });
 });
 
+function checkLogin() {
+    if (sessionStorage.getItem('id') == null) return false;
+    return true;
+}
