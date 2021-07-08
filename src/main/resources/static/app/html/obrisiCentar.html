@@ -12,7 +12,7 @@
         <style>
             .styled-table .button {
                 margin-top: .7em;
-                margin-left: 60%;
+                margin-left: auto;
                 width: 8%;
                 height: 40px;
                 background:rgb(165, 164, 164);
@@ -31,6 +31,22 @@
                 color: white;
             }
 
+            .header .back-btn {
+                width: 20%;
+                height: 40px;
+                background:rgb(165, 164, 164);
+                color: white;
+                box-sizing: border-box;
+                border-radius: 5px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.15);
+                border: 1px solid #dddddd;
+            }
+
+            .header .back-btn:hover {
+                background-color: rgb(185, 181, 181);
+                color: white;
+            }
+
         </style>
 
         <script src="../../assets/js/jquery.min.js"></script>
@@ -39,6 +55,13 @@
         <script src="../js/login.js"></script>
         <script src="../js/logged.js"></script>
         <script src="../js/logout.js"></script>
+        <script>
+            function back() {
+                document.getElementById('allTreninzi').show();
+                document.getElementById('addTermin').hide();
+                document.getElementsByClassName('back-btn').hide();
+            }
+        </script>
     </head>
     <body id="centriBody">
         <div class="navbar">
@@ -70,8 +93,9 @@
                 <span id="admin" hidden>
                     <a href="#">Kontrolni Panel Centra</a>
                     <a href="./odobriTrenera.html" class="right">Trener</a>
-                    <a id="active" href="#" class="right">Izmeni</a>
+                    <a href="./listaSala.html" class="right">Sala</a>
                     <a href="./dodajCentar.html" class="right">Dodaj</a>
+                    <a id="active" href="#" class="right">Izmeni</a>
                 </span>
 
             </div>
@@ -96,8 +120,8 @@
                 </div>
             </form>
 
+            <button class="back-btn" onclick="window.location.reload()" hidden>Back</button>
             <form class="change-block" id="changeTermin" hidden>
-                <!-- <button class="back-btn" onclick="window.location.reload()">Back</button> -->
                 <!-- <div class="centar-block"> -->
                 <h1>Edit Centar</h1>
                 <div id="input-content">

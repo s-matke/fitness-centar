@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dodavanje Fitness Centra | Fitness Centar</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/trening.css">
+        <!-- <link rel="stylesheet" type="text/css" href="../../assets/css/terming.css"> -->
+        <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">
+
+        <script src="../../assets/js/jquery.min.js"></script>
+        <script src="../js/sala.js"></script>
+        <script src="../js/login.js"></script>
+        <script src="../js/logged.js"></script>
+        <script src="../js/logout.js"></script>
+        <script>
+
+            $(document).ready(function() {
+                // pribavljanje svih FC-a
+                
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/api/centar/opcije",
+                    dataType: "json",
+                    success: function(response) {
+                        for (let fc of response) {
+                            let option = "<option value=" + fc.id + ">" + fc.naziv + "</otion>";
+                            $('#centar-select').append(option);
+                        }
+                    },
+                    error: function(error) {
+                        // alert("Doslo je do greske prilikom pribavljanja informacija sa servera.")
+                        // window.location.href = "../../index.html";
+                    }
+                });
+            });
+        </script>
+        <style>
+            .trening-block select {
+                background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 94% 20%;
+                width: 90%;
+                height: 42px;
+                box-sizing: border-box;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                margin-bottom: 20px;
+                font-size: 17px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                padding: 0 5px 0 5px;
+                outline: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                background-color: white;
+                border-color: black;
+            }
+        </style>
+    </head>
+    <body id="addCentarBody">
+        <div class="navbar">
+            <a href="../../index.html">Fitness Centar</a>
+
+            <span class="login" hidden><a onclick="logout()" href="../../index.html" class="right">Logout</a> </span>
+            <span class="login" hidden><a href="#" class="right">Profile</a></span>
+            <span class="logout"><a href="./login.html" class="right">Login</a></span>
+            <span class="logout"><a href="./register.html" class="right">Register</a></span>
+            <a href="./listaTerminga.html" class="right">Workouts</a>
+            <a href="../../index.html" class="right">Home</a>
+        </div>
+        
+        
+        <div class="header">
+            <div class="logged-navbar" hidden>
+                <!-- <a>Fitness Centar</a> -->
+                <span id="trener" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <!-- <a href="#" class="right">Odjavi</a> -->
+                    <a href="./upcomingTrening.html" class="right">Raspored</a>
+                    <a href="./dodajTrening.html" class="right">Dodaj Trening</a>
+                    <a href="./mojiTreninzi.html" class="right">Dodaj Termin</a>
+                </span>
+                <span id="user" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <a href="./odradjeniTermini.html" class="right">Odradjeni</a>
+                    <a href="./prijavljeniTermini.html" class="right">Prijavljeni</a>
+                </span>
+                <span id="admin" hidden>
+                    <a href="#">Kontrolni Panel Sale</a>
+                    <a href="./odobriTrenera.html" class="right">Trener</a>
+                    <a id="active" href="#" class="right">Dodaj</a>
+                    <a href="./listaSala.html" class="right">Izmeni</a>
+                    <a href="./obrisiCentar.html" class="right">Centar</a>
+                </span>
+            </div>
+            <div>
+                <form id="addSala">
+                    <div class="trening-block">
+                        <h1>Dodaj Salu</h1>
+                        <input id="oznaka" type="text" placeholder="Oznaka Sale" required/> <br/>
+                        <input id="kapacitet" type="number" placeholder="Kapacitet" required/> <br/>
+                        <div id="input-centri">
+                            <select name="centar-select" id="centar-select">
+                            </select>
+                        </div>
+                        <button onclick="addSala()" type="submit">Add</button>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

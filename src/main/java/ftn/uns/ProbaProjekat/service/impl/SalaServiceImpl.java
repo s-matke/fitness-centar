@@ -36,4 +36,34 @@ public class SalaServiceImpl implements SalaService {
 		List<Sala> sale = this.salaRepo.findAllByFitnessCentar_id(id);
 		return sale;
 	}
+
+	@Override
+	public Sala update(Sala sala) throws Exception {
+		Sala salaToUpdate = this.salaRepo.getOne(sala.getId());
+		if (salaToUpdate == null) {
+			throw new Exception("Sala ne postoji");
+		}
+		
+		salaToUpdate.setOznaka(sala.getOznaka());
+		salaToUpdate.setKapacitet(sala.getKapacitet());
+		salaToUpdate.setFitnessCentar(sala.getFitnessCentar());
+		
+		Sala savedSala = this.salaRepo.save(salaToUpdate);
+		return savedSala;
+	}
+
+	@Override
+	public void delete(Long id) {
+		this.salaRepo.deleteById(id);
+		
+	}
+
+	@Override
+	public Sala create(Sala sala) throws Exception {
+		if (sala.getId() != null) {
+			throw new Exception("ID must be null!");
+		}
+		Sala novaSala = this.salaRepo.save(sala);
+		return novaSala;
+	}
 }

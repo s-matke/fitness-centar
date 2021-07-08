@@ -11,4 +11,10 @@ public interface SalaService {
 	List<Sala> findAll();
 	
 	List<Sala> findByCentar(Long id);
+	
+	Sala update(Sala sala) throws Exception;
+	
+	public void delete(Long id);
+	
+	Sala create(Sala sala) throws Exception;
 }

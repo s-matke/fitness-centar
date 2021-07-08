@@ -26,6 +26,21 @@ public class Sala implements Serializable{
 	// n sala : 1 fitness centar
 	@ManyToOne(fetch = FetchType.EAGER)
 	private FitnessCentar fitnessCentar;
+	
+	public Sala() {}
+
+	public Sala(String oznaka, Integer kapacitet, FitnessCentar centar) {
+		this.oznaka = oznaka;
+		this.kapacitet = kapacitet;
+		this.fitnessCentar = centar;
+	}
+	
+	public Sala(Long id, String oznaka, Integer kapacitet, FitnessCentar centar) {
+		this.id = id;
+		this.oznaka = oznaka;
+		this.kapacitet = kapacitet;
+		this.fitnessCentar = centar;
+	}
 
 	public Long getId() {
 		return id;

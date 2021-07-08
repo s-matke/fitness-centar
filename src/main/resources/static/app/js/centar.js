@@ -36,15 +36,17 @@ $(document).on('click', '.btnEditCentar', function(event) {
     //console.log("Usao u deo gde cuvam info");
     var tabela = $(".centar-block")
     var changeForm = $(".change-block")
+    var dugme = $(".back-btn");
 
     tabela.hide();
     changeForm.show();
+    dugme.show();
 
     // Vrednosti
     let id = this.dataset.id;
     let naziv = this.dataset.naziv;
     let adresa = this.dataset.adresa;
-    let telefon = this.dataset.adresa;
+    let telefon = this.dataset.telefon;
     let email = this.dataset.email;
 
     let id_input = "<input id='id' type='number' disabled value='" + id + "' />"; 

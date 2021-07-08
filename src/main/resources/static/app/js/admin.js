@@ -177,7 +177,7 @@ function registerT() {
 
 $(document).on("submit", "#addFitnessCentar", function(event) {
     event.preventDefault();
-    alert("OUPS");
+    // alert("OUPS");
     if (!checkPrivileges()) return;
 
 
@@ -203,7 +203,7 @@ $(document).on("submit", "#addFitnessCentar", function(event) {
         success: function(response) {
             console.log(response);
             alert("Uspesno dodat novi fitness centar (" + response.id + ")\nNaziv: " + response.naziv + "\nAdresa: " + response.adresa);
-            window.location.href = "../../index.html";
+            window.location.href = "./obrisiCentar.html";
         },
         error: function(error) {
             alert(error);
@@ -223,7 +223,7 @@ function deleteC() {
         if (id == null) {alert("Morate izabrati centar koji zelite obrisati"); return;}
         if(!check(id)) {return;}
 
-        alert("Ipak je prosao da brise, id: " + id);
+        // alert("Ipak je prosao da brise, id: " + id);
         
         $.ajax({
             type: "DELETE",
