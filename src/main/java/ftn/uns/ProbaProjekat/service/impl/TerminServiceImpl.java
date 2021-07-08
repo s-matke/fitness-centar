@@ -37,4 +37,5 @@ public class TerminServiceImpl implements TerminService {
 		
 		return termin;
 	}
+
 }

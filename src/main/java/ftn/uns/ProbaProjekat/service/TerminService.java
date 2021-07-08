@@ -11,4 +11,5 @@ public interface TerminService {
 	Termin findOne(Long id);
 	
 	Termin create(Termin termin) throws Exception;
+	
 }

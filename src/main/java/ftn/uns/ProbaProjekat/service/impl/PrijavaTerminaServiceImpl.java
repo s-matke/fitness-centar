@@ -1,5 +1,6 @@
 package ftn.uns.ProbaProjekat.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,4 +54,16 @@ public class PrijavaTerminaServiceImpl implements PrijavaTerminaService {
 		List<PrijavaTermina> lista = this.prijavaRepo.search(id);
 		return lista;
 	}
+
+	@Override
+	public int slobodnaMesta(Timestamp pocetak, Timestamp kraj) {
+		List<PrijavaTermina> listaTermina = this.prijavaRepo.novomesto(pocetak, kraj);
+		System.out.println("Termini izmedju: " + pocetak + " ---- " + kraj);
+		for (PrijavaTermina termina : listaTermina) {
+			System.out.println(termina.getTermin().getPocetak() + " -- " + termina.getTermin().getKraj());
+		}
+		return listaTermina.size();
+	}
+
+
 }

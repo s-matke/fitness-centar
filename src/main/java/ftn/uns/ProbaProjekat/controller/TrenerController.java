@@ -58,7 +58,7 @@ public class TrenerController {
 		
 		trenerDTO.setStatus(false);	// ostaje na Administratoru da dozvoli/odbije zahtev za pristup sistemu (samo za trenere)
 		
-		System.out.println("ID Centra: " + trenerDTO.getFitnessCentar_id());
+		//System.out.println("ID Centra: " + trenerDTO.getFitnessCentar_id());
 		
 		FitnessCentar centar = this.centarService.findOne(trenerDTO.getFitnessCentar_id());
 		
@@ -81,7 +81,7 @@ public class TrenerController {
 		
 		trenerDTO.setStatus(true);	// ostaje na Administratoru da dozvoli/odbije zahtev za pristup sistemu (samo za trenere)
 		
-		System.out.println("ID Centra: " + trenerDTO.getFitnessCentar_id());
+		//System.out.println("ID Centra: " + trenerDTO.getFitnessCentar_id());
 		
 		FitnessCentar centar = this.centarService.findOne(trenerDTO.getFitnessCentar_id());
 		
@@ -143,6 +143,7 @@ public class TrenerController {
 	public ResponseEntity<TerminDTO> addTermin(@RequestBody TerminDTO terminDTO) throws Exception {
 		// Provera validnosti datuma prosledjenog za termin
 		Timestamp now = new Timestamp(System.currentTimeMillis());
+		System.out.println("Now:" + now + "\nEpoch:" + terminDTO.getEpoha() + "\nEpoch*1000:" + terminDTO.getEpoha() * 1000l + "\nNowTime: " + now.getTime());
 		if ((terminDTO.getEpoha() * 1000l) < now.getTime()) {
 			throw new Exception("Datum mora biti validan, odnosno novi termin mora biti odrzan u buducnosti.");
 		}
@@ -155,9 +156,12 @@ public class TrenerController {
 		
 		terminDTO.setPocetak(new Timestamp(terminDTO.getEpoha() * 1000l));
 		
+		long epoha = terminDTO.getPocetak().getTime() + ((long)trening.getTrajanje() * 3600000l);	// kad se zavrsava termin
+		Timestamp end =  new Timestamp(epoha);
+		
 		Sala sala = this.salaService.findOne(terminDTO.getSala_id());
 			
-		Termin termin = new Termin(terminDTO.getPocetak(), terminDTO.getCena(), sala, trening);
+		Termin termin = new Termin(terminDTO.getPocetak(), end, terminDTO.getCena(), sala, trening);
 		Termin noviTermin = terminService.create(termin);
 		
 		TerminDTO noviTerminDTO = new TerminDTO(noviTermin.getId(), noviTermin.getPocetak(), noviTermin.getCena(), noviTermin.getSala().getId(), noviTermin.getTrening().getId());

@@ -87,7 +87,10 @@ $(document).on("submit", "#allTermini", function(event) {
         },
         error: function(error) {
             console.log(error);
-            alert("Request status: " + error.status + " Status Text: " + error.statusText + " " + error.responseText);
+            console.log("Request status: " + error.status + " Status Text: " + error.statusText + " " + error.responseText);
+            if (error.status == 403) {
+                alert("Nema slobodnog mesta");
+            }
         }
     });
 });

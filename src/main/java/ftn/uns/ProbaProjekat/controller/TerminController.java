@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ftn.uns.ProbaProjekat.model.Clan;
 import ftn.uns.ProbaProjekat.model.PrijavaTermina;
 import ftn.uns.ProbaProjekat.model.Termin;
-import ftn.uns.ProbaProjekat.model.Trener;
 import ftn.uns.ProbaProjekat.model.dto.PrijavaDTO;
 import ftn.uns.ProbaProjekat.model.dto.PrijavaTerminaDTO;
 import ftn.uns.ProbaProjekat.model.dto.TermingDTO;
@@ -121,7 +120,7 @@ public class TerminController {
 		List<PrijavaTermina> listaTermina = this.prijavaService.findByClan(clan_id);
 		
 		SimpleDateFormat crunchifyDate = new SimpleDateFormat("MMM dd yyyy");
-		SimpleDateFormat crunchifyTime = new SimpleDateFormat("HH:ss");
+		SimpleDateFormat crunchifyTime = new SimpleDateFormat("HH:mm");
 		
 		String datum, vreme;
 		
@@ -193,6 +192,26 @@ public class TerminController {
 		
 		Clan clan = this.clanService.findOne(prijavaDTO.getClan_id());	// pronalazimo clana sa datim ID-om
 		Termin termin = this.terminService.findOne(prijavaDTO.getTermin_id());	// pronalazimo termin sa datim ID-om
+		
+		// Provera da li ima mesta u sali
+		//termin.getSala().getKapacitet()
+		//if (this.terminService.getPrijavljeni(termin.getPocetak()))
+		
+//		System.out.println("Vreme:" + termin.getPocetak().getTime());
+//		System.out.println("Timestamp Pocetak:" + termin.getPocetak());
+		long epoha = termin.getPocetak().getTime() + ((long)termin.getTrening().getTrajanje() * 3600000l);
+		Timestamp novo =  new Timestamp(epoha);
+//		System.out.println("Timestamp sabran?:" + novo);
+		int mesta = this.prijavaService.slobodnaMesta(termin.getPocetak(), novo);	// saljemo epohu kada se planira izvoditi termin + vreme trajanja
+		int slobodnaMesta = termin.getSala().getKapacitet() - mesta;
+		
+		if (slobodnaMesta <= 0) {
+			System.out.println("Nema slobodnog mesta za prijavu termina");
+			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+		}
+		
+		System.out.println("Broj prijavljenih: " + mesta);
+		System.out.println();
 		
 		PrijavaTermina prijava = new PrijavaTermina(clan, termin);
 		

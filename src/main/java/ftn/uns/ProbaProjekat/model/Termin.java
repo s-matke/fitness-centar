@@ -27,6 +27,9 @@ public class Termin implements Serializable {
 	@Column(name = "datum")
 	private Timestamp pocetak;	// YYYY-mm-DD HH:mm:SS
 	
+	@Column(name = "kraj", nullable=true)
+	private Timestamp kraj;
+	
 	@Column(name = "cena")
 	private Double cena;
 	
@@ -52,6 +55,24 @@ public class Termin implements Serializable {
 	public Termin(Long id, Timestamp pocetak, Double cena, Sala sala, Trening trening) {
 		this.id = id;
 		this.pocetak = pocetak;
+		this.cena = cena;
+		this.sala = sala;
+		this.trening = trening;
+	}
+	
+	// TMP Constructor
+	public Termin(Timestamp pocetak, Timestamp kraj, Double cena, Sala sala, Trening trening) {
+		this.pocetak = pocetak;
+		this.kraj = kraj;
+		this.cena = cena;
+		this.sala = sala;
+		this.trening = trening;
+	}
+	
+	public Termin(Long id, Timestamp pocetak, Timestamp kraj, Double cena, Sala sala, Trening trening) {
+		this.id = id;
+		this.pocetak = pocetak;
+		this.kraj = kraj;
 		this.cena = cena;
 		this.sala = sala;
 		this.trening = trening;
@@ -95,6 +116,22 @@ public class Termin implements Serializable {
 
 	public void setTrening(Trening trening) {
 		this.trening = trening;
+	}
+
+	public Timestamp getKraj() {
+		return kraj;
+	}
+
+	public void setKraj(Timestamp kraj) {
+		this.kraj = kraj;
+	}
+
+	public Set<PrijavaTermina> getPrijavljeniTermini() {
+		return prijavljeniTermini;
+	}
+
+	public void setPrijavljeniTermini(Set<PrijavaTermina> prijavljeniTermini) {
+		this.prijavljeniTermini = prijavljeniTermini;
 	}
 	
 	
