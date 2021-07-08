@@ -15,6 +15,14 @@ public class FitnessCentarDTO {
 	
 	public FitnessCentarDTO() {}
 	
+	public FitnessCentarDTO(String naziv, String adresa, String telefon, String email) {
+		this.naziv = naziv;
+		this.adresa = adresa;
+		this.telefon = telefon;
+		this.email = email;
+	}
+	
+	
 	public FitnessCentarDTO(Long id, String naziv, String adresa, String telefon, String email) {
 		this.id = id;
 		this.naziv = naziv;
@@ -31,6 +39,16 @@ public class FitnessCentarDTO {
 		this.treneri = treneri;
 	}
 
+	public FitnessCentarDTO(Long id, String naziv, String adresa, String telefon, String email, Integer sale, Integer treneri) {
+		this.id = id;
+		this.naziv = naziv;
+		this.adresa = adresa;
+		this.telefon = telefon;
+		this.email = email;
+		this.sale = sale;
+		this.treneri = treneri;
+	}
+	
 	public FitnessCentarDTO(Long id, String naziv) {
 		this.id = id;
 		this.naziv = naziv;

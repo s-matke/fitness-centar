@@ -13,4 +13,6 @@ public interface FitnessCentarService {
 	FitnessCentar findOne(Long id);
 	
 	public void delete(Long id);
+	
+	FitnessCentar update(FitnessCentar centar) throws Exception;
 }

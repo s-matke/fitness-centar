@@ -6,14 +6,14 @@
         <meta charset="utf8"/>
         <title>Lista FCa | Fitness-Centar</title>
         <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
-        <link rel="stylesheet" type="text/css" href="../../assets/css/terming.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/centar.css">
         <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">
 
         <style>
             .styled-table .button {
-                margin-top: .1em;
-                /* margin-left: 65%; */
-                width: 5%;
+                margin-top: .7em;
+                margin-left: 60%;
+                width: 8%;
                 height: 40px;
                 background:rgb(165, 164, 164);
                 color: white;
@@ -30,44 +30,17 @@
                 background-color: rgb(185, 181, 181);
                 color: white;
             }
+
         </style>
 
         <script src="../../assets/js/jquery.min.js"></script>
+        <script src="../js/centar.js"></script>
         <script src="../js/admin.js"></script>
         <script src="../js/login.js"></script>
         <script src="../js/logged.js"></script>
         <script src="../js/logout.js"></script>
-        <script>
-            $(document).ready(function() {
-                if (!checkPrivileges()) return;
-                $("#centriBody").show();
-                $.ajax({
-                    type: "GET",
-                    url: "http://localhost:8080/api/centar/lista",
-                    dataType: "json",
-                    success: function(response) {
-                        console.log("SUCCESS:\n" +response);
-                        for (let centar of response) {
-                            let row = "<tr>";
-                            row += "<td>" + centar.id + "</td>";
-                            row += "<td>" + centar.naziv + "</td>";
-                            row += "<td>" + centar.adresa + "</td>";
-                            row += "<td>" + centar.sale + "</td>";
-                            row += "<td>" + centar.treneri + "</td>";
-                            let boxes = "<input type='radio' name='odjava' value='" + centar.id + "'/>";
-                            row += "<td>" + boxes + "</td>";
-                            
-                            $("#content").append(row);
-                        }
-                    },
-                    error: function(error) {
-                        console.log("ERROR:\n" + error);
-                    }
-                });
-            });
-        </script>
     </head>
-    <body id="centriBody" hidden>
+    <body id="centriBody">
         <div class="navbar">
             <a href="../../index.html">Fitness Centar</a>
             
@@ -97,7 +70,7 @@
                 <span id="admin" hidden>
                     <a href="#">Kontrolni Panel Centra</a>
                     <a href="./odobriTrenera.html" class="right">Trener</a>
-                    <a id="active" href="#" class="right">Obrisi</a>
+                    <a id="active" href="#" class="right">Izmeni</a>
                     <a href="./dodajCentar.html" class="right">Dodaj</a>
                 </span>
 
@@ -112,16 +85,25 @@
                                 <th>Adresa</th>
                                 <th>Broj Sala</th>
                                 <th>Broj Trenera</th>
-                                <th>Odjavi</th>
+                                <th>Delete</th>
+                                <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody id="content">
                         </tbody>
                     </table>
-                </div>
-                <div>
                     <input class="button" onclick="deleteC()" type="submit" value="Ukloni"/>
                 </div>
+            </form>
+
+            <form class="change-block" id="changeTermin" hidden>
+                <!-- <button class="back-btn" onclick="window.location.reload()">Back</button> -->
+                <!-- <div class="centar-block"> -->
+                <h1>Edit Centar</h1>
+                <div id="input-content">
+                </div>
+                <input class="button" onclick="changeC()" type="submit" value="Edit"/>
+
             </form>
         </div>
 

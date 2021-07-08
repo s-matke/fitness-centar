@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -65,10 +67,12 @@ public class FitnessCentarController {
 					centar.getId(),
 					centar.getNaziv(),
 					centar.getAdresa(),
+					centar.getTelefon(),
+					centar.getEmail(),
 					sale,
 					treneri
 					);
-			System.out.println("Treneri: " + treneri + "\nSIZE: " + this.trenerService.findByCentar(centar.getId()).size());
+//			System.out.println("Treneri: " + treneri + "\nSIZE: " + this.trenerService.findByCentar(centar.getId()).size());
 			centarDTOS.add(centarDTO);
 		}
 		
@@ -86,4 +90,34 @@ public class FitnessCentarController {
 		
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	
+	@PutMapping(
+			value= "/izmeni/{id}",
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FitnessCentarDTO> izmeniCentar(@PathVariable Long id, @RequestBody FitnessCentarDTO fitnessDTO) throws Exception {
+		//FitnessCentar centarDTO = this.centarService.findOne(fitnessDTO.getId());
+		
+		FitnessCentar centar = new FitnessCentar(id, fitnessDTO.getNaziv(), fitnessDTO.getAdresa(), fitnessDTO.getTelefon(), fitnessDTO.getEmail());
+		System.out.println("ID: " + id);
+		FitnessCentar updatedCentar = this.centarService.update(centar);
+		System.out.println("Naziv: " + updatedCentar.getNaziv() + "\nAdresa: " + updatedCentar.getAdresa() + "\nTelefon: " + updatedCentar.getTelefon() + "\nEmail: " + updatedCentar.getEmail());
+		FitnessCentarDTO updatedCentarDTO = new FitnessCentarDTO(
+				updatedCentar.getId(),
+				updatedCentar.getNaziv(),
+				updatedCentar.getAdresa(),
+				updatedCentar.getTelefon(),
+				updatedCentar.getEmail());
+				
+		return new ResponseEntity<>(updatedCentarDTO, HttpStatus.OK);
+	}
+
 }
+
+
+
+
+
+
+
+

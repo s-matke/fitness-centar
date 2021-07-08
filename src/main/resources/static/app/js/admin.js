@@ -176,9 +176,10 @@ function registerT() {
 // Dodavanje fitness centra
 
 $(document).on("submit", "#addFitnessCentar", function(event) {
+    event.preventDefault();
+    alert("OUPS");
     if (!checkPrivileges()) return;
 
-    event.preventDefault();
 
     // preuzimanje vrednost
     let naziv = $("#naziv").val();
@@ -238,3 +239,7 @@ function deleteC() {
         });
     });
 }
+
+// function changeC() {
+
+
