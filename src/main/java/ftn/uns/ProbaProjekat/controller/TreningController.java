@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,12 +40,12 @@ public class TreningController {
 	@GetMapping(
 			value = "/lista",
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<TreningDTO>> getTrenings(@RequestParam(required=false) String keyword){
+	public ResponseEntity<List<TreningDTO>> getTrenings(){
 		
 		//System.out.println("Keyword: " + keyword);
 		
 		List<TreningDTO> treningDTOS = new ArrayList<>();
-		List<Trening> listaTreninga = this.treningService.findAll(keyword);  
+		List<Trening> listaTreninga = this.treningService.findAll();  
 		
 		for (Trening trening : listaTreninga) {
 			TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTip_treninga(), trening.getTrajanje());
@@ -108,6 +111,47 @@ public class TreningController {
 		return new ResponseEntity<>(noviTreningDTO, HttpStatus.CREATED);
 	}
 	
+	@PutMapping(
+			value="/izmeni/{uid}/{id}",
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> izmeniTrening(@PathVariable("uid") Long uid, @PathVariable("id") Long id, @RequestBody TreningDTO treningDTO) throws Exception {
+		Trener trener = this.trenerService.findOne(uid);
+		if (trener == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		Trening trening = new Trening (id, treningDTO.getNaziv(), treningDTO.getOpis(), treningDTO.getTip_treninga(), treningDTO.getTrajanje(), trener);
 		
-
+		Trening updatedTrening = this.treningService.update(trening);
+		System.out.println("Naziv: " + updatedTrening.getNaziv());
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value = "/obrisi/{id}")
+	public ResponseEntity<Void> obrisiTrening(@PathVariable Long id) throws Exception {
+		Trening trening = this.treningService.findOne(id);
+		
+		if (trening == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		this.treningService.delete(id);
+		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

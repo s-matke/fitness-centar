@@ -6,7 +6,7 @@ import ftn.uns.ProbaProjekat.model.Trening;
 
 public interface TreningService {
 
-	List<Trening> findAll(String keyword);
+	List<Trening> findAll();
 	
 	List<Trening> findByNaziv(String naziv);
 	
@@ -21,4 +21,8 @@ public interface TreningService {
 	List<Trening> findByTrener(Long id);
 
 	Trening findOne(Long id);
+	
+	Trening update(Trening trening) throws Exception;
+	
+	public void delete(Long id);
 }

@@ -1,147 +1,133 @@
 $(document).ready(function() {
+    let id = sessionStorage.getItem('id');
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/trening/lista",
+        url: "http://localhost:8080/api/trener/trening/lista",
         dataType: "json",
+        data: {id},
         success: function(response) {
-            console.log("Success:\n", response);
+            console.log("SUCCESS:\n" +response);
             for (let trening of response) {
                 let row = "<tr>";
                 row += "<td>" + trening.naziv + "</td>";
                 row += "<td>" + trening.opis + "</td>";
+                console.log("tip: " + trening.tip_treninga + "\n trajanje: " + trening.trajanje);
                 row += "<td>" + trening.tip_treninga + "</td>";
                 row += "<td>" + trening.trajanje + "</td>";
+                let boxes = "<input type='radio' name='odjava' value='" + trening.id + "'/>";
+                row += "<td>" + boxes + "</td>";
+                let btn = "<button class='btnEditTrening' data-id='" + trening.id + "' data-naziv='" + trening.naziv + "' data-opis='" + trening.opis + "' data-tip='" + trening.tip_treninga + "' data-trajanje='" + trening.trajanje + "'>Edit</button>";
+                row += "<td>" + btn + "</td>";
                 row += "</tr>";
                 
-                $('#content').append(row);
+                $("#content").append(row);
             }
         },
-        error: function(response) {
-            console.log("ERROR:\n", response);
-            alert("Greska - BACA PRVA");
+        error: function(error) {
+            console.log("ERROR:\n" + error);
         }
     });
 });
 
-$(document).on("submit", "#searchForm", function(event) {
-    event.preventDefault();
-    
-    let contentContainer = $("#content");
-    contentContainer.empty();
+$(document).on('click', '.btnEditTrening', function(event) {
 
-    let keyword = $("#filter").val().toLowerCase();
+    event.preventDefault(); // da nam se ne bi reloadala stranica..
+    //console.log("Usao u deo gde cuvam info");
+    var tabela = $(".trening-block")
+    var changeForm = $(".change-block")
+    var dugme = $(".back-btn");
 
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/api/trening/lista",
-        data: {keyword},
-        //dataType: "json",
-        success: function(response) {
-            console.log("Success:\n", response);
+    tabela.hide();
+    changeForm.show();
+    dugme.show();
+//let btn = "<button class='btnEditTrening' data-id=" + trening.id + " data-naziv='" + trening.naziv + "' data-opis='" + trening.opis + "' 
+// data-tip='" + trening.tip_treninga + "' data-trajanje='" + trening.trajanje + "'>Edit Sala</button>";
+    // Vrednosti
+    let id = this.dataset.id;
+    let naziv = this.dataset.naziv;
+    let opis = this.dataset.opis;
+    let tip_treninga = this.dataset.tip;
+    let trajanje = this.dataset.trajanje;
 
-            for (let trening of response) {
-                let row = "<tr>";
-                row += "<td>" + trening.naziv + "</td>";
-                row += "<td>" + trening.opis + "</td>";
-                row += "<td>" + trening.tip_treninga + "</td>";
-                row += "<td>" + trening.trajanje + "</td>";
-                row += "</tr>";
-                
-                $('#content').append(row);
-            }
-        },
-        error: function(response) {
-            console.log("Error:\n", response);
-            alert("Greska - DRUGA");
+
+    let id_input = "<input id='id' type='number' disabled value='" + id + "' />"; 
+    let naziv_input = "<input id='naziv' type='text' value='"+naziv+"' />";
+    let opis_input ="<input id='opis' type='text' value='"+opis+"' />";
+    let tip_treninga_input ="<input id='tip_treninga' type='text' value='"+tip_treninga+"' />";
+    let trajanje_input = "<input id='trajanje' type='number' value='"+trajanje+"' />";
+       
+
+    console.log("APPENDUJEM");
+    $('#input-content').append(id_input); 
+    $('#input-content').append(naziv_input);
+    $('#input-content').append(opis_input);
+    $('#input-content').append(tip_treninga_input);
+    $('#input-content').append(trajanje_input);
+
+});
+
+function changeTrening() {
+    $(document).on("submit", "#changeTermin", function(event) {
+        event.preventDefault();
+
+        let id = $("#id").val();
+        let naziv = $("#naziv").val();
+        let opis = $("#opis").val();
+        let tip_treninga = $("#tip_treninga").val();
+        let trajanje = $("#trajanje").val();
+        //let centar_id = $("#centar_id").val();
+        // let centar_id = document.getElementById('centar-select').value;
+        let uid = sessionStorage.getItem('id');
+
+        let podaci = {
+            naziv,
+            opis,
+            tip_treninga,
+            trajanje
         }
+
+        $.ajax({
+            type: "PUT",
+            url: "http://localhost:8080/api/trening/izmeni/" + uid + "/" + id,
+            contentType: "application/json",
+            data: JSON.stringify(podaci),
+            success: function(response) {
+                console.log("Success:\n" + response);
+                alert("Uspesno izmenjen trening");
+                window.location.reload();
+            },
+            error: function(error) {
+                console.log("ERROR:\n" + error);
+                alert("Greska!");
+            }
+        });
     });
-});
+}
 
-$(document).on("submit", "#searchByCategory", function(event) {
-    event.preventDefault();
+function deleteTrening() {
+    $(document).on("submit", "#treninzi", function(event) {
+        event.preventDefault();
+        
+        let id;
+        $("input:radio[name='odjava']:checked").each(function() {
+            id = parseInt($(this).val());
+        });
+        if (id == null) {alert("Morate izabrati trening koji zelite obrisati"); return;}
+        // if(!check(id)) {return;}
 
-    let contentContainer = $("#content");
-    contentContainer.empty();
-    let parametar;
-    let naziv = $("#naziv").val();
-    let opis = $("#opis").val();
-    let tip = $("#tip").val();
-    let trajanje = $("#trajanje").val();
-
-    console.log("naziv: " + naziv + "\ntrajanje: " + trajanje);
-    // if (naziv != null) {
-    //     parametar = naziv;
-    //     alert("Naziv: " + naziv + "\nParam: " + parametar);
-    // } else if (trajanje != null) {
-    //     parametar = trajanje;
-    //     alert("Trajanje: " + trajanje + "\nParam: " + parametar);
-    // }
-
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/api/trening/lista/pretraga",
-        data: {naziv, opis, tip, trajanje},
-        //dataType: "json",
-        success: function(response) {
-            console.log("Success:\n", response);
-
-            for (let trening of response) {
-                let row = "<tr>";
-                row += "<td>" + trening.naziv + "</td>";
-                row += "<td>" + trening.opis + "</td>";
-                row += "<td>" + trening.tip_treninga + "</td>";
-                row += "<td>" + trening.trajanje + "</td>";
-                row += "</tr>";
-                
-                $('#content').append(row);
+        // alert("Ipak je prosao da brise, id: " + id);
+        
+        $.ajax({
+            type: "DELETE",
+            url: "http://localhost:8080/api/trening/obrisi/" + id,
+            // dataType: "json",
+            success: function(response) {
+                console.log("SUCCESS:\n" + response);
+                window.location.reload();
+            },
+            error: function(response) {
+                console.log("ERROR:\n" + response);
             }
-        },
-        error: function(response) {
-            console.log("Error:\n", response);
-            alert("Greska - DRUGA");
-        }
-    }); 
-});
-
-function sortTable(n) {
-    var table = document.getElementById("treninzi");
-    var rows, i, x, y, count = 0;
-    var switching = true;
-
-    var direction = "ascending";
-
-    while (switching) {
-        switching = false;
-        var rows = table.rows;
-
-        for (i = 1; i < (rows.length - 1); i++) {
-            var Switch = false;
-
-            x = rows[i].getElementsByTagName("TD")[n];
-            y = rows[i+1].getElementsByTagName("TD")[n];
-
-            if (direction == "ascending") {
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()){
-                    Switch = true;
-                    break;
-                }
-            } else if (direction == "descending") {
-                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                    Switch = true;
-                    break;
-                }
-            }
-        }
-        if (Switch) {
-            rows[i].parentNode.insertBefore(rows[i+1], rows[i]);
-            switching = true;
-
-            count++;
-        } else {
-            if (count == 0 && direction == "ascending") {
-                direction = "descending";
-                switching = true;
-            }
-        }
-    }
+        });
+    });
 }

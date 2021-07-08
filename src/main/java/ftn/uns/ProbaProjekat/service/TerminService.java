@@ -12,4 +12,10 @@ public interface TerminService {
 	
 	Termin create(Termin termin) throws Exception;
 	
+	List<Termin> findAllByTrener(Long id);
+	
+	Termin update(Termin termin) throws Exception;
+	
+	public void delete(Long id);
+	
 }

@@ -11,7 +11,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,14 +21,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftn.uns.ProbaProjekat.model.Clan;
 import ftn.uns.ProbaProjekat.model.PrijavaTermina;
+import ftn.uns.ProbaProjekat.model.Sala;
 import ftn.uns.ProbaProjekat.model.Termin;
+import ftn.uns.ProbaProjekat.model.Trening;
 import ftn.uns.ProbaProjekat.model.dto.PrijavaDTO;
 import ftn.uns.ProbaProjekat.model.dto.PrijavaTerminaDTO;
+import ftn.uns.ProbaProjekat.model.dto.TerminDTO;
 import ftn.uns.ProbaProjekat.model.dto.TermingDTO;
 import ftn.uns.ProbaProjekat.service.ClanService;
 import ftn.uns.ProbaProjekat.service.PrijavaTerminaService;
+import ftn.uns.ProbaProjekat.service.SalaService;
 import ftn.uns.ProbaProjekat.service.TerminService;
 import ftn.uns.ProbaProjekat.service.TrenerService;
+import ftn.uns.ProbaProjekat.service.TreningService;
 
 @RestController
 @RequestMapping(value = "/api/termin")
@@ -36,13 +43,17 @@ public class TerminController {
 	private final ClanService clanService;
 	private final PrijavaTerminaService prijavaService;
 	private final TrenerService trenerService;
+	private final TreningService treningService;
+	private final SalaService salaService;
 	
 	@Autowired
-	public TerminController(TerminService terminService, ClanService clanService, PrijavaTerminaService prijavaService, TrenerService trenerService) {
+	public TerminController(TerminService terminService, ClanService clanService, PrijavaTerminaService prijavaService, TrenerService trenerService, TreningService treningService, SalaService salaService) {
 		this.terminService = terminService;
 		this.clanService = clanService;
 		this.prijavaService = prijavaService;
 		this.trenerService = trenerService;
+		this.treningService = treningService;
+		this.salaService = salaService;
 	}
 	
 	// Izlistavanje termina koji se mogu prijaviti
@@ -147,6 +158,7 @@ public class TerminController {
 		return new ResponseEntity<>(prijavaDTOS, HttpStatus.OK);
 	}
 	
+
 	// Lista nadolazecih termina za trenera
 	@GetMapping(
 			value = "/trener/prijavljeni",
@@ -158,7 +170,7 @@ public class TerminController {
 		List<PrijavaTermina> listaTermina = this.prijavaService.findAllById(trener_id);
 		
 		SimpleDateFormat crunchifyDate = new SimpleDateFormat("MMM dd yyyy");
-		SimpleDateFormat crunchifyTime = new SimpleDateFormat("HH:ss");
+		SimpleDateFormat crunchifyTime = new SimpleDateFormat("HH:mm");
 		
 		String datum, vreme;
 		
@@ -233,5 +245,109 @@ public class TerminController {
 		this.prijavaService.delete(id);
 		return new ResponseEntity<>(id, HttpStatus.OK);
 	}
+	
+	@GetMapping(
+			value = "/lista/{id}",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<TerminDTO>> listTermins(@PathVariable Long id) {
+		List<TerminDTO> terminDTOS = new ArrayList<>();
+		List<Termin> listaTermina = this.terminService.findAllByTrener(id);
+		
+		SimpleDateFormat crunchifyDate = new SimpleDateFormat("MMM dd yyyy");
+		SimpleDateFormat crunchifyTime = new SimpleDateFormat("HH:mm");
+
+		String datum, vreme;
+		long epoha;
+		long epoha_kraj;
+		
+		for (Termin termin : listaTermina) {
+			datum = crunchifyDate.format(termin.getPocetak());
+			vreme = crunchifyTime.format(termin.getPocetak());
+			epoha = termin.getPocetak().getTime();
+			epoha_kraj = termin.getKraj().getTime();
+			TerminDTO terminDTO = new TerminDTO(
+					termin.getId(),
+					termin.getTrening().getNaziv(),
+					termin.getTrening().getTrajanje(),
+					termin.getCena(),
+					vreme,
+					datum,
+					termin.getSala().getId(),
+					termin.getSala().getOznaka());
+			terminDTOS.add(terminDTO);
+		}
+		
+		return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
+	}
+	
+	@PutMapping(
+			value = "/izmeni/{id}",
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> izmeniTermin(@PathVariable Long id, @RequestBody TerminDTO terminDTO) throws Exception {
+		Termin termin = this.terminService.findOne(id);
+		//System.out.println("ID: " + id);
+		Trening trening = this.treningService.findOne(termin.getTrening().getId());
+		
+		Sala sala = this.salaService.findOne(terminDTO.getTrening_id());
+		
+		Termin terminT;
+//		
+		if (termin == null || trening == null || sala == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		System.out.println("EPOHA: " + terminDTO.getEpoha());
+		//long epoha = terminDTO.getEpoha();
+		if (terminDTO.getEpoha() != 0l) {
+			System.out.println("Epoha nije nula");
+			Timestamp novPocetak= new Timestamp(terminDTO.getEpoha() * 1000l);
+			Timestamp novKraj = new Timestamp(terminDTO.getEpoha() + ((long)trening.getTrajanje() * 3600000l));
+			//	public Termin(Long id, Timestamp pocetak, Timestamp kraj, Double cena, Sala sala, Trening trening) {
+			terminT = new Termin(id, novPocetak, novKraj, terminDTO.getCena(), sala, trening);
+		} else {
+			terminT = new Termin(id, termin.getPocetak(), termin.getKraj(), terminDTO.getCena(), sala, trening);
+		}
+		Termin updatedTermin = this.terminService.update(terminT);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+		//Termin = new Termin(id, terminDTO.getCena())
+	}
+	
+	@DeleteMapping(value="/obrisi/{id}")
+	public ResponseEntity<Void> obrisiTermin(@PathVariable Long id) throws Exception {
+		Termin termin = this.terminService.findOne(id);
+		
+		if (termin == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		this.terminService.delete(id);
+		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

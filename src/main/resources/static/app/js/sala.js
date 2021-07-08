@@ -75,7 +75,7 @@ $(document).on('click', '.btnEditSala', function(event) {
             alert("doslo do greske prilikom pribavljanja fitnes centara");
         }
     })
-    console.log("Zavrsio s apendovanjem");
+    //console.log("Zavrsio s apendovanjem");
 });
 
 function changeS() {
@@ -97,7 +97,7 @@ function changeS() {
 
         $.ajax({
             type: "PUT",
-            url: "http://localhost:8080/api/sala/izmeni/" + id,
+            url: "http://localhost:8080/api/termin/izmeni/" + id,
             contentType: "application/json",
             data: JSON.stringify(podaci),
             success: function(response) {

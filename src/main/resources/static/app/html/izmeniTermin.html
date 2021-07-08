@@ -1,0 +1,169 @@
+<!-- Lista nadolazecih treninga - Feature za trenere -->
+<!-- Clan_Ime_Prezime | Termin_Vreme_Datum_Sala | Opcija 'zavrsenja' treninga -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf8"/>
+        <title>Lista FCa | Fitness-Centar</title>
+        <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/centar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">
+
+        <style>
+            .styled-table .button {
+                margin-top: .7em;
+                margin-left: auto;
+                width: 8%;
+                height: 40px;
+                background:rgb(165, 164, 164);
+                color: white;
+                box-sizing: border-box;
+                border-radius: 5px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.15);
+                border: 1px solid #dddddd;
+
+                /* border: 1px solid #353030; */
+                /* margin-right: auto; */
+                /* width: 100%; */
+            }
+            .styled-table .button:hover {
+                background-color: rgb(185, 181, 181);
+                color: white;
+            }
+
+            .header .back-btn {
+                width: 20%;
+                height: 40px;
+                background:rgb(165, 164, 164);
+                color: white;
+                box-sizing: border-box;
+                border-radius: 5px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.15);
+                border: 1px solid #dddddd;
+            }
+
+            .header .back-btn:hover {
+                background-color: rgb(185, 181, 181);
+                color: white;
+            }
+
+            .change-block select {
+                background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 94% 20%;
+                width: 90%;
+                height: 42px;
+                box-sizing: border-box;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                margin-bottom: 20px;
+                font-size: 17px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                padding: 0 5px 0 5px;
+                outline: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                background-color: white;
+                border-color: black;
+            }
+
+        </style>
+
+        <script src="../../assets/js/jquery.min.js"></script>
+         <script src="../js/izmeni_termin.js"></script>
+        <!-- <script src="../js/admin.js"></script> --> 
+        <script src="../js/login.js"></script>
+        <script src="../js/logged.js"></script>
+        <script src="../js/logout.js"></script>
+        <script>
+            function back() {
+                document.getElementById('allTreninzi').show();
+                document.getElementById('addTermin').hide();
+                document.getElementsByClassName('back-btn').hide();
+            }
+        </script>
+    </head>
+    <body id="centriBody">
+        <div class="navbar">
+            <a href="../../index.html">Fitness Centar</a>
+            
+            <span class="login" hidden><a onclick="logout()" href="../../index.html" class="right">Logout</a> </span>
+            <span class="login" hidden><a href="#" class="right">Profile</a></span>
+            <span class="logout"><a href="./login.html" class="right">Login</a></span>
+            <span class="logout"><a href="./register.html" class="right">Register</a></span>
+            <a href="./listaTerminga.html" class="right">Workouts</a>
+            <a href="../../index.html" class="right">Home</a>
+        </div>
+
+        <div class="header">
+            <div class="logged-navbar" hidden>
+                <!-- <a>Fitness Centar</a> -->
+                <span id="user" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <a href="./odradjeniTermini.html" class="right">Odradjeni</a>
+                    <a href="./prijavljeniTermini.html" class="right">Prijavljeni</a>
+                </span>
+                <span id="trener" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <!-- <a href="#" class="right">Odjavi</a> -->
+                    <a href="./upcomingTrening.html" class="right">Raspored</a>
+                    <a href="./listTrenings.html" class="right">Trening</a>
+                    <a href="./mojiTreninzi.html" class="right">Dodaj</a>
+                    <a id="active" href="#" class="right">Izmeni</a>
+                </span>
+                <span id="admin" hidden>
+                    <a href="#">Kontrolni Panel Centra</a>
+                    <a href="./odobriTrenera.html" class="right">Trener</a>
+                    <a href="./listaSala.html" class="right">Sala</a>
+                    <a href="./obrisiCentar.html" class="right">Centar</a>
+                </span>
+
+            </div>
+            <form class="termin-block" id="termini">
+                <div class="styled-table">
+                    <table class="tabela" id="allTermini" style="margin-top: 2%">
+                        <thead>    
+                            <tr>
+                                <!-- <th>ID</th> -->
+                                <th>Naziv</th>
+                                <th>Trajanje</th>
+                                <th>Cena</th>
+                                <th>Vreme</th>
+                                <th>Datum</th>
+                                <th>Sala</th>
+                                <th>Delete</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody id="content">
+                        </tbody>
+                    </table>
+                    <input class="button" onclick="deleteTermin()" type="submit" value="Ukloni"/>
+                </div>
+            </form>
+
+            <button class="back-btn" onclick="window.location.reload()" hidden>Back</button>
+            <form class="change-block" id="changeTermin" hidden>
+                <!-- <div class="centar-block"> -->
+                <h1>Edit Termin</h1>
+                <div id="input-content">
+                </div>
+                <div id="input-sale">
+                    <select name="sala-select" id="sala-select">
+                    </select>
+                </div>
+                <input class="button" onclick="changeTermin()" type="submit" value="Edit"/>
+
+            </form>
+        </div>
+
+        <div class="footer-content">
+            <footer class="footer">
+                <div class="container">
+                    <!-- <script src="../js/footer.js"></script> -->
+                    <p>Copyright &copy; Stefan Matkovic 2021</p>
+                </div>
+            </footer>
+            
+        </div>
+
+    </body>
+</html>

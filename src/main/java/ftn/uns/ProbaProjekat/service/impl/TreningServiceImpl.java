@@ -17,14 +17,9 @@ public class TreningServiceImpl implements TreningService {
 	
 	
 	@Override
-	public List<Trening> findAll(String keyword) {
-		if (keyword == null) {
-			System.out.println("Usao u findALL");
-			List<Trening> treninzi = this.treningRepo.findAll();
-			return treninzi;
-		}
-		System.out.println();
-		List<Trening> treninzi = this.treningRepo.search(keyword);
+	public List<Trening> findAll() {
+		System.out.println("Usao u findALL");
+		List<Trening> treninzi = this.treningRepo.findAll();
 		return treninzi;
 	}
 
@@ -75,6 +70,29 @@ public class TreningServiceImpl implements TreningService {
 	public Trening findOne(Long id) {
 		Trening trening = this.treningRepo.getOne(id);
 		return trening;
+	}
+
+
+	@Override
+	public Trening update(Trening trening) throws Exception {
+		Trening treningToUpdate = this.treningRepo.getOne(trening.getId());
+		if (treningToUpdate == null) {
+			throw new Exception("Trening ne postoji");
+		}
+		
+		treningToUpdate.setNaziv(trening.getNaziv());
+		treningToUpdate.setOpis(trening.getOpis());
+		treningToUpdate.setTip_treninga(trening.getTip_treninga());
+		treningToUpdate.setTrajanje(trening.getTrajanje());
+		
+		Trening savedTrening = this.treningRepo.save(treningToUpdate);
+		return savedTrening;
+	}
+
+
+	@Override
+	public void delete(Long id) {
+		this.treningRepo.deleteById(id);
 	}
 	
 }

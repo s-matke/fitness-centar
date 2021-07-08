@@ -38,4 +38,32 @@ public class TerminServiceImpl implements TerminService {
 		return termin;
 	}
 
+	@Override
+	public List<Termin> findAllByTrener(Long id) {
+		List<Termin> listaTermina = this.terminRepo.findAllByTrener(id);
+		return listaTermina;
+	}
+
+	@Override
+	public Termin update(Termin termin) throws Exception {
+		Termin terminToUpdate = this.terminRepo.getOne(termin.getId());
+		if (terminToUpdate == null) {
+			throw new Exception("Termin ne postoji");
+		}
+		
+		terminToUpdate.setCena(termin.getCena());
+		terminToUpdate.setPocetak(termin.getPocetak());
+		terminToUpdate.setKraj(termin.getKraj());
+		terminToUpdate.setSala(termin.getSala());
+		terminToUpdate.setTrening(termin.getTrening());
+		
+		Termin savedTermin = this.terminRepo.save(terminToUpdate);
+		return savedTermin;
+	}
+
+	@Override
+	public void delete(Long id) {
+		this.terminRepo.deleteById(id);
+	}
+
 }

@@ -26,7 +26,7 @@ $(document).on("submit", "#addTrening", function(event) {
         success: function(response) {
             console.log(response);
             alert("Uspesno dodat novi trening");
-            window.location.href = "../../index.html";
+            window.location.href = "./listTrenings.html";
         },
         error: function(error) {
             console.log(error);
