@@ -17,8 +17,18 @@ public class ClanDTO {
 	private Boolean status;
 	private String tip_korisnika;
 	
+	private String fullname;
+	
 	public ClanDTO() {
 		
+	}
+	
+	public ClanDTO(String userName, String fullname, String email, String telefon, String role) {
+		this.userName = userName;
+		this.fullname = fullname;
+		this.email = email;
+		this.telefon = telefon;
+		this.role = role;
 	}
 	
 	public ClanDTO(Long id, String userName, String lozinka, String ime, String prezime, String email,
@@ -138,6 +148,14 @@ public class ClanDTO {
 
 	public void setTip_korisnika(String tip_korisnika) {
 		this.tip_korisnika = tip_korisnika;
+	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 	
 

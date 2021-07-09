@@ -70,4 +70,9 @@ public class OdradjenTerminServiceImpl implements OdradjenTerminService {
 		return odradjen;
 	}
 
+	@Override
+	public List<OdradjenTermin> findAll(Long id) {
+		return this.odradjenRepo.findAllByOcene(id);
+	}
+
 }

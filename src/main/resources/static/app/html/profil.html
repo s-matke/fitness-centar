@@ -1,15 +1,108 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pocetna Strana | Fitness Centar</title>
-        <meta charset="utf-8" />
+        <meta charset="utf8"/>
+        <title>Login | Fitness-Centar</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/login.css">
+        <!-- <link rel="stylesheet" type="text/css" href="../../assets/css/centar.css"> -->
+        <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">     
         <script src="../../assets/js/jquery.min.js"></script>
-        <script src="../js/korisnik.js"></script>
         <script src="../js/login.js"></script>
+        <script src="../js/logged.js"></script>
+        <script src="../js/logout.js"></script>
+        <!-- <script src="../js/footer.js"></script> -->
+        <script>
+            $(document).ready(function() {
+                let id = sessionStorage.getItem('id');
+                let role = sessionStorage.getItem('role').toLowerCase();
+
+                // let role = rolee.toLowerCase;
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/api/" + role + "/profil/" + id,
+                    dataType: "json",
+                    success: function(response) {
+                        let username_input = "<input disabled type='text' value='" + response.userName + "' />";
+                        let fullname_input = "<input disabled type='text' value='" + response.fullname + "' />";
+                        let email_input = "<input disabled type='email' value='" + response.email + "'/>";
+                        let telefon_input = "<input disabled type='text' value='" + response.telefon + "'/>";
+                        let role_input = "<input disabled type='text' value='" + response.role + "'/>";
+                        $("#content").append(username_input);
+                        $("#content").append(fullname_input);
+                        $("#content").append(email_input);
+                        $("#content").append(telefon_input);
+                        $("#content").append(role_input);
+                        
+                        if (response.role === "Trener") {
+                            let avgOcena_input = "<input type='number' step='0.01' value='" + response.avgOcena + "'/>";
+                            $("#content").append(avgOcena_input);
+                        }
+                    }
+                });
+            });
+        </script>
     </head>
+
     <body>
-        <div>
-            <input type="button" onclick='prikazKorisnika()', value="Info" />
+
+        <div class="navbar">
+            <a href="../../index.html">Fitness Centar</a>
+
+            <span class="login" hidden><a onclick="logout()" href="../../index.html" class="right">Logout</a> </span>
+            <span class="login" hidden><a href="#" class="right">Profile</a></span>
+            <span class="logout"><a href="./login.html" class="right">Login</a></span>
+            <span class="logout"><a href="./register.html" class="right">Register</a></span>
+            <a id="active" href="#" class="right">Workouts</a>
+            <a href="../../index.html" class="right">Home</a>
+        </div>
+
+
+        <div class="header">
+            
+            <div class="logged-navbar" hidden>
+                <!-- <a>Fitness Centar</a> -->
+                <span id="user" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <a href="./odradjeniTermini.html" class="right">Odradjeni</a>
+                    <a href="./prijavljeniTermini.html" class="right">Prijavljeni</a>
+                </span>
+                <span id="trener" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <!-- <a href="#" class="right">Odjavi</a> -->
+                    <a href="./upcomingTrening.html" class="right">Raspored</a>
+                    <a href="./listTrenings.html" class="right">Trening</a>
+                    <a href="./izmeniTermin.html" class="right">Termin</a>
+                </span>
+                <span id="admin" hidden>
+                    <a href="#">Kontrolni Panel</a>
+                    <a href="./odobriTrenera.html" class="right">Trener</a>
+                    <a href="./listaSala.html" class="right">Sala</a>
+                    <a href="./obrisiCentar.html" class="right">Centar</a>
+                </span>
+            </div>
+
+            <form id="loginForm">    
+                <div class="login-block">
+                    <h1>Profile</h1>
+                    <input placeholder="Test" value="" id="password"/>
+                    <div id="content">
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="footer-content">
+            <footer class="footer">
+                <div class="container">
+                    <!-- <script src="../js/footer.js"></script> -->
+                    <p>Copyright &copy; Stefan Matkovic 2021</p>
+                </div>
+            </footer>            
         </div>
     </body>
 </html>

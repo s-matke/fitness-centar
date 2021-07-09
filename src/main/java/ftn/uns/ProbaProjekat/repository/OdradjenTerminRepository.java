@@ -16,4 +16,7 @@ public interface OdradjenTerminRepository extends JpaRepository<OdradjenTermin, 
 	@Query("SELECT t FROM OdradjenTermin t WHERE t.clan.id = ?1 AND t.ocena IS NULL")
 	public List<OdradjenTermin> findAllByUngradedClan(Long id);
 	
+	@Query("SELECT t FROM OdradjenTermin t WHERE t.trener.id = ?1 AND t.ocena IS NOT NULL")
+	public List<OdradjenTermin> findAllByOcene(Long id);
+	
 }

@@ -1,5 +1,6 @@
 package ftn.uns.ProbaProjekat.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,21 @@ public class TerminServiceImpl implements TerminService {
 	@Override
 	public void delete(Long id) {
 		this.terminRepo.deleteById(id);
+	}
+
+	@Override
+	public List<Termin> search(String naziv, String tip_treninga, String opis, Double cenaOd, Double cenaDo, Timestamp dateStart, Timestamp dateEnd) {
+		if (naziv != null) {
+			naziv = '%' + naziv + '%';
+		}
+		if (tip_treninga != null) {
+			tip_treninga = '%' + tip_treninga + '%';
+		}
+		if (opis != null) {
+			opis = '%' + opis + '%';
+		}
+		List<Termin> listaTermina = this.terminRepo.search(naziv, tip_treninga, opis, cenaOd, cenaDo, dateStart, dateEnd);
+		return listaTermina;
 	}
 
 }

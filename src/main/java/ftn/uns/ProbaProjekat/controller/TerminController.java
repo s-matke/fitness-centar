@@ -1,5 +1,6 @@
 package ftn.uns.ProbaProjekat.controller;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -440,32 +441,137 @@ public class TerminController {
 		
 		OdradjenTermin updatedOdradjen = this.odradjenService.update(nodradjen);
 		System.out.println("Nova Ocena: " + updatedOdradjen.getOcena());
+		
+		Trener trener = odradjen.getTermin().getTrening().getTrener();
+		
+		List<OdradjenTermin> ocenjeniTermini = this.odradjenService.findAll(trener.getId());
+		
+		Double avgOcena = 0.0;
+		for (OdradjenTermin ocenjeno : ocenjeniTermini) {
+			avgOcena += ocenjeno.getOcena();
+		}
+		
+		avgOcena = avgOcena / ocenjeniTermini.size();
+		
+		trener.setAvgOcena(avgOcena);
+		
+		this.trenerService.update(trener);
+		
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@SuppressWarnings("deprecation")
+	@GetMapping(
+			value = "/pretraga",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<TermingDTO>> search(
+			@RequestParam(required=false) Long id,
+			@RequestParam(required=false) String naziv,
+			@RequestParam(required=false) String tip_treninga,
+			@RequestParam(required=false) String opis,
+			@RequestParam(required=false) Double cenaOd,
+			@RequestParam(required=false) Double cenaDo,
+			@RequestParam(required=false) long epoha)
+	{
+//		System.out.println("Naziv: " + naziv + "\nTip: " + tip_treninga + "\nOpis: " + opis + "\nCena: " + cena + "\nDatum: " + date);
+		List<TermingDTO> termingDTOS= new ArrayList<>();
+		List<Termin> listaTermina;
+		List<PrijavaTermina> listaPrijavljenihTermina = this.prijavaService.findByClan(id);
+		
+		System.out.println("Datum: " + epoha);
+//		long epoha = termin.getPocetak().getTime() + ((long)termin.getTrening().getTrajanje() * 3600000l);
+//		Timestamp novo =  new Timestamp(epoha);
+		
+		Timestamp novo = new Timestamp(epoha);
+		
+//		System.out.println("Time: " + novo);
+		Timestamp beginning = new Timestamp(0l);
+		
+		// _----_-----__--------
+				
+		//System.out.println("Long: " + date);
+		if (naziv != null || tip_treninga != null || opis != null || cenaOd != null || cenaDo != null || novo.equals(beginning) || novo.after(beginning)) {
+			Timestamp dateStart = null;
+			Timestamp dateEnd = null;
+			
+//			System.out.println("Beginning: " + beginning);
+			
+			if (novo.equals(beginning)) {
+				dateStart = new Timestamp(novo.getTime());
+				dateEnd = new Timestamp(System.currentTimeMillis() * 2l);
+				
+//				System.out.println("Datum Pocetak: " + dateStart);
+//				System.out.println("Datum End: " + dateEnd);
+			}
+			else {
+				dateStart = new Timestamp(novo.getTime() * 1000l);
+				dateEnd = new Timestamp((novo.getTime() * 1000l) + (1l * 24l * 60l * 60l * 1000l));
+//				System.out.println("Datum Pocetak: " + dateStart);
+//				System.out.println("Datum End: " + dateEnd);
+			}
+//			System.out.println("Usao u search");
+			listaTermina = this.terminService.search(naziv, tip_treninga, opis, cenaOd, cenaDo, dateStart, dateEnd);
+		}
+		else {
+			listaTermina = this.terminService.findAll();
+		}
+		// Jednostavniji ispis datum-a i vremen-a korisniku
+		SimpleDateFormat crunchifyDate = new SimpleDateFormat("MMM dd yyyy");
+		SimpleDateFormat crunchifyTime = new SimpleDateFormat("HH:mm");
+		
+		// trenutno vreme u formatu timestamp-a
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		
+		boolean preskoci = false;
+		String datum;
+		String vreme;
+		
+		for (Termin termin : listaTermina) {
+			// Proveravamo da li je nekom od trenera status promenjen na false, cime im se zabranjuje pristu sajtu (TODO: obrisati termine prilikom promene statusa?)
+			// takodje, proveravamo da li je neki od termina zavrsen "vremenski
+//			if (termin.getTrening().getTrener().getStatus() == false || termin.getPocetak().getTime() < now.getTime()) {
+//				continue;
+//			}
+			
+			datum = crunchifyDate.format(termin.getPocetak());
+			vreme = crunchifyTime.format(termin.getPocetak());
+			
+			TermingDTO termingDTO = new TermingDTO(
+					termin.getTrening().getNaziv(),
+					termin.getTrening().getOpis(),
+					termin.getTrening().getTip_treninga(),
+					termin.getTrening().getTrajanje(),
+					datum,
+					vreme,
+					termin.getCena(),
+					termin.getTrening().getTrener().getIme() + " " + termin.getTrening().getTrener().getPrezime(),
+					termin.getTrening().getTrener().getFitnessCentar().getNaziv(),
+					termin.getSala().getOznaka(),
+					termin.getId());
+			
+			// Provera da li je clan vec prijavljen na neki od termina
+			if (id != null) {
+				for (PrijavaTermina prijava : listaPrijavljenihTermina) {
+					if (prijava.getTermin().getId() == termin.getId()) {
+						preskoci = true;
+					}
+				}
+			}
+			
+			if (preskoci == false) {
+				termingDTOS.add(termingDTO);
+			}
+			preskoci = false;
+		}
+		
+		if (termingDTOS.size() == 0) {
+			return new ResponseEntity<>(termingDTOS, HttpStatus.BAD_REQUEST);
+		}
+		
+		return new ResponseEntity<>(termingDTOS, HttpStatus.OK);
+//
+	}
+		
 
 }

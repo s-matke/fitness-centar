@@ -17,4 +17,6 @@ public interface OdradjenTerminService {
 	
 	OdradjenTermin findOne(Long id);
 
+	List<OdradjenTermin> findAll(Long id);
+	
 }

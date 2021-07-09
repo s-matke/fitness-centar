@@ -18,7 +18,18 @@ public class TrenerDTO {
 	private String tip_korisnika;
 	private Long fitnessCentar_id;
 	
+	private String fullname;
+	
 	public TrenerDTO() {
+	}
+	
+	public TrenerDTO(String userName, String fullname, String email, String telefon, String role, Double avgOcena) {
+		this.userName = userName;
+		this.fullname = fullname;
+		this.email = email;
+		this.telefon = telefon;
+		this.role = role;
+		this.avgOcena = avgOcena;
 	}
 	
 	public TrenerDTO(Long id, String userName, String lozinka, String ime, String prezime, String email,
@@ -169,6 +180,14 @@ public class TrenerDTO {
 
 	public void setFitnessCentar_id(Long fitnessCentar_id) {
 		this.fitnessCentar_id = fitnessCentar_id;
+	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 	
 }
