@@ -26,6 +26,7 @@ import ftn.uns.ProbaProjekat.model.Sala;
 import ftn.uns.ProbaProjekat.model.Termin;
 import ftn.uns.ProbaProjekat.model.Trener;
 import ftn.uns.ProbaProjekat.model.Trening;
+import ftn.uns.ProbaProjekat.model.dto.OdradjenTerminDTO;
 import ftn.uns.ProbaProjekat.model.dto.PrijavaDTO;
 import ftn.uns.ProbaProjekat.model.dto.PrijavaTerminaDTO;
 import ftn.uns.ProbaProjekat.model.dto.TerminDTO;
@@ -339,24 +340,25 @@ public class TerminController {
 	public ResponseEntity<Void> zavrsiTermin(@PathVariable Long id) throws Exception {
 		PrijavaTermina prijava = this.prijavaService.findOne(id);
 		
-		System.out.println("Termin Cena: " + prijava.getTermin().getCena() + 
-				"\nClan: " + prijava.getClan().getIme() + " " + prijava.getClan().getPrezime());
+//		System.out.println("Termin Cena: " + prijava.getTermin().getCena() + 
+//				"\nClan: " + prijava.getClan().getIme() + " " + prijava.getClan().getPrezime());
 		
-		System.out.println("Pronasao prijavu");
+//		System.out.println("Pronasao prijavu");
 		
+		// uncomment
 //		if (prijava == null) {
 //			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //		}
 		
-		System.out.println("Prijava postoji");
+//		System.out.println("Prijava postoji");
 		
 		Timestamp now = new Timestamp(System.currentTimeMillis());	// trenutno vreme
-		System.out.println("Trenutna epoha: " + now.getTime() + "Kraj termina: " + prijava.getTermin().getKraj().getTime());
+		//System.out.println("Trenutna epoha: " + now.getTime() + "Kraj termina: " + prijava.getTermin().getKraj().getTime());
 //		if (prijava.getTermin().getKraj().getTime() > now.getTime()) {
 //			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);			
 //		}
 		
-		System.out.println("Vreme je korektno");
+		//System.out.println("Vreme je korektno");
 		
 //		Termin termin = prijava.getTermin();
 		Termin termin = prijava.getTermin();
@@ -366,15 +368,79 @@ public class TerminController {
 		//Double ocena = 2.0;
 		
 		OdradjenTermin odradjenTermin = new OdradjenTermin(null, termin, trener, clan);
-		System.out.println("Napravljen odradjen termin");
+//		System.out.println("Napravljen odradjen termin");
 		OdradjenTermin noviOdradjen =  this.odradjenService.create(odradjenTermin);
 		
-		System.out.println("Clan: " + noviOdradjen.getClan().getIme() + " " + noviOdradjen.getClan().getPrezime() + "\nOdradio trening: " + noviOdradjen.getTermin().getTrening().getNaziv());
+//		System.out.println("Clan: " + noviOdradjen.getClan().getIme() + " " + noviOdradjen.getClan().getPrezime() + "\nOdradio trening: " + noviOdradjen.getTermin().getTrening().getNaziv());
 		
 //		this.prijavaService.delete(id);
 		
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.CREATED);	
+	}
+	
+	@GetMapping(
+			value = "/odradjen/{id}",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<OdradjenTerminDTO>> listaOdradjenih(@PathVariable Long id) {
+		Clan clan = this.clanService.findOne(id);
+		List<OdradjenTerminDTO> odradjenDTOS = new ArrayList<>();
+		List<OdradjenTermin> listaOdradjenih = this.odradjenService.findByGradedClan(id);
 		
+		SimpleDateFormat crunchifyDate = new SimpleDateFormat("MMM dd yyyy");
+		String datum;
+		
+		for (OdradjenTermin odradjen : listaOdradjenih) {
+			datum = crunchifyDate.format(odradjen.getTermin().getPocetak());
+			System.out.println("Odradjen: " + odradjen.getTermin().getTrening().getNaziv());
+			System.out.println("Velicina: " + odradjen.getClan().getIme());
+			OdradjenTerminDTO odradjenDTO = new OdradjenTerminDTO(
+					odradjen.getTermin().getTrening().getNaziv(),
+					odradjen.getTermin().getTrening().getTip_treninga(),
+					datum,
+					odradjen.getTermin().getTrening().getTrener().getIme() + " " + odradjen.getTermin().getTrening().getTrener().getPrezime(),
+					odradjen.getOcena());
+			odradjenDTOS.add(odradjenDTO);
+		}
+		return new ResponseEntity<>(odradjenDTOS, HttpStatus.OK);		
+	}
+	
+	@GetMapping(
+			value = "/odradjen-neocenjen/{id}",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<OdradjenTerminDTO>> listaNeocenjenih(@PathVariable Long id) {
+//		Clan clan = this.clanService.findOne(id);
+		List<OdradjenTerminDTO> odradjenDTOS = new ArrayList<>();
+		List<OdradjenTermin> listaOdradjenih = this.odradjenService.findByUngradedClan(id);
+		
+		SimpleDateFormat crunchifyDate = new SimpleDateFormat("MMM dd yyyy");
+		String datum;
+		
+		for (OdradjenTermin odradjen : listaOdradjenih) {
+			datum = crunchifyDate.format(odradjen.getTermin().getPocetak());
+			OdradjenTerminDTO odradjenDTO = new OdradjenTerminDTO(
+					odradjen.getId(),
+					odradjen.getTermin().getTrening().getNaziv(),
+					odradjen.getTermin().getTrening().getTip_treninga(),
+					datum,
+					odradjen.getTermin().getTrening().getTrener().getIme() + " " + odradjen.getTermin().getTrening().getTrener().getPrezime(),
+					odradjen.getOcena());
+			odradjenDTOS.add(odradjenDTO);
+		}
+		return new ResponseEntity<>(odradjenDTOS, HttpStatus.OK);
+	}
+	
+	@PutMapping(value = "/oceni/{id}")
+	public ResponseEntity<Void> oceniTrening(@PathVariable Long id, @RequestParam(required=true) Double ocena) throws Exception {
+		OdradjenTermin odradjen = this.odradjenService.findOne(id);
+		if (odradjen == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		OdradjenTermin nodradjen = new OdradjenTermin(id, ocena, odradjen.getTermin(), odradjen.getTermin().getTrening().getTrener(), odradjen.getClan());
+		
+		OdradjenTermin updatedOdradjen = this.odradjenService.update(nodradjen);
+		System.out.println("Nova Ocena: " + updatedOdradjen.getOcena());
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	

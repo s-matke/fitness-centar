@@ -1,0 +1,208 @@
+<!-- Lista nadolazecih treninga - Feature za trenere -->
+<!-- Clan_Ime_Prezime | Termin_Vreme_Datum_Sala | Opcija 'zavrsenja' treninga -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf8"/>
+        <title>Lista Treninga | Fitness-Centar</title>
+        <link rel="stylesheet" type="text/css" href="../../assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/centar.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/footer.css">
+   
+
+        <script src="../../assets/js/jquery.min.js"></script>
+        <script src="../js/login.js"></script>
+        <script src="../js/logged.js"></script>
+        <script src="../js/logout.js"></script>
+        <script>
+            $(document).ready(function() {
+                let id = sessionStorage.getItem('id');
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/api/termin/odradjen-neocenjen/" + id,
+                    dataType: "json",
+                    success: function(response) {
+                        console.log("Success:\n" + response);
+                        for (let odradjen of response) {
+                            console.log("Naziv: " + odradjen.naziv + "\nTip: " + odradjen.tip_treninga + "\nDatum: " + odradjen.datum + "\nTrener: " + odradjen.fullname + "\nOcena: " + odradjen.ocena);
+                            let row = "<tr>";
+                            row += "<td>" + odradjen.naziv + "</td>";
+                            row += "<td>" + odradjen.tip_treninga + "</td>";
+                            row += "<td>" + odradjen.datum + "</td>";
+                            row += "<td>" + odradjen.fullname + "</td>";
+                            let btn = "<button class='btnOceni' data-id='" + odradjen.id + "'>Oceni</button>";
+                            row += "<td>" + btn + "</td>";
+                            row += "</tr>";
+
+                            $('#content').append(row);
+                        }
+                    },
+                    error: function(error) {
+                        alert("greska:\n" + error + "\n" + error.status);
+                    }
+                })
+            });
+
+            $(document).on('click', '.btnOceni', function(event) {
+                event.preventDefault();
+
+                var tabela = $(".termin-block");
+                var changeForm = $(".change-block");
+                var dugme = $(".back-btn");
+
+                tabela.hide();
+                changeForm.show();
+                dugme.show();
+
+                let id = this.dataset.id;
+                let id_input = "<input id='id' type='number' disabled value='" + id + "' />";
+
+                $('#input-content').append(id_input);
+            });
+
+            function oceni() {
+                $(document).on("submit", "#changeOcena", function(event) {
+                    event.preventDefault();
+
+                    let id = $('#id').val();
+                    let ocena = $('#ocena').val();
+
+                    $.ajax({
+                        type: "PUT",
+                        url: "http://localhost:8080/api/termin/oceni/" + id,
+                        data: {ocena},
+                        success: function(response){ 
+                            console.log("Success:\n" + response);
+                            alert("Uspesno ocenjen trening");
+                            window.location.reload();
+                        },
+                        erro: function(error) {
+                            console.log("ERROR:\n" + error);
+                            alert("Greska");
+                        }
+                    });
+                });
+            }
+        </script>
+
+        <style>
+             .termin-block .button {
+                margin-top: .7em;
+                margin-left: auto;
+                width: 8%;
+                height: 40px;
+                background:rgb(165, 164, 164);
+                color: white;
+                box-sizing: border-box;
+                border-radius: 5px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.15);
+                border: 1px solid #dddddd;
+
+                /* border: 1px solid #353030; */
+                /* margin-right: auto; */
+                /* width: 100%; */
+            }
+            .termin-block .button:hover {
+                background-color: rgb(185, 181, 181);
+                color: white;
+            }
+
+            .header .back-btn {
+                width: 20%;
+                height: 40px;
+                background:rgb(165, 164, 164);
+                color: white;
+                box-sizing: border-box;
+                border-radius: 5px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.15);
+                border: 1px solid #dddddd;
+            }
+
+            .header .back-btn:hover {
+                background-color: rgb(185, 181, 181);
+                color: white;
+            }
+        </style>
+
+    </head>
+    <body>
+        
+        <div class="navbar">
+            <a href="../../index.html">Fitness Centar</a>
+            
+            <span class="login" hidden><a onclick="logout()" href="../../index.html" class="right">Logout</a> </span>
+            <span class="login" hidden><a href="#" class="right">Profile</a></span>
+            <span class="logout"><a href="./login.html" class="right">Login</a></span>
+            <span class="logout"><a href="./register.html" class="right">Register</a></span>
+            <a href="./listaTerminga.html" class="right">Workouts</a>
+            <a href="../../index.html" class="right">Home</a>
+        </div>
+        <div class="header">
+            <div class="logged-navbar" hidden>
+                <!-- <a>Fitness Centar</a> -->
+                <span id="user" hidden>
+                    <a href="#">Kontrolni Panel Termina</a>
+                    <a id="active" href="#" class="right">Neocenjeni</a>
+                    <a href="./odradjeniTermini.html" class="right">Zavrseni</a>
+                    <a href="./prijavljeniTermini.html" class="right">Prijavljeni</a>
+                </span>
+                <span id="trener" hidden>
+                    <a href="#">Raspored Termina</a>
+                    <!-- <a href="#" class="right">Odjavi</a> -->
+                    <a id="active" href="#" class="right">Raspored</a>
+                    <a href="./listTrenings.html" class="right">Trening</a>
+                    <a href="./izmeniTermin.html" class="right">Termin</a>
+                </span>
+                <span id="admin" hidden>
+                    <a href="#">Kontrolni Panel Centra</a>
+                    <a href="./odobriTrenera.html" class="right">Treneri</a>
+                    <a href="./dodajCentar.html" class="right">Centar</a>
+                </span>
+
+            </div>
+            <div>
+                <h2></h2>
+            </div>
+            <br/>
+            <form class="termin-block" id="zavrseni-termini">
+                <div class="styled-table">
+                    <table class="tabela" id="infotrening">
+                        <thead>    
+                            <tr>
+                                <th>Naziv</th>
+                                <th>Tip</th>
+                                <th>Datum</th>
+                                <th>Trener</th>
+                                <th>Ocena</th>
+                            </tr>
+                        </thead>
+                        <tbody id="content">
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+
+            <button class="back-btn" onclick="window.location.reload()" hidden>Back</button>
+            <form class="change-block" id="changeOcena" hidden>
+                <!-- <div class="centar-block"> -->
+                <h1>Oceni Trening</h1>
+                <div id="input-content">
+                </div>
+                <input id="ocena" type="number" step=0.01 min=0 required/>
+                <input class="button" onclick="oceni()" type="submit" value="Confirm"/>
+
+            </form>
+        </div>
+        
+        <div class="footer-content">
+            <footer class="footer">
+                <div class="container">
+                    <!-- <script src="../js/footer.js"></script> -->
+                    <p>Copyright &copy; Stefan Matkovic 2021</p>
+                </div>
+            </footer>
+            
+        </div>
+    </body>
+</html>

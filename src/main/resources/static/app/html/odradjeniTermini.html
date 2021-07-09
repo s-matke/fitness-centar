@@ -16,69 +16,31 @@
         <script src="../js/logout.js"></script>
         <script>
             $(document).ready(function() {
-                let trener_id = sessionStorage.getItem('id');
-
-                console.log("ID: " + trener_id);
+                let id = sessionStorage.getItem('id');
 
                 $.ajax({
                     type: "GET",
-                    url: "http://localhost:8080/api/termin/raspored",
-                    data: {trener_id},
+                    url: "http://localhost:8080/api/termin/odradjen/" + id,
                     dataType: "json",
                     success: function(response) {
                         console.log("Success:\n" + response);
-                        for (let termin of response) {
+                        for (let odradjen of response) {
+                            console.log("Naziv: " + odradjen.naziv + "\nTip: " + odradjen.tip_treninga + "\nDatum: " + odradjen.datum + "\nTrener: " + odradjen.fullname + "\nOcena: " + odradjen.ocena);
                             let row = "<tr>";
-                            row += "<td>" + termin.fullname + "</td>";
-                            row += "<td>" + termin.cena + "</td>";
-                            row += "<td>" + termin.vreme + "</td>";
-                            row += "<td>" + termin.datum + "</td>";
-                            row += "<td>" + termin.oznaka + "</td>";
-                            // console.log("TERMIN ID: " + termin.id);
-                            let btn = "<button class='btnFinishTermin' data-id='" + termin.id + "' >Zavrsi</button>";
-                            row += "<td>" + btn + "</td>";
+                            row += "<td>" + odradjen.naziv + "</td>";
+                            row += "<td>" + odradjen.tip_treninga + "</td>";
+                            row += "<td>" + odradjen.datum + "</td>";
+                            row += "<td>" + odradjen.fullname + "</td>";
+                            row += "<td>" + odradjen.ocena + "</td>";
                             row += "</tr>";
 
-                            $("#content").append(row);
+                            $('#content').append(row);
                         }
                     },
                     error: function(error) {
-                        console.log("Hello from error");
+                        alert("greska:\n" + error + "\n" + error.status);
                     }
-                });
-            });
-
-            $(document).on('click', ".btnFinishTermin", function(event) {
-                event.preventDefault();
-                let id = this.dataset.id;
-                console.log("ID: " + id);
-                // id = parseInt(id);
-                // console.log("NEW ID: " + id);
-                $.ajax({
-                    type: "POST",
-                    url: "http://localhost:8080/api/termin/zavrsi/" + id,
-                success: function(response) {
-                    // console.log("Sad je id: " + id);
-                    // alert("Usao u prvi sucess");
-                    $.ajax({
-                        type: "DELETE",
-                        url: "http://localhost:8080/api/termin/odjava",
-                        data: {id},
-                        success: function(response) {
-                            alert("Termin uspesno zavrsen");
-                            window.location.reload();
-                        },
-                        error: function(error) {
-                            alert("Doslo je do greske prilikom brisanja prijavljenog termina, obratiti se administratoru");
-                            window.location.reload();
-                        }
-                    });
-                    // alert("Termin uspesno zavrsen");
-                },
-                error: function(error) {
-                    alert("Termin neuspesno zavrsen");
-                }
-                });
+                })
             });
         </script>
 
@@ -100,7 +62,8 @@
                 <!-- <a>Fitness Centar</a> -->
                 <span id="user" hidden>
                     <a href="#">Kontrolni Panel Termina</a>
-                    <a href="./odradjeniTermini.html" class="right">Odradjeni</a>
+                    <a href="./oceniTermin.html" class="right">Neocenjeni</a>
+                    <a id="active" href="#" class="right">Zavrseni</a>
                     <a href="./prijavljeniTermini.html" class="right">Prijavljeni</a>
                 </span>
                 <span id="trener" hidden>
@@ -121,17 +84,16 @@
                 <h2></h2>
             </div>
             <br/>
-            <form class="termin-block" id="upcomingTreninzi">
+            <form class="termin-block" id="zavrseni-termini">
                 <div class="styled-table">
                     <table class="tabela" id="infotrening">
                         <thead>    
                             <tr>
-                                <th>Clan</th>
-                                <th>Cena</th>
-                                <th>Vreme</th>
+                                <th>Naziv</th>
+                                <th>Tip</th>
                                 <th>Datum</th>
-                                <th>Sala</th>
-                                <th>Zavrsi</th>
+                                <th>Trener</th>
+                                <th>Ocena</th>
                             </tr>
                         </thead>
                         <tbody id="content">
