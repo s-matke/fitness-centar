@@ -43,9 +43,7 @@ public class Trening implements Serializable{
 //	@OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //	private Set<PrijavaTermina> listaPrijavljenihTermina = new HashSet<>();
 	
-	@OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<OdradjenTermin> listaOdradjenihTermina = new HashSet<>();
-	
+
 	public Trening() {}
 	
 	public Trening(String naziv, String opis, String tip, Integer trajanje, Trener trener) {

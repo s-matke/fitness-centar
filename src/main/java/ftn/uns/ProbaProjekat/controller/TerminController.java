@@ -20,15 +20,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ftn.uns.ProbaProjekat.model.Clan;
+import ftn.uns.ProbaProjekat.model.OdradjenTermin;
 import ftn.uns.ProbaProjekat.model.PrijavaTermina;
 import ftn.uns.ProbaProjekat.model.Sala;
 import ftn.uns.ProbaProjekat.model.Termin;
+import ftn.uns.ProbaProjekat.model.Trener;
 import ftn.uns.ProbaProjekat.model.Trening;
 import ftn.uns.ProbaProjekat.model.dto.PrijavaDTO;
 import ftn.uns.ProbaProjekat.model.dto.PrijavaTerminaDTO;
 import ftn.uns.ProbaProjekat.model.dto.TerminDTO;
 import ftn.uns.ProbaProjekat.model.dto.TermingDTO;
 import ftn.uns.ProbaProjekat.service.ClanService;
+import ftn.uns.ProbaProjekat.service.OdradjenTerminService;
 import ftn.uns.ProbaProjekat.service.PrijavaTerminaService;
 import ftn.uns.ProbaProjekat.service.SalaService;
 import ftn.uns.ProbaProjekat.service.TerminService;
@@ -42,15 +45,17 @@ public class TerminController {
 	private final TerminService terminService;
 	private final ClanService clanService;
 	private final PrijavaTerminaService prijavaService;
+	private final OdradjenTerminService odradjenService;
 	private final TrenerService trenerService;
 	private final TreningService treningService;
 	private final SalaService salaService;
 	
 	@Autowired
-	public TerminController(TerminService terminService, ClanService clanService, PrijavaTerminaService prijavaService, TrenerService trenerService, TreningService treningService, SalaService salaService) {
+	public TerminController(TerminService terminService, ClanService clanService, PrijavaTerminaService prijavaService, OdradjenTerminService odradjenService, TrenerService trenerService, TreningService treningService, SalaService salaService) {
 		this.terminService = terminService;
 		this.clanService = clanService;
 		this.prijavaService = prijavaService;
+		this.odradjenService = odradjenService;
 		this.trenerService = trenerService;
 		this.treningService = treningService;
 		this.salaService = salaService;
@@ -161,7 +166,7 @@ public class TerminController {
 
 	// Lista nadolazecih termina za trenera
 	@GetMapping(
-			value = "/trener/prijavljeni",
+			value = "/raspored",
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PrijavaTerminaDTO>> getUpcomingSessions(@RequestParam(required = true) Long trener_id) throws Exception {
 		// Potrebne povratne informacije: Clan ime+prezime, Vreme+Datum+Cena Termina i Oznaka sale u kojoj se odrzava termin
@@ -178,6 +183,7 @@ public class TerminController {
 			vreme = crunchifyTime.format(prijava.getTermin().getPocetak());
 			datum = crunchifyDate.format(prijava.getTermin().getPocetak());
 			PrijavaTerminaDTO prijavaDTO = new PrijavaTerminaDTO(
+					prijava.getId(),
 					prijava.getClan().getIme() + " " + prijava.getClan().getPrezime(),
 					prijava.getTermin().getCena(),
 					vreme,
@@ -327,6 +333,48 @@ public class TerminController {
 		this.terminService.delete(id);
 		
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	
+	@PostMapping(value="/zavrsi/{id}")
+	public ResponseEntity<Void> zavrsiTermin(@PathVariable Long id) throws Exception {
+		PrijavaTermina prijava = this.prijavaService.findOne(id);
+		
+		System.out.println("Termin Cena: " + prijava.getTermin().getCena() + 
+				"\nClan: " + prijava.getClan().getIme() + " " + prijava.getClan().getPrezime());
+		
+		System.out.println("Pronasao prijavu");
+		
+//		if (prijava == null) {
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+		
+		System.out.println("Prijava postoji");
+		
+		Timestamp now = new Timestamp(System.currentTimeMillis());	// trenutno vreme
+		System.out.println("Trenutna epoha: " + now.getTime() + "Kraj termina: " + prijava.getTermin().getKraj().getTime());
+//		if (prijava.getTermin().getKraj().getTime() > now.getTime()) {
+//			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);			
+//		}
+		
+		System.out.println("Vreme je korektno");
+		
+//		Termin termin = prijava.getTermin();
+		Termin termin = prijava.getTermin();
+		Clan clan = prijava.getClan();
+		Trener trener = prijava.getTermin().getTrening().getTrener();
+		
+		//Double ocena = 2.0;
+		
+		OdradjenTermin odradjenTermin = new OdradjenTermin(null, termin, trener, clan);
+		System.out.println("Napravljen odradjen termin");
+		OdradjenTermin noviOdradjen =  this.odradjenService.create(odradjenTermin);
+		
+		System.out.println("Clan: " + noviOdradjen.getClan().getIme() + " " + noviOdradjen.getClan().getPrezime() + "\nOdradio trening: " + noviOdradjen.getTermin().getTrening().getNaziv());
+		
+//		this.prijavaService.delete(id);
+		
+		return new ResponseEntity<>(HttpStatus.CREATED);
+		
 	}
 	
 	

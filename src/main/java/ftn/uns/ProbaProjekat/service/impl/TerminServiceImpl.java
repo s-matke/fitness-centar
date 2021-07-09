@@ -35,7 +35,7 @@ public class TerminServiceImpl implements TerminService {
 		
 		Termin noviTermin = this.terminRepo.save(termin);
 		
-		return termin;
+		return noviTermin;
 	}
 
 	@Override

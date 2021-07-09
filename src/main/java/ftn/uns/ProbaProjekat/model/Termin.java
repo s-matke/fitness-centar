@@ -40,8 +40,11 @@ public class Termin implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Trening trening;
 	
-	@OneToMany(mappedBy = "termin", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "termin", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<PrijavaTermina> prijavljeniTermini = new HashSet<>();
+	
+	@OneToMany(mappedBy = "termin", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<OdradjenTermin> odradjeniTermini = new HashSet<>();
 	
 	public Termin() {}
 	
@@ -133,6 +136,15 @@ public class Termin implements Serializable {
 	public void setPrijavljeniTermini(Set<PrijavaTermina> prijavljeniTermini) {
 		this.prijavljeniTermini = prijavljeniTermini;
 	}
+
+	public Set<OdradjenTermin> getOdradjeniTermini() {
+		return odradjeniTermini;
+	}
+
+	public void setOdradjeniTermini(Set<OdradjenTermin> odradjeniTermini) {
+		this.odradjeniTermini = odradjeniTermini;
+	}
+	
 	
 	
 }

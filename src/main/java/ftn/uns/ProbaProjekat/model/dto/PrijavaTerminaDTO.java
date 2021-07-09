@@ -42,6 +42,15 @@ public class PrijavaTerminaDTO {
 		this.oznaka = oznaka;
 	}
 	
+	public PrijavaTerminaDTO(Long id, String fullname, Double cena, String vreme, String datum, String oznaka) {
+		this.id = id;
+		this.fullname = fullname;
+		this.cena = cena;
+		this.vreme = vreme;
+		this.datum = datum;
+		this.oznaka = oznaka;
+	}
+	
 	public Long getClan_id() {
 		return clan_id;
 	}

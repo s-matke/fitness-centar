@@ -66,5 +66,5 @@ INSERT INTO PRIJAVA_TERMINA (clan_id, termin_id) VALUES (6, 10);
 -- INSERT INTO ODRADJEN_TERMIN (ocena, clan_id, trening_id) VALUES (3.00, 6, 2);
 -- INSERT INTO ODRADJEN_TERMIN (ocena, clan_id, trening_id) VALUES (5.00, 7, 1);
 -- INSERT INTO ODRADJEN_TERMIN (ocena, clan_id, trening_id) VALUES (5.00, 6, 3);
--- INSERT INTO ODRADJEN_TERMIN (clan_id, trening_id) VALUES (6, 2);
+-- INSERT INTO ODRADJEN_TERMIN (clan_id, termin_id) VALUES (6, 2);
 

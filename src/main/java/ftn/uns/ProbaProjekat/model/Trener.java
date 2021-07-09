@@ -27,9 +27,14 @@ public class Trener extends Korisnik{
 	@OneToMany(mappedBy = "trener", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Trening> listaTreninga = new HashSet<>();
 	
+	@OneToMany(mappedBy = "trener", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<OdradjenTermin> odradjeniTermini = new HashSet<>();
+	
+	
 	// fitness centar u kom je zaposlen
 	@ManyToOne(fetch = FetchType.EAGER)
 	private FitnessCentar fitnessCentar;
+	
 
 	public Trener() {}
 	
