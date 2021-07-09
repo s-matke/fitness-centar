@@ -73,6 +73,7 @@ $(document).on('click', '.btnEditTermin', function(event) {
         dataType: "json",
         success: function(response) {
             for (let sale of response) {
+                if (sale.id == sala_id) { continue; }
                 let option = "<option value=" + sale.id + ">" + sale.oznaka + "</option>";
                 
                 $('#sala-select').append(option);
@@ -131,7 +132,11 @@ function changeTermin() {
             },
             error: function(error) {
                 console.log("ERROR:\n" + error);
-                alert("Greska!");
+                if (error.status == 400) {
+                    // alert("Greska!");
+                    alert("Ne ispravan datum");
+                    return;
+                }
             }
         });
     });

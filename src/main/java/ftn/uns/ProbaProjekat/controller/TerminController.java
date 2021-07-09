@@ -301,6 +301,10 @@ public class TerminController {
 			System.out.println("Epoha nije nula");
 			Timestamp novPocetak= new Timestamp(terminDTO.getEpoha() * 1000l);
 			Timestamp novKraj = new Timestamp(terminDTO.getEpoha() + ((long)trening.getTrajanje() * 3600000l));
+			Timestamp now = new Timestamp(System.currentTimeMillis());	// trenutno vreme
+			if (novPocetak.getTime() < now.getTime()) {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
 			//	public Termin(Long id, Timestamp pocetak, Timestamp kraj, Double cena, Sala sala, Trening trening) {
 			terminT = new Termin(id, novPocetak, novKraj, terminDTO.getCena(), sala, trening);
 		} else {
