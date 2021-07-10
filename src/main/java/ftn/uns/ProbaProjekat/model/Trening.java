@@ -87,12 +87,22 @@ public class Trening implements Serializable{
 		this.opis = opis;
 	}
 
-	public String getTip_treninga() {
+	
+
+	public String getTip() {
 		return tip;
 	}
 
-	public void setTip_treninga(String tip) {
+	public void setTip(String tip) {
 		this.tip = tip;
+	}
+
+	public Set<Termin> getTermini() {
+		return termini;
+	}
+
+	public void setTermini(Set<Termin> termini) {
+		this.termini = termini;
 	}
 
 	public Integer getTrajanje() {

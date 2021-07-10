@@ -75,8 +75,8 @@ function changeC() {
         let telefon = $("#telefon").val();
         let email = $("#email").val();
 
-        // console.log("ID: " + id + "\nNaziv: " + naziv + "\nAdresa: " + adresa);
-        // alert("ID: " + id);
+        console.log("ID: " + id + "\nNaziv: " + naziv + "\nAdresa: " + adresa);
+        alert("ID: " + id);
 
         let podaci = {
             naziv,

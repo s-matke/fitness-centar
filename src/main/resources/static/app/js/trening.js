@@ -11,12 +11,12 @@ $(document).ready(function() {
                 let row = "<tr>";
                 row += "<td>" + trening.naziv + "</td>";
                 row += "<td>" + trening.opis + "</td>";
-                console.log("tip: " + trening.tip_treninga + "\n trajanje: " + trening.trajanje);
-                row += "<td>" + trening.tip_treninga + "</td>";
+                // console.log("tip: " + trening.tip_treninga + "\n trajanje: " + trening.trajanje);
+                row += "<td>" + trening.tip + "</td>";
                 row += "<td>" + trening.trajanje + "</td>";
                 let boxes = "<input type='radio' name='odjava' value='" + trening.id + "'/>";
                 row += "<td>" + boxes + "</td>";
-                let btn = "<button class='btnEditTrening' data-id='" + trening.id + "' data-naziv='" + trening.naziv + "' data-opis='" + trening.opis + "' data-tip='" + trening.tip_treninga + "' data-trajanje='" + trening.trajanje + "'>Edit</button>";
+                let btn = "<button class='btnEditTrening' data-id='" + trening.id + "' data-naziv='" + trening.naziv + "' data-opis='" + trening.opis + "' data-tip='" + trening.tip + "' data-trajanje='" + trening.trajanje + "'>Edit</button>";
                 row += "<td>" + btn + "</td>";
                 row += "</tr>";
                 
@@ -46,14 +46,14 @@ $(document).on('click', '.btnEditTrening', function(event) {
     let id = this.dataset.id;
     let naziv = this.dataset.naziv;
     let opis = this.dataset.opis;
-    let tip_treninga = this.dataset.tip;
+    let tip = this.dataset.tip;
     let trajanje = this.dataset.trajanje;
 
 
     let id_input = "<input id='id' type='number' disabled value='" + id + "' />"; 
     let naziv_input = "<input id='naziv' type='text' value='"+naziv+"' />";
     let opis_input ="<input id='opis' type='text' value='"+opis+"' />";
-    let tip_treninga_input ="<input id='tip_treninga' type='text' value='"+tip_treninga+"' />";
+    let tip_input ="<input id='tip_treninga' type='text' value='"+tip+"' />";
     let trajanje_input = "<input id='trajanje' type='number' value='"+trajanje+"' />";
        
 
@@ -61,7 +61,7 @@ $(document).on('click', '.btnEditTrening', function(event) {
     $('#input-content').append(id_input); 
     $('#input-content').append(naziv_input);
     $('#input-content').append(opis_input);
-    $('#input-content').append(tip_treninga_input);
+    $('#input-content').append(tip_input);
     $('#input-content').append(trajanje_input);
 
 });
@@ -73,7 +73,7 @@ function changeTrening() {
         let id = $("#id").val();
         let naziv = $("#naziv").val();
         let opis = $("#opis").val();
-        let tip_treninga = $("#tip_treninga").val();
+        let tip = $("#tip_treninga").val();
         let trajanje = $("#trajanje").val();
         //let centar_id = $("#centar_id").val();
         // let centar_id = document.getElementById('centar-select').value;
@@ -82,7 +82,7 @@ function changeTrening() {
         let podaci = {
             naziv,
             opis,
-            tip_treninga,
+            tip,
             trajanje
         }
 

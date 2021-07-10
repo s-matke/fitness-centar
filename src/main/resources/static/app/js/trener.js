@@ -5,7 +5,7 @@ $(document).on("submit", "#addTrening", function(event) {
     // preuzimanje vrednosti
     let naziv = $("#naziv").val();
     let opis = $("#opis").val();
-    let tip_treninga = $("#tip_treninga").val();
+    let tip = $("#tip_treninga").val();
     let trajanje = $("#trajanje").val();
     let id = sessionStorage.getItem('id');
 
@@ -13,7 +13,7 @@ $(document).on("submit", "#addTrening", function(event) {
         id,
         naziv,
         opis,
-        tip_treninga,
+        tip,
         trajanje
     }
 
@@ -51,7 +51,7 @@ $(document).ready(function() {
                 let row = "<tr>";
                 row += "<td>" + trening.naziv + "</td>";
                 row += "<td>" + trening.opis + "</td>";
-                row += "<td>" + trening.tip_treninga + "</td>";
+                row += "<td>" + trening.tip + "</td>";
                 row += "<td>" + trening.trajanje + "</td>";
                 let btn = "<button class='btnAddTermin' data-id=" + trening.id + ">Add Termin</button>";
                 row += "<td> " + btn + "</td>"

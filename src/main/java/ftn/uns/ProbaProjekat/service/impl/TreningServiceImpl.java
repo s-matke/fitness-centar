@@ -82,7 +82,7 @@ public class TreningServiceImpl implements TreningService {
 		
 		treningToUpdate.setNaziv(trening.getNaziv());
 		treningToUpdate.setOpis(trening.getOpis());
-		treningToUpdate.setTip_treninga(trening.getTip_treninga());
+		treningToUpdate.setTip(trening.getTip());
 		treningToUpdate.setTrajanje(trening.getTrajanje());
 		
 		Trening savedTrening = this.treningRepo.save(treningToUpdate);

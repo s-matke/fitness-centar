@@ -56,7 +56,7 @@ public class FitnessCentarServiceImpl implements FitnessCentarService {
 		centarToUpdate.setNaziv(centar.getNaziv());
 		centarToUpdate.setAdresa(centar.getAdresa());
 		centarToUpdate.setTelefon(centar.getTelefon());
-		centarToUpdate.setEmail(centar.getTelefon());
+		centarToUpdate.setEmail(centar.getEmail());
 		
 		FitnessCentar savedCentar = this.fitnessRepo.save(centarToUpdate);
 		return savedCentar;

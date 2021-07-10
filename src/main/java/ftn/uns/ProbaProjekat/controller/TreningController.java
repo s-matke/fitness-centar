@@ -48,7 +48,7 @@ public class TreningController {
 		List<Trening> listaTreninga = this.treningService.findAll();  
 		
 		for (Trening trening : listaTreninga) {
-			TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTip_treninga(), trening.getTrajanje());
+			TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTip(), trening.getTrajanje());
 			treningDTOS.add(treningDTO);
 		}			
 		
@@ -86,7 +86,7 @@ public class TreningController {
 		}
 		
 		for (Trening trening : listaTreninga) {
-			TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTip_treninga(), trening.getTrajanje());
+			TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTip(), trening.getTrajanje());
 			treningDTOS.add(treningDTO);
 		}				
 		
@@ -101,12 +101,12 @@ public class TreningController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<TreningDTO> createTrening(@RequestBody TreningDTO treningDTO) throws Exception {
 		Trener trener = this.trenerService.findOne(treningDTO.getId());
-		
-		Trening trening = new Trening(treningDTO.getNaziv(), treningDTO.getOpis(), treningDTO.getTip_treninga(), treningDTO.getTrajanje(), trener);
+//		System.out.println("Naziv: " + treningDTO.getNaziv() + "\nOpis: " + treningDTO.getOpis() + "\nTip: " + treningDTO.getTip() + "\nTrajanje: " + treningDTO.getTrajanje());
+		Trening trening = new Trening(treningDTO.getNaziv(), treningDTO.getOpis(), treningDTO.getTip(), treningDTO.getTrajanje(), trener);
 		
 		Trening noviTrening = this.treningService.create(trening);
 		
-		TreningDTO noviTreningDTO = new TreningDTO(noviTrening.getId(), noviTrening.getNaziv(), noviTrening.getOpis(), noviTrening.getTip_treninga(), noviTrening.getTrajanje());
+		TreningDTO noviTreningDTO = new TreningDTO(noviTrening.getId(), noviTrening.getNaziv(), noviTrening.getOpis(), noviTrening.getTip(), noviTrening.getTrajanje());
 		
 		return new ResponseEntity<>(noviTreningDTO, HttpStatus.CREATED);
 	}
@@ -116,13 +116,16 @@ public class TreningController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> izmeniTrening(@PathVariable("uid") Long uid, @PathVariable("id") Long id, @RequestBody TreningDTO treningDTO) throws Exception {
 		Trener trener = this.trenerService.findOne(uid);
+		
+//		System.out.println("Naziv: " + treningDTO.getNaziv() + "\nOpis: " + treningDTO.getOpis() + "\nTip: " + treningDTO.getTip() + "\nTrajanje: " + treningDTO.getTrajanje());
+		
 		if (trener == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		Trening trening = new Trening (id, treningDTO.getNaziv(), treningDTO.getOpis(), treningDTO.getTip_treninga(), treningDTO.getTrajanje(), trener);
+		Trening trening = new Trening (id, treningDTO.getNaziv(), treningDTO.getOpis(), treningDTO.getTip(), treningDTO.getTrajanje(), trener);
 		
 		Trening updatedTrening = this.treningService.update(trening);
-		System.out.println("Naziv: " + updatedTrening.getNaziv());
+//		System.out.println("Naziv: " + updatedTrening.getNaziv());
 		
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

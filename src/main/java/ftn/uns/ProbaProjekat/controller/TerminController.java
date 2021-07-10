@@ -96,7 +96,7 @@ public class TerminController {
 			TermingDTO termingDTO = new TermingDTO(
 					termin.getTrening().getNaziv(),
 					termin.getTrening().getOpis(),
-					termin.getTrening().getTip_treninga(),
+					termin.getTrening().getTip(),
 					termin.getTrening().getTrajanje(),
 					datum,
 					vreme,
@@ -396,7 +396,7 @@ public class TerminController {
 			System.out.println("Velicina: " + odradjen.getClan().getIme());
 			OdradjenTerminDTO odradjenDTO = new OdradjenTerminDTO(
 					odradjen.getTermin().getTrening().getNaziv(),
-					odradjen.getTermin().getTrening().getTip_treninga(),
+					odradjen.getTermin().getTrening().getTip(),
 					datum,
 					odradjen.getTermin().getTrening().getTrener().getIme() + " " + odradjen.getTermin().getTrening().getTrener().getPrezime(),
 					odradjen.getOcena());
@@ -421,7 +421,7 @@ public class TerminController {
 			OdradjenTerminDTO odradjenDTO = new OdradjenTerminDTO(
 					odradjen.getId(),
 					odradjen.getTermin().getTrening().getNaziv(),
-					odradjen.getTermin().getTrening().getTip_treninga(),
+					odradjen.getTermin().getTrening().getTip(),
 					datum,
 					odradjen.getTermin().getTrening().getTrener().getIme() + " " + odradjen.getTermin().getTrening().getTrener().getPrezime(),
 					odradjen.getOcena());
@@ -540,7 +540,7 @@ public class TerminController {
 			TermingDTO termingDTO = new TermingDTO(
 					termin.getTrening().getNaziv(),
 					termin.getTrening().getOpis(),
-					termin.getTrening().getTip_treninga(),
+					termin.getTrening().getTip(),
 					termin.getTrening().getTrajanje(),
 					datum,
 					vreme,

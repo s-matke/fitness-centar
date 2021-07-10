@@ -190,8 +190,8 @@ $(document).on("submit", "#addFitnessCentar", function(event) {
     let newCentar = {
         naziv,
         adresa,
-        email,
-        telefon
+        telefon,
+        email
     }
 
     $.ajax({

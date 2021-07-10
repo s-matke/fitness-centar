@@ -96,8 +96,9 @@ public class FitnessCentarController {
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<FitnessCentarDTO> izmeniCentar(@PathVariable Long id, @RequestBody FitnessCentarDTO fitnessDTO) throws Exception {
-		//FitnessCentar centarDTO = this.centarService.findOne(fitnessDTO.getId());
 		
+		//FitnessCentar centarDTO = this.centarService.findOne(fitnessDTO.getId());
+		System.out.println("Naziv: " + fitnessDTO.getNaziv()  + "\nAdresa: " + fitnessDTO.getAdresa() + "\nTelefon: " + fitnessDTO.getTelefon() + "\nEmail: "+ fitnessDTO.getEmail());
 		FitnessCentar centar = new FitnessCentar(id, fitnessDTO.getNaziv(), fitnessDTO.getAdresa(), fitnessDTO.getTelefon(), fitnessDTO.getEmail());
 		System.out.println("ID: " + id);
 		FitnessCentar updatedCentar = this.centarService.update(centar);

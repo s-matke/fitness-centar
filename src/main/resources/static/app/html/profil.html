@@ -38,7 +38,8 @@
                         $("#content").append(role_input);
                         
                         if (response.role === "Trener") {
-                            let avgOcena_input = "<input type='number' step='0.01' value='" + response.avgOcena + "'/>";
+                            let ocena = (Math.round(response.avgOcena * 100) / 100).toFixed(2);
+                            let avgOcena_input = "<input disabled type='number' value='" + ocena + "'/>";
                             $("#content").append(avgOcena_input);
                         }
                     }
@@ -88,7 +89,6 @@
             <form id="loginForm">    
                 <div class="login-block">
                     <h1>Profile</h1>
-                    <input placeholder="Test" value="" id="password"/>
                     <div id="content">
 
                     </div>

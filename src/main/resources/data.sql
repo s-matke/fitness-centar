@@ -31,16 +31,16 @@ INSERT INTO TRENING (naziv, opis, tip, trajanje, trener_id) VALUES ('Snaga', 'Ve
 -- INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (500, '2021-07-09 13:30', 1, 3);
 -- INSERT INTO TERMIN (cena, datum, sala_id, trening_id) VALUES (2000, '2021-07-10 14:20', 3, 1);
 
-INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (150, '2021-07-23 08:40:00', '2021-07-23 09:40:00', 1, 1);
-INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (1510, '2021-07-22 09:00:00', '2021-07-22 10:00:00', 1, 2); -- posmatrani termin
-INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (1420, '2021-07-22 08:10:00', '2021-07-22 09:10:00', 1, 3);
-INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (1480, '2021-07-22 08:20:00', '2021-07-22 09:20:00', 1, 1);
-INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (150230, '2021-07-22 08:00:00', '2021-07-22 09:00:00', 1, 2);
-INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (151300, '2021-07-22 09:40:00', '2021-07-22 10:40:00', 1, 3);
-INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (15200, '2021-07-22 09:50:00', '2021-07-22 10:50:00', 1, 2);
-INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (15100, '2021-07-22 10:00:00', '2021-07-22 11:00:00', 1, 1);
-INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (1510, '2021-07-22 10:10:00', '2021-07-22 11:10:00', 1, 3);
-INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (1520, '2021-07-22 10:20:00', '2021-07-22 11:20:00', 1, 1);
+INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (1, '2021-07-23 08:40:00', '2021-07-23 09:40:00', 1, 1);
+INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (2, '2021-07-22 09:00:00', '2021-07-22 10:00:00', 1, 2); -- posmatrani termin
+INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (3, '2021-07-22 08:10:00', '2021-07-22 09:10:00', 1, 3);
+INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (4, '2021-07-22 08:20:00', '2021-07-22 09:20:00', 1, 1);
+INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (5, '2021-07-22 08:00:00', '2021-07-22 09:00:00', 1, 2);
+INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (5, '2021-07-22 09:40:00', '2021-07-22 10:40:00', 1, 3);
+INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (6, '2021-07-22 09:50:00', '2021-07-22 10:50:00', 1, 2);
+INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (7, '2021-07-22 10:00:00', '2021-07-22 11:00:00', 1, 1);
+INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (7, '2021-07-22 10:10:00', '2021-07-22 11:10:00', 1, 3);
+INSERT INTO TERMIN (cena, datum, kraj, sala_id, trening_id) VALUES (8, '2021-07-22 10:20:00', '2021-07-22 11:20:00', 1, 1);
 
 
 

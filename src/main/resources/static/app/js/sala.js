@@ -47,10 +47,10 @@ $(document).on('click', '.btnEditSala', function(event) {
     let centar_id = this.dataset.centar_id;
     let naziv = this.dataset.naziv;
 
-    let id_input = "<input id='id' type='number' disabled value='" + id + "' />"; 
+    let id_input = "<input id='id' type='number' disabled value=" + id + " />"; 
     let oznaka_input = "<input id='oznaka' type='text' value='"+oznaka+"' />";
     let kapacitet_input ="<input id='kapacitet' type='number' value='"+kapacitet+"' />";
-    let centar_id_input ="<option selected value=" + centar_id + "'>" + naziv + "</option>";
+    let centar_id_input ="<option selected value=" + centar_id + ">" + naziv + "</option>";
 
     
 
@@ -87,7 +87,7 @@ function changeS() {
         let kapacitet = $("#kapacitet").val();
         //let centar_id = $("#centar_id").val();
         let centar_id = document.getElementById('centar-select').value;
-
+        console.log("")
 
         let podaci = {
             oznaka,
@@ -97,7 +97,7 @@ function changeS() {
 
         $.ajax({
             type: "PUT",
-            url: "http://localhost:8080/api/termin/izmeni/" + id,
+            url: "http://localhost:8080/api/sala/izmeni/" + id,
             contentType: "application/json",
             data: JSON.stringify(podaci),
             success: function(response) {

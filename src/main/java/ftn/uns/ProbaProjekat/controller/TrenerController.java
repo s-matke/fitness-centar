@@ -128,9 +128,9 @@ public class TrenerController {
 	public ResponseEntity<List<TreningDTO>> listTrening(@RequestParam(required=true) Long id) throws Exception {
 		List<TreningDTO> treningDTOS = new ArrayList<>();
 		List<Trening> listaTreninga = this.treningService.findByTrener(id);
-		
+				
 		for (Trening trening : listaTreninga) {
-			TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getTip_treninga(), trening.getOpis(), trening.getTrajanje());
+			TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTip(), trening.getTrajanje());
 			treningDTOS.add(treningDTO);
 		}
 		

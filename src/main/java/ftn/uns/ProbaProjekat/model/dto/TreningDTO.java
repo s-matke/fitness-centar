@@ -49,11 +49,11 @@ public class TreningDTO {
 		this.opis = opis;
 	}
 
-	public String getTip_treninga() {
+	public String getTip() {
 		return tip;
 	}
 
-	public void setTip_treninga(String tip) {
+	public void setTip(String tip) {
 		this.tip = tip;
 	}
 
