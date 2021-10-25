@@ -64,9 +64,6 @@ public class KorisnikController {
 		}
 		
 		return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-	}
-	
-	
-	
+	}	
 
 }
