@@ -51,7 +51,7 @@ body {
 .navbar {
     overflow: hidden;
     position: relative;
-    position: -webkit-sticky;
+    /* position: -webkit-sticky; */
     font-size: 25px;
     
     z-index: 3;
@@ -85,8 +85,8 @@ body {
 
 .logged-navbar {
     overflow: hidden;
-    position:sticky;
-    position: -webkit-sticky;
+    position:relative;
+    /* position: -webkit-sticky; */
     font-size: 25px;
     
     border-bottom: .06em solid black;
