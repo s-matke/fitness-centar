@@ -50,7 +50,7 @@ body {
 /*  Main Navbar  */
 .navbar {
     overflow: hidden;
-    position: sticky;
+    position: relative;
     position: -webkit-sticky;
     font-size: 25px;
     
